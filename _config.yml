@@ -3,7 +3,7 @@ title: Digital Garden
 email: your-email@example.com
 description: >- # 이 부분은 사이트 설명으로 채워집니다.
   Quartz에서 마이그레이션된 Jekyll 디지털 가든입니다.
-baseurl: "/jekill_test" # 레포지토리 이름이 jekill_test이므로 서브디렉토리로 설정
+baseurl: "" # username.github.io 루트 레포이므로 서브디렉토리 없음
 url: "https://brighteen.github.io" # 사용자 블로그 도메인
 
 # 테마 설정
@@ -14,12 +14,16 @@ collections:
   notes:
     output: true
     permalink: /notes/:path/
+  mml:
+    output: true
+    permalink: /mml/:path/
 
 # 빌드 설정
 markdown: kramdown
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+  hard_wrap: true
 highlighter: rouge
 plugins:
   - jekyll-feed
@@ -35,3 +39,18 @@ exclude:
   - migrate_to_jekyll.py
   - .agent/
   - README.md
+
+# 문서별 기본 속성 (Frontmatter) 자동 지정
+defaults:
+  - scope:
+      path: ""
+      type: "mml" # _mml 폴더 내의 파일들
+    values:
+      layout: "sidebar"
+      collection_name: "mml"
+  - scope:
+      path: ""
+      type: "notes" # _notes 폴더 내의 파일들
+    values:
+      layout: "sidebar"
+      collection_name: "notes"

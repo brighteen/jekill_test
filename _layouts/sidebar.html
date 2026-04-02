@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body class="layout-sidebar">
+    {%- include header.html -%}
+
+    {%- assign col_name = page.collection_name | default: "notes" -%}
+    {%- assign items = site[col_name] -%}
+
+    <main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list">
+          {%- assign current_folder = "" -%}
+          {%- for item in items -%}
+            {%- if item.name == "index.md" or item.name == "index.html" -%}{%- continue -%}{%- endif -%}
+
+            {%- assign path_parts = item.relative_path | split: "/" -%}
+            {%- assign folder_name = "" -%}
+            {%- if path_parts.size > 2 -%}
+              {%- assign limit = path_parts.size | minus: 2 -%}
+              {%- for i in (1..limit) -%}
+                {%- if forloop.first -%}
+                  {%- assign folder_name = path_parts[i] -%}
+                {%- else -%}
+                  {%- assign folder_name = folder_name | append: " / " | append: path_parts[i] -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if folder_name != current_folder and folder_name != "" -%}
+              <li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">{{ folder_name }}</li>
+              {%- assign current_folder = folder_name -%}
+            {%- endif -%}
+
+            {%- assign title = item.title | default: item.name | replace: ".md", "" | replace: ".html", "" -%}
+            {%- if item.url == page.url -%}
+              <li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="{{ item.url | relative_url }}" style="font-weight: bold; color: #2a7ae2;">{{ title }}</a></li>
+            {%- else -%}
+              <li class="sidebar-item" style="margin-left: 10px;"><a href="{{ item.url | relative_url }}">{{ title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          {{ content }}
+
+          {%- if col_name == "mml" -%}
+            {%- assign mml_sorted = site.mml | sort: "path" -%}
+            {%- assign prev_page = nil -%}
+            {%- assign next_page = nil -%}
+            {%- assign found_current = false -%}
+
+            {%- for doc in mml_sorted -%}
+              {%- if doc.name == "index.md" or doc.name == "index.html" -%}{%- continue -%}{%- endif -%}
+
+              {%- if found_current and next_page == nil -%}
+                {%- assign next_page = doc -%}
+              {%- endif -%}
+
+              {%- if doc.url == page.url -%}
+                {%- assign found_current = true -%}
+              {%- endif -%}
+
+              {%- unless found_current -%}
+                {%- assign prev_page = doc -%}
+              {%- endunless -%}
+            {%- endfor -%}
+
+            <nav class="mml-pagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #e8e8e8;">
+              <div style="flex: 1; text-align: left;">
+                {%- if prev_page -%}
+                  <a href="{{ prev_page.url | relative_url }}" class="mml-nav-btn mml-prev" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; font-size: 0.9em; transition: all 0.2s;">
+                    <span style="font-size: 1.2em;">←</span>
+                    <span>
+                      <div style="font-size: 0.75em; color: #888; margin-bottom: 2px;">이전 글</div>
+                      <div style="font-weight: bold;">{{ prev_page.title }}</div>
+                    </span>
+                  </a>
+                {%- endif -%}
+              </div>
+
+              <div style="flex: 0; padding: 0 12px;">
+                <a href="{{ site.baseurl }}/mml/" style="font-size: 0.85em; color: #888; text-decoration: none;">목차</a>
+              </div>
+
+              <div style="flex: 1; text-align: right;">
+                {%- if next_page -%}
+                  <a href="{{ next_page.url | relative_url }}" class="mml-nav-btn mml-next" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; font-size: 0.9em; transition: all 0.2s;">
+                    <span>
+                      <div style="font-size: 0.75em; color: #888; margin-bottom: 2px;">다음 글</div>
+                      <div style="font-weight: bold;">{{ next_page.title }}</div>
+                    </span>
+                    <span style="font-size: 1.2em;">→</span>
+                  </a>
+                {%- endif -%}
+              </div>
+            </nav>
+          {%- endif -%}
+
+        </div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>
