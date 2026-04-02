@@ -1,12 +1,8 @@
 ---
 layout: home
-title: My Digital Garden
+title: Mathmatics for AI
 ---
 
-
-- [MML]({{ site.baseurl }}/notes/mml/)
-- [머신러닝]({{ site.baseurl }}/notes/machine-learning/)
-- [선형대수]({{ site.baseurl }}/notes/linear-algebra/)
 
 <div style="text-align: center;" markdown="1">
   ![0_me.png]({{ site.baseurl }}/assets/0_me.png){: width="300" }

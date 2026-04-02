@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>6.3 Sum Rule, Product Rule, and Bayes’ Theorem | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="6.3 Sum Rule, Product Rule, and Bayes’ Theorem" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="합의 법칙, 곱의 법칙, 그리고 베이즈 정리" />
+<meta property="og:description" content="합의 법칙, 곱의 법칙, 그리고 베이즈 정리" />
+<link rel="canonical" href="https://brighteen.github.io/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.3%20Sum%20Rule,%20Product%20Rule,%20and%20Bayes'%20Theorem/" />
+<meta property="og:url" content="https://brighteen.github.io/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.3%20Sum%20Rule,%20Product%20Rule,%20and%20Bayes'%20Theorem/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="6.3 Sum Rule, Product Rule, and Bayes’ Theorem" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"합의 법칙, 곱의 법칙, 그리고 베이즈 정리","headline":"6.3 Sum Rule, Product Rule, and Bayes’ Theorem","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.3%20Sum%20Rule,%20Product%20Rule,%20and%20Bayes'%20Theorem/"},"url":"https://brighteen.github.io/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.3%20Sum%20Rule,%20Product%20Rule,%20and%20Bayes'%20Theorem/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 1. Introduction and Motivation</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/1.%20Introduction%20and%20Motivation/1.0%20Intro/">1.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/1.%20Introduction%20and%20Motivation/1.1%20Finding%20Words%20for%20Intuitions/">1.1 Finding Words for Intuitions</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/1.%20Introduction%20and%20Motivation/1.2%20Two%20Ways%20to%20Read%20This%20Book/">1.2 Two Ways to Read This Book</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/1.%20Introduction%20and%20Motivation/1.3%20Exercises%20and%20Feedback/">1.3 Exercises and Feedback</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 2. Linear Algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.0%20Intro/">2.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.1%20Systems%20of%20Linear%20Equations/">2.1 Systems of Linear Equations</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.2%20Matrices/">2.2 Matrices</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.3%20Solving%20Systems%20of%20Linear%20Equations/">2.3 Solving Systems of Linear Equations</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.4%20Vector%20Spaces/">2.4 Vector Spaces</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.5%20Linear%20Independence/">2.5 Linear Independence</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.6%20Basis%20and%20Rank/">2.6 Basis and Rank</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.7%20Linear%20Mappings/">2.7 Linear Mappings</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.8%20Affine%20Spaces/">2.8 Affine Spaces</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/2.9%20Further%20Reading/">2.9 Further Reading</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/2.%20Linear%20Algebra/Exercises/">Exercises</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 3. Analytic Geometry</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.0%20Intro/">3.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.1%20Norms/">3.1 Norms</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.10%20Further%20Reading/">3.10 Further Reading</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.2%20Inner%20Products/">3.2 Inner Products</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.3%20Lengths%20and%20Distances/">3.3 Lengths and Distances</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.4%20Angles%20and%20Orthogonality/">3.4 Angles and Orthogonality</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.5%20Orthonormal%20Basis/">3.5 Orthonormal Basis</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.6%20Orthogonal%20Complement/">3.6 Orthogonal Complement</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.7%20Inner%20Product%20of%20Functions/">3.7 Inner Product of Functions</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.8%20Orthogonal%20Projections/">3.8 Orthogonal Projections</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/3.%20Analytic%20Geometry/3.9%20Rotations/">3.9 Rotations</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 4. Matrix Decompositions</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.0%20Intro/">4.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.1%20Determinant%20and%20Trace/">4.1 Determinant and Trace</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.2%20Eigenvalues%20and%20eigenvectors/">4.2 Eigenvalues and eigenvectors</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.3%20Cholesky%20Decomposition/">4.3 Cholesky Decomposition</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.4%20Eigendecomposition%20and%20Diagonalization/">4.4 Eigendecomposition and Diagonalization</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.5%20Singular%20Value%20Decomposition/">4.5 Singular Value Decomposition</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.6%20Matrix%20Approximation/">4.6 Matrix Approximation</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.7%20Matrix%20Phylogeny/">4.7 Matrix Phylogeny</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4.8%20Further%20Reading/">4.8 Further Reading</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/4.%20Matrix%20Decompositions/4%EC%9E%A5%20%EC%A0%95%EB%A6%AC/">4장 정리</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 5. Vector Calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.0%20Intro/">5.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.1%20Differentiation%20of%20Univariate%20Functions/">5.1 Differentiation of Univariate Functions</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.2%20Partial%20Differentiation%20and%20Gradients/">5.2 Partial Differentiation and Gradients</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.3%20Gradients%20of%20Vector-Valued%20Functions/">5.3 Gradients of Vector-Valued Functions</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.4%20Gradients%20of%20Matrices/">5.4 Gradients of Matrices</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.5%20Useful%20Identities%20for%20Computing%20Gradients/">5.5 Useful Identities for Computing Gradients</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.6%20Backpropagation%20and%20Automatic%20Differentiantion/">5.6 Backpropagation and Automatic Differentiantion</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.7%20Higher-Order%20Derivtives/">5.7 Higher-Order Derivtives</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.8%20Linearization%20and%20Multivariate%20Taylor%20Series/">5.8 Linearization and Multivariate Taylor Series</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/5.%20Vector%20Calculus/5.9%20Further%20Reading/">5.9 Further Reading</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 6. Probability and Distributions</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.0%20Intro/">6.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.1%20Construction%20of%20a%20Probability%20Space/">6.1 Construction of a Probability Space</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.2%20Discrete%20and%20Continuous%20Probabilities/">6.2 Discrete and Continuous Probabilities</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.3%20Sum%20Rule,%20Product%20Rule,%20and%20Bayes'%20Theorem/" style="font-weight: bold; color: #2a7ae2;">6.3 Sum Rule, Product Rule, and Bayes' Theorem</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.4%20Summary%20Statistics%20and%20Independence/">6.4 Summary Statistics and Independence</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.4.4%EC%A0%88%20%EC%88%98%EC%8B%9D%20%EC%A6%9D%EB%AA%85/">6.4.4절 수식 증명</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.5%20Gaussian%20Distribution/">6.5 Gaussian Distribution</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.6%20Conjugacy%20and%20the%20Exponential%20Family/">6.6 Conjugacy and the Exponential Family</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.7%20Change%20of%20Variables,%20Inverse%20Transform/">6.7 Change of Variables, Inverse Transform</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.8%20Further%20Reading/">6.8 Further Reading</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">Part I Mathematical Foundations / 7. Continuous Optimization</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/7.%20Continuous%20Optimization/7.0%20Intro/">7.0 Intro</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/7.%20Continuous%20Optimization/7.1%20Optimization%20Using%20Gradient%20Descent/">7.1 Optimization Using Gradient Descent</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/mml/Part%20I%20Mathematical%20Foundations/7.%20Continuous%20Optimization/7.2%20Constrained%20Optimization%20and%20Lagrange%20Multipliers/">7.2 Constrained Optimization and Lagrange Multipliers</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <p>합의 법칙, 곱의 법칙, 그리고 베이즈 정리</p>
+
+<p>우리는 확률론을 논리적 추론(logical reasoning)의 확장으로 생각한다. 6.1.1절에서 논의했듯이, 여기에 제시된 확률의 규칙들은 요구 조건(desiderata)을 충족시키는 것으로부터 자연스럽게 도출된다 (Jaynes, 2003, chapter 2). 확률적 모델링(8.4절)은 머신러닝 방법을 설계하기 위한 원칙적인 토대를 제공한다. 데이터와 우리 문제의 불확실성에 대응하는 확률 분포(6.2절)를 정의하고 나면, 오직 두 가지 근본적인 규칙인 합의 법칙(sum rule)과 곱의 법칙(product rule)만이 존재함이 밝혀진다.  <br />
+$\quad$ (6.9)식에서 $p(\boldsymbol{x}, \boldsymbol{y})$가 두 확률 변수 $\boldsymbol{x}, \boldsymbol{y}$의 결합 분포(joint distribution)였음을 상기해 보자. 분포 $p(\boldsymbol{x})$와 $p(\boldsymbol{y})$는 그에 대응하는 주변 분포(marginal distributions)이며, $p(\boldsymbol{y} \mid \boldsymbol{x})$는 $\boldsymbol{x}$가 주어졌을 때 $\boldsymbol{y}$의 조건부 분포(conditional distribution)이다. 6.2절에서 이산 및 연속 확률 변수에 대한 주변 확률과 조건부 확률의 정의가 주어졌으므로, 이제 우리는 확률론의 두 가지 근본적인 규칙을 제시할 수 있다.  <br />
+$\quad$ 첫 번째 규칙인 합의 법칙(sum rule)은 다음과 같이 명시한다.</p>
+
+\[p(\boldsymbol{x}) = \begin{cases} \sum_{\boldsymbol{y} \in \mathcal{Y}} p(\boldsymbol{x}, \boldsymbol{y}) &amp; \text{if } \boldsymbol{y} \text{ is discrete} \\ \int_{\mathcal{Y}} p(\boldsymbol{x}, \boldsymbol{y})d\boldsymbol{y} &amp; \text{if } \boldsymbol{y} \text{ is continuous} \end{cases} \quad (6.20)\]
+
+<p>여기서 $\mathcal{Y}$는 확률 변수 $Y$의 목표 공간의 상태들이다. 이는 우리가 확률 변수 $Y$의 상태 집합 $\boldsymbol{y}$를 합산하여 소거하거나(sum out) 적분하여 소거한다(integrate out)는 것을 의미한다. 합의 법칙은 주변화 성질(marginalization property)로도 알려져 있다. 합의 법칙은 결합 분포를 주변 분포와 연관 짓는다. 일반적으로 결합 분포가 두 개 이상의 확률 변수를 포함할 때, 합의 법칙은 확률 변수들의 임의의 부분집합에 적용될 수 있으며, 그 결과 잠재적으로 하나 이상의 확률 변수에 대한 주변 분포를 도출한다. 더 구체적으로, 만약 $\boldsymbol{x} = [x_1, \dots, x_D]^\top$라면, 우리는 다음과 같은 주변 분포를 얻는다.</p>
+
+\[p(x_i) = \int p(x_1, \dots, x_D)d\boldsymbol{x}_{\setminus i} \quad (6.21)\]
+
+<p>이는 $x_i$를 제외한 모든 확률 변수들을 적분/합산하여 소거하는 합의 법칙을 반복적으로 적용함으로써 도출되며, 여기서 $x_i$를 제외한 모든 변수라는 것은 $\setminus i$ 로 표시되고 “$i$를 제외한 모두(all except $i$)”라고 읽는다.</p>
+
+<blockquote>
+  <p>$\to$ 기하학적으로, 이는 $D$차원의 확률 밀도를 단 하나의 1차원($x_i$ 축) 위로 투영시키는 선형 변환과 동일하다.</p>
+</blockquote>
+
+<p>주목 (Remark). 확률적 모델링의 계산적 어려움(computational challenges) 중 상당수는 이 합의 법칙의 적용에서 기인한다. 변수가 많거나 상태가 많은 이산 변수들이 존재할 때, 합의 법칙은 결국 고차원 합산 또는 고차원 적분을 수행하는 문제로 귀결된다. 고차원 합산이나 적분을 정확하게 계산하는 다항 시간 알고리즘(polynomial-time algorithm)이 알려져 있지 않다는 점에서, 이를 수행하는 것은 일반적으로 계산상 난해하다(computationally hard).</p>
+
+<blockquote>
+  <p>$\to$ 모델의 파라미터를 추론하기 위해 잠재 변수 $\boldsymbol{z}$를 소거하려고 $p(\boldsymbol{x}) = \int p(\boldsymbol{x}, \boldsymbol{z}) d\boldsymbol{z}$를 계산해야 한다고 가정해보자. 만약 $\boldsymbol{z}$가 $1000$차원의 벡터라면, 우리는 $1000$중 정적분을 수행해야 한다. 차원의 저주로 이 공간의 부피는 폭발적이며, 이때 해석적 해를 계산하는 것은 intractable하다. 때문에, ELBO와 같은 수학적 하한선을 정의하여 적분을 근사 최적화 문제로 치환하거나, MCMC 샘플링을 통해 무작위 추출로 적분값을 역산하는 통계적 근사법을 사용한다.</p>
+</blockquote>
+
+<p>$\quad$ 두 번째 규칙인 곱의 법칙(product rule)은 다음 식을 통해 결합 분포를 조건부 분포와 연관 짓는다.</p>
+
+\[p(\boldsymbol{x}, \boldsymbol{y}) = p(\boldsymbol{y} \mid \boldsymbol{x})p(\boldsymbol{x}). \quad (6.22)\]
+
+<p>곱의 법칙은 두 확률 변수의 모든 결합 분포가 두 개의 다른 분포들의 곱으로 인수분해(factorized, 곱으로 쓰임)될 수 있다는 사실로 해석될 수 있다. 두 인수는 첫 번째 확률 변수의 주변 분포 $p(\boldsymbol{x})$와, 첫 번째 변수가 주어졌을 때 두 번째 확률 변수의 조건부 분포 $p(\boldsymbol{y} \mid \boldsymbol{x})$이다. $p(\boldsymbol{x}, \boldsymbol{y})$에서 확률 변수의 순서는 임의적이므로, 곱의 법칙은 $p(\boldsymbol{x}, \boldsymbol{y}) = p(\boldsymbol{x} \mid \boldsymbol{y})p(\boldsymbol{y})$ 역시 암시한다. 정확히 말하자면, (6.22)는 이산 확률 변수에 대한 확률 질량 함수로 표현되었다. 연속 확률 변수의 경우, 곱의 법칙은 확률 밀도 함수로 표현된다 (6.2.3절).  <br />
+$\quad$ 머신러닝과 베이지안 통계학에서 우리는 다른 확률 변수들을 관측했다는 조건 하에 관측되지 않은 (잠재) 확률 변수들을 추론하는 데 종종 관심을 가진다. 관측되지 않은 확률 변수 $\boldsymbol{x}$에 대한 어떤 사전 지식 $p(\boldsymbol{x})$가 있고, $\boldsymbol{x}$와 우리가 관측할 수 있는 두 번째 확률 변수 $\boldsymbol{y}$ 사이에 어떤 관계 $p(\boldsymbol{y} \mid \boldsymbol{x})$가 있다고 가정해 보자. 만약 우리가 $\boldsymbol{y}$를 관측한다면, 관측된 $\boldsymbol{y}$의 값들이 주어졌을 때 $\boldsymbol{x}$에 대한 어떤 결론을 도출하기 위해 베이즈 정리를 사용할 수 있다. 베이즈 정리(Bayes’ theorem, 베이즈 규칙 또는 베이즈 법칙이라고도 함)는 다음과 같다.</p>
+
+\[\underbrace{p(\boldsymbol{x} \mid \boldsymbol{y})}_{\text{사후 확률 (posterior)}} = \frac{\overbrace{p(\boldsymbol{y} \mid \boldsymbol{x})}^{\text{우도 (likelihood)}} \overbrace{p(\boldsymbol{x})}^{\text{사전 확률 (prior)}}}{\underbrace{p(\boldsymbol{y})}_{\text{증거 (evidence)}}} \quad (6.23)\]
+
+<p>이것은 다음 식들로 인해 (6.22)의 곱의 법칙에서 직접적으로 도출되는 결과이다.</p>
+
+\[p(\boldsymbol{x}, \boldsymbol{y}) = p(\boldsymbol{x} \mid \boldsymbol{y})p(\boldsymbol{y}) \quad (6.24)\]
+
+<p>그리고</p>
+
+\[p(\boldsymbol{x}, \boldsymbol{y}) = p(\boldsymbol{y} \mid \boldsymbol{x})p(\boldsymbol{x}) \quad (6.25)\]
+
+<p>따라서 다음이 성립한다.</p>
+
+\[p(\boldsymbol{x} \mid \boldsymbol{y})p(\boldsymbol{y}) = p(\boldsymbol{y} \mid \boldsymbol{x})p(\boldsymbol{x}) \iff p(\boldsymbol{x} \mid \boldsymbol{y}) = \frac{p(\boldsymbol{y} \mid \boldsymbol{x})p(\boldsymbol{x})}{p(\boldsymbol{y})}. \quad (6.26)\]
+
+<p>$\quad$ (6.23)에서 $p(\boldsymbol{x})$는 사전 확률(prior)이며, 이는 어떠한 데이터도 관측하기 이전에 관측되지 않은 (잠재) 변수 $\boldsymbol{x}$에 대한 우리의 주관적인 사전 지식을 캡슐화한 것이다. 우리는 이치에 맞는 어떤 사전 확률이든 선택할 수 있지만, 매우 드물게 발생하는 값일지라도 모든 그럴듯한 $\boldsymbol{x}$에 대해 사전 확률이 $0$이 아닌 pdf(또는 pmf)를 가지도록 보장하는 것이 매우 중요하다.</p>
+
+<blockquote>
+  <p>$\to$ 만약 우리가 어떤 가설 $\boldsymbol{x}$에 대해 편견을 가지고 초기 사전 확률을 정확히 실수 $0$으로 할당해 버린다면, 이후 어떤 데이터(우도)가 관측되더라도 사후 확률은 영원히 0이 된다. 구현 관점에서 어떠한 가설에 대한 제약을 폐구간 $[0, 1]$이 아닌 개구간 $(0, 1)$으로 유지해야 한다.</p>
+</blockquote>
+
+<p>$\quad$ 우도(likelihood) $p(\boldsymbol{y} \mid \boldsymbol{x})$는 $\boldsymbol{x}$와 $\boldsymbol{y}$가 어떻게 연관되어 있는지를 설명하며, 이산 확률 분포의 경우 만약 우리가 잠재 변수 $\boldsymbol{x}$를 안다고 가정했을 때 데이터 $\boldsymbol{y}$가 나타날 확률이다. 우도는 $\boldsymbol{x}$에 대한 분포가 아니라 오직 $\boldsymbol{y}$에 대한 분포라는 점에 유의하라. 우리는 $p(\boldsymbol{y} \mid \boldsymbol{x})$를 “($\boldsymbol{y}$가 주어졌을 때) $\boldsymbol{x}$의 우도” 또는 “$\boldsymbol{x}$가 주어졌을 때 $\boldsymbol{y}$의 확률”이라고 부르지만, 결코 $\boldsymbol{y}$의 우도라고는 부르지 않는다 (MacKay, 2003).  <br />
+$\quad$ 사후 확률(posterior) $p(\boldsymbol{x} \mid \boldsymbol{y})$는 베이지안 통계학에서 우리가 관심을 가지는 양(quantity of interest)인데, 왜냐하면 이것이 우리가 정확히 알고 싶어 하는 것, 즉 $\boldsymbol{y}$를 관측하고 난 후 $\boldsymbol{x}$에 대해 우리가 알게 된 것을 표현하기 때문이다.  <br />
+$\quad$ 다음 양은</p>
+
+\[p(\boldsymbol{y}) := \int p(\boldsymbol{y} \mid \boldsymbol{x})p(\boldsymbol{x})d\boldsymbol{x} = \mathbb{E}_{\boldsymbol{x}}[p(\boldsymbol{y} \mid \boldsymbol{x})] \quad (6.27)\]
+
+<p>주변 우도/증거(marginal likelihood/evidence)이다. (6.27)의 우변은 6.4.1절에서 정의할 기댓값 연산자(expectation operator)를 사용한다. 정의에 의해 주변 우도는 (6.23)의 분자를 잠재 변수 $\boldsymbol{x}$에 대해 적분한 것이다. 따라서 주변 우도는 $\boldsymbol{x}$와 무관하며, 사후 확률 $p(\boldsymbol{x} \mid \boldsymbol{y})$가 정규화(normalized)되도록 보장한다. 주변 우도는 또한 사전 확률 $p(\boldsymbol{x})$에 대해 기댓값을 취한 ‘기대 우도(expected likelihood)’로 해석될 수도 있다. 사후 확률의 정규화 외에도 주변 우도는 베이지안 모델 선택(Bayesian model selection)에서 중요한 역할을 하며, 이는 8.6절에서 논의할 것이다. 적분 때문에 증거는 종종 계산하기 어렵다.  <br />
+$\quad$ 베이즈 정리 (6.23)은 우도에 의해 주어진 $\boldsymbol{x}$와 $\boldsymbol{y}$ 사이의 관계를 뒤집을 수 있게 해준다. 따라서 베이즈 정리는 때때로 확률적 역(probabilistic inverse)이라고도 불린다. 우리는 8.4절에서 베이즈 정리에 대해 더 논의할 것이다.  <br />
+<em>주목 (Remark).</em> 베이지안 통계학에서 사후 확률 분포는 사전 확률과 데이터로부터 얻을 수 있는 모든 가용한 정보를 캡슐화하기 때문에 우리가 관심을 가지는 대상이다. 사후 확률 전체를 들고 다니는 대신, 8.3절에서 논의할 사후 확률의 최댓값(maximum of the posterior)과 같이 사후 확률의 특정 통계량(statistic)에만 초점을 맞추는 것도 가능하다. 하지만 사후 확률의 특정 통계량에만 초점을 맞추는 것은 정보의 손실(loss of information)을 초래한다. 더 넓은 문맥에서 생각해보면, 사후 확률은 의사 결정 시스템 내에서 사용될 수 있으며, 전체 사후 확률(full posterior)을 가지는 것은 극도로 유용할 수 있고 교란(disturbances)에 강건한(robust) 의사 결정으로 이어질 수 있다. 예를 들어, 모델 기반 강화학습(model-based reinforcement learning)의 맥락에서 Deisenroth et al. (2015)은 그럴듯한 상태 전이 함수(transition functions)들의 전체 사후 확률 분포를 사용하는 것이 매우 빠른(데이터/표본 효율적인) 학습으로 이어지는 반면, 사후 확률의 최댓값에만 초점을 맞추는 것은 일관된 실패를 초래함을 보여주었다. 따라서 전체 사후 확률을 가지는 것은 하위 작업(downstream task)에 매우 유용할 수 있다. 9장에서 우리는 선형 회귀(linear regression)의 맥락에서 이 논의를 계속할 것이다.</p>
+<nav class="mml-pagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #e8e8e8;">
+              <div style="flex: 1; text-align: left;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.2%20Discrete%20and%20Continuous%20Probabilities/" class="mml-nav-btn mml-prev" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; font-size: 0.9em; transition: all 0.2s;">
+                    <span style="font-size: 1.2em;">←</span>
+                    <span>
+                      <div style="font-size: 0.75em; color: #888; margin-bottom: 2px;">이전 글</div>
+                      <div style="font-weight: bold;">6.2 Discrete and Continuous Probabilities</div>
+                    </span>
+                  </a></div>
+
+              <div style="flex: 0; padding: 0 12px;">
+                <a href="/mml/" style="font-size: 0.85em; color: #888; text-decoration: none;">목차</a>
+              </div>
+
+              <div style="flex: 1; text-align: right;"><a href="/mml/Part%20I%20Mathematical%20Foundations/6.%20Probability%20and%20Distributions/6.4%20Summary%20Statistics%20and%20Independence/" class="mml-nav-btn mml-next" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; font-size: 0.9em; transition: all 0.2s;">
+                    <span>
+                      <div style="font-size: 0.75em; color: #888; margin-bottom: 2px;">다음 글</div>
+                      <div style="font-weight: bold;">6.4 Summary Statistics and Independence</div>
+                    </span>
+                    <span style="font-size: 1.2em;">→</span>
+                  </a></div>
+            </nav></div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

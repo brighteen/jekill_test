@@ -9,37 +9,53 @@
     {%- assign col_name = page.collection_name | default: "notes" -%}
     {%- assign items = site[col_name] -%}
 
-    <main class="page-content sidebar-layout-container" aria-label="Content">
+    <main class="page-content sidebar-layout-container" id="sidebar-layout-container" aria-label="Content">
       
+      <button id="sidebar-toggle" aria-label="Toggle Sidebar">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
       <aside class="left-sidebar">
         <ul class="sidebar-list">
-          {%- assign current_folder = "" -%}
+          {%- assign current_l1 = "" -%}
+          {%- assign current_l2 = "" -%}
           {%- for item in items -%}
             {%- if item.name == "index.md" or item.name == "index.html" -%}{%- continue -%}{%- endif -%}
 
             {%- assign path_parts = item.relative_path | split: "/" -%}
-            {%- assign folder_name = "" -%}
+            {%- assign l1_name = "" -%}
+            {%- assign l2_name = "" -%}
+            
             {%- if path_parts.size > 2 -%}
-              {%- assign limit = path_parts.size | minus: 2 -%}
-              {%- for i in (1..limit) -%}
-                {%- if forloop.first -%}
-                  {%- assign folder_name = path_parts[i] -%}
-                {%- else -%}
-                  {%- assign folder_name = folder_name | append: " / " | append: path_parts[i] -%}
-                {%- endif -%}
-              {%- endfor -%}
+              {%- assign l1_name = path_parts[1] -%}
+            {%- endif -%}
+            {%- if path_parts.size > 3 -%}
+              {%- assign l2_name = path_parts[2] -%}
             {%- endif -%}
 
-            {%- if folder_name != current_folder and folder_name != "" -%}
-              <li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">{{ folder_name }}</li>
-              {%- assign current_folder = folder_name -%}
+            {%- if l1_name != current_l1 and l1_name != "" -%}
+              <li class="sidebar-folder-heading-l1" style="margin-top: 25px; font-weight: 800; color: #222; font-size: 1.05em; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 10px;">{{ l1_name }}</li>
+              {%- assign current_l1 = l1_name -%}
+              {%- assign current_l2 = "" -%}
+            {%- endif -%}
+
+            {%- if l2_name != current_l2 and l2_name != "" -%}
+              <li class="sidebar-folder-heading-l2" style="margin-top: 15px; font-weight: 600; color: #555; font-size: 0.9em; margin-bottom: 8px; margin-left: 5px;">{{ l2_name }}</li>
+              {%- assign current_l2 = l2_name -%}
             {%- endif -%}
 
             {%- assign title = item.title | default: item.name | replace: ".md", "" | replace: ".html", "" -%}
+            {%- assign indent = "10px" -%}
+            {%- if l2_name != "" -%}
+              {%- assign indent = "20px" -%}
+            {%- endif -%}
+
             {%- if item.url == page.url -%}
-              <li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="{{ item.url | relative_url }}" style="font-weight: bold; color: #2a7ae2;">{{ title }}</a></li>
+              <li class="sidebar-item sidebar-item-active" style="margin-left: {{ indent }};"><a href="{{ item.url | relative_url }}" style="font-weight: bold; color: #2a7ae2;">{{ title }}</a></li>
             {%- else -%}
-              <li class="sidebar-item" style="margin-left: 10px;"><a href="{{ item.url | relative_url }}">{{ title }}</a></li>
+              <li class="sidebar-item" style="margin-left: {{ indent }};"><a href="{{ item.url | relative_url }}">{{ title }}</a></li>
             {%- endif -%}
           {%- endfor -%}
         </ul>
@@ -114,6 +130,25 @@
         color: #2a7ae2;
       }
     </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const toggle = document.getElementById('sidebar-toggle');
+        const container = document.getElementById('sidebar-layout-container');
+        
+        if (toggle && container) {
+          toggle.addEventListener('click', function() {
+            container.classList.toggle('collapsed');
+          });
+        }
+
+        // Auto-scroll to active sidebar item
+        const activeItem = document.querySelector('.sidebar-item-active');
+        if (activeItem) {
+          activeItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+      });
+    </script>
 
   </body>
 </html>

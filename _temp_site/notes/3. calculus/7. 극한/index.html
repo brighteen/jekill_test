@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>극한 | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="극한" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="극한과 미분 해삭학 및 위상수학에서 극한(limit) 또는 극한값은 수열이나 함수가 한없이 ‘가까워지는’ 값이다. 해석학에서 함수의 극한(limit of a function)은 독립변수가 일정한 값에 한없이 가까워질 때, 함수의 값이 한없이 가까워지는 값이다. 함수의 극한은 존재할 수도(수렴), 존재하지 않을 수도(발산) 있다." />
+<meta property="og:description" content="극한과 미분 해삭학 및 위상수학에서 극한(limit) 또는 극한값은 수열이나 함수가 한없이 ‘가까워지는’ 값이다. 해석학에서 함수의 극한(limit of a function)은 독립변수가 일정한 값에 한없이 가까워질 때, 함수의 값이 한없이 가까워지는 값이다. 함수의 극한은 존재할 수도(수렴), 존재하지 않을 수도(발산) 있다." />
+<link rel="canonical" href="https://brighteen.github.io/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="극한" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"극한과 미분 해삭학 및 위상수학에서 극한(limit) 또는 극한값은 수열이나 함수가 한없이 ‘가까워지는’ 값이다. 해석학에서 함수의 극한(limit of a function)은 독립변수가 일정한 값에 한없이 가까워질 때, 함수의 값이 한없이 가까워지는 값이다. 함수의 극한은 존재할 수도(수렴), 존재하지 않을 수도(발산) 있다.","headline":"극한","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/"},"url":"https://brighteen.github.io/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/">6. 음함수의 미분</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/" style="font-weight: bold; color: #2a7ae2;">7. 극한</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <h2 id="극한과-미분">극한과 미분</h2>
+<p>해삭학 및 위상수학에서 극한(limit) 또는 극한값은 수열이나 함수가 한없이 ‘가까워지는’ 값이다.  <br />
+해석학에서 함수의 극한(limit of a function)은 독립변수가 일정한 값에 한없이 가까워질 때, 함수의 값이 한없이 가까워지는 값이다. 함수의 극한은 존재할 수도(수렴), 존재하지 않을 수도(발산) 있다.</p>
+
+<p>어떤 함수에서 특정 입력값 $a$를 대입했을 때 함숫값이 수학적으로 정의되지 않더라도, $x$가 $a$에 한없이 가까워질 때 출력값이 특정한 값에 수렴한다면 우리는 그 값을 극한값이라고 부른다.  <br />
+이는 ‘함수가 해당 지점에서 실제로 어떤 값을 가지는가?’가 아니라, ‘해당 지점 주변에서 함수가 어떤 추세를 보이는가?’를 분석하는 것이다.</p>
+
+<p>미분(derivative) 또는 도함수는 어떤 함수의 정의역 속 각 점에서 함숫값의 변화량과 독립변숫값의 변화량이 구성되는 새로운 함수이다. 어떤 함수의 순간 변화율(미분계수)을 구하는 것을 의미하며 순간변화율 독립 변수 x의 증분에 관한 함숫값 f(x)의 증분의 비가 한없이 일정한 값에 가까워질 때 그 일정한 값, 즉 함수에서 변수 x값의 변화량에 관한 함숫값 f(x)의 변화량 비가 한없이 일정한 값에 가까워질 때 그 일정한 값 dy/dx로 나타낸다.  <br />
+미분은 비선형 함수를 선형함수로 근사적으로 나타내려는 시도다. 비선형 함수를 미분하여 한 점 주변에서 1차 함수로 생각한다. 이를 반복하면 함수의 다항함수 근사를 얻으며 무한 번 하면 테일러 급수를 얻는다.  <br />
+미분은 특정 순간의 ‘변화율’, 즉 그래프 상에서 특정 점을 지나는 접선의 기울기를 구하는 연산인데, 여기서 논리적인 충돌이 발생한다.  <br />
+기울기를 계산하기 위해서는 반드시 두 개의 점이 필요하며, $y$의 변화량을 $x$의 변화량으로 나누어야 한다.</p>
+
+\[\frac{\Delta y}{\Delta x}\]
+
+<p>하지만 특정 ‘순간(하나의 점)’의 변화율을 구하려면 두 점 사이의 거리가 $0$이어야 한다(도로에 차들을 촬영했을 때 사진 한장으로 차들의 속도를 구할 수 있는가?). 이 경우 분모와 분자가 모두 $0$이 되는 형태가 되어 수학적으로 연산이 불가능해진다.  <br />
+즉, ‘순간’이라는 것은 한 점에서 정의되며, ‘변화율’은 두 점 사이의 ‘변화’가 얼만지를 나타내므로 모순이라는 것이다.</p>
+
+<p>위에서 발생한 모순을 피하고 순간 변화율을 계산하기 위해 극한의 개념이 도입된다.</p>
+<ul>
+  <li>단일 점이 아닌, 거리가 $h$만큼 떨어진 두 점 사이의 평균 변화율을 먼저 계산한다. 여기서 $h$는 $0$이 아닌 유한한 상수이다.</li>
+  <li>그 다음, 극한을 사용하여 이 유한한 거리 $h$를 $0$으로 한없이 접근시킨다.</li>
+  <li>이 과정을 통해 평균 변화율이 수렴하는 최종 목적지를 찾으며, 이것이 곧 미분계수(순간 변화율)가 된다.<br />
+이를 수식으로 표현하면 다음과 같다.</li>
+</ul>
+
+\[f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\]
+
+<p>이 정의에서 $h$는 실체가 없는 ‘무한소’가 아니다. 극한 기호 $\lim_{h \to 0}$ 아래에서 $h$는 철저히 영이 아닌 유한한 크기를 가진 변화량으로 취급되므로, 분모가 $0$이 되는 수학적 오류를 발생시키지 않으면서도 완벽하게 접선의 기울기를 도출해낼 수 있다.</p>
+<blockquote>
+  <p>$\to$ $h$가 무한소(infinitesimal)가 아니라는 말의 핵심은, 현대 수학의 표준 실수 체계($\mathbb{R}$)에서 ‘0에 한없이 가까우면서 0은 아닌 어떤 고정된 수’라는 개념 자체가 존재하지 않기 때문이다.<br />
+우리가 미적분학에서 사용하는 표준 실수 체계에는 아르키메데스 성질이 성립한다. 이는 임의의 양의 실수 $x$와 $y$에 대하여, $x$를 여러 번 더하면 언젠가는 $y$보다 커지게 되는 자연수 $n$이 존재한다($nx &gt; y$)는 성질이다.  <br />
+이 성질에 따르면 ‘가장 작은 양의 실수’는 존재할 수 없다. 아무리 작은 양수 $h$가 있다고 가정하더라도, 우리는 항상 그보다 더 작은 양수 $\frac{h}{2}$를 계산해 낼 수 있기 때문이다. 따라서 극한 기호 안의 $h$를 어떤 ‘무한소의 상태인 숫자’로 취급하는 것은 실수 공리에 어긋난다. $h$는 극한을 계산하는 논리적 과정 내내 철저하게 0이 아닌 유한한 일반 실수이다.</p>
+</blockquote>
+
+<blockquote>
+  <p>$\to$ ‘미분계수’, ‘순간변화율’, ‘도함수’의 차이를 생각해보자.<br />
+먼저 ‘미분계수’과 ‘순간변화율’은 수학적으로 동일한 값을 가리킨다.</p>
+</blockquote>
+
+\[f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}\]
+
+<p>단지 이 값을 어느 관점에서 해석하느냐에 따라 사용하는 용어가 다를 뿐이다. 먼저 대수적인 관점에서, 함수 $f(x)$에서 특정한 점 $x=a$일 때, 평균변화율의 극한값을 대수적인 연산 결과가 미분 계수이며, 이는 하나의 실수값이다. 물리적/기하학적 관점에서, 동일한 $f’(a)$의 값을 물리적인 속도의 순간적인 변화나, 기하학적인 그래프 상 특정 점에서의 ‘접선의 기울기’로 해석할 때 사용하는 의미론적 용어이다.  <br />
+반면, ‘도함수’는 특정 점 $x=a$에 국한된 상수가 아닌 임의의 입력값 $x$를 그 지점에서의 미분계수 $f’(x)$에 대응시키는 ‘함수’이다. 즉, 어떤 $x$를 대입하든 그 위치에서의 접선의 기울기를 뱉어내도록 규칙화된 수식 그 자체를 의미한다.</p>
+
+\[f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\]
+
+<p>따라서 이 개념들은 원래 함수 $f(x)$를 미분하여 얻어낸 일반화된 식인 ‘도함수’ $f’(x)$가 먼저 존재하고, 그 도함수의 $x$ 자리에 특정한 상수 $a$를 대입하여 계산해낸 구체적인 결괏값이 바로 ‘미분계수(순간변화율)’ $f’(a)$가 되는 논리적 인과관계를 갖는다.</p>
+
+<h2 id="입실론-델타-논법">입실론-델타 논법</h2>
+<p>“입력값 $x$가 $a$에 한없이 가까워질 때, 함수 $f(x)$의 값은 $L$에 한없이 가까워진다.” 이 문장에서 ‘한없이’, ‘가까워진다’라는 개념은 사람마다 다르게 해석될 수 있는 주관적인 상태이다.  <br />
+때문에 수학에서는 이를 정량적이고 객관적인 명제로 바꾸어야 했는데, 이를 위해 ‘오차 범위’라는 개념을 도입하여 극한을 엄밀하게 재정의한 것이 바로 입실론-델타 논법이다.  <br />
+(대게 입실론과 델타가 서로 누가누가 더 바운더리를 잘 줄이냐를 보는 경쟁의 관점으로 접한다.)  <br />
+함수 $f(x)$에 대하여 $x$가 $a$로 접근할 때의 극한값이 $L$이라는 것, 즉 $\lim_{x \to a} f(x) = L$이라는 명제는 수학적으로 다음과 같이 정의된다.</p>
+
+<p>임의의 양수 $\epsilon &gt; 0$에 대하여, 다음 조건을 만족하는 양수 $\delta &gt; 0$가 항상 존재한다.</p>
+
+\[0 &lt; |x - a| &lt; \delta \implies |f(x) - L| &lt; \epsilon\]
+
+<p>(극한은 $x$가 $a$일 때의 함숫값을 묻는 것이 아니므로 $x \neq a$라는 조건이 필수이다. 수식에서 $0 &lt; |x - a|$부분이 이를 충족시킨다.)</p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\epsilon$ (epsilon): 출력값의 허용 오차. y축 상에서 출력값 $f(x)$가 목표값 $L$로부터 벗어나도 허용되는 오차의 범위를 의미한다. 식에서 $</td>
+          <td>f(x) - L</td>
+          <td>&lt; \epsilon$은 ‘$f(x)$와 $L$ 사이의 거리가 $\epsilon$보다 작다’는 것을 뜻한다.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\delta$ (delta): 입력값의 통제 범위. x축 상에서 입력값 $x$가 기준점 $a$로부터 얼마나 떨어져 있는지를 나타내는 범위이다. 식에서 $</td>
+          <td>x - a</td>
+          <td>&lt; \delta$는 ‘$x$와 $a$ 사이의 거리가 $\delta$보다 작다’는 것을 뜻한다.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>임의의 $\epsilon$과 존재하는 $\delta$의 인과관계. 이 논법의 핵심은 방향성이다. 누군가가 아무리 작은 양수 $\epsilon$을 무작위로 제시하더라도, 그에 맞춰 $|f(x) - L| &lt; \epsilon$ 조건을 만족하게 만들 수 있는 특정한 $\delta$ 범위를 우리가 항상 찾아낼 수 있어야 한다.<br />
+결론적으로, 아무리 출력값의 오차범위($\epsilon$)를 작게 주더라도 그에 상응하는 입력값의 범위($\delta$)를 항상 구해낼 수 있다면, 출력값은 다른 곳으로 튀지 않고 오직 $L$이라는 값 하나로만 완벽하게 갇히게 되며, 이는 극한값이 $L$로 수렴한다는 증거가 된다. 반대로, 범위를 좁히는 과정에서 출력값이 두 개의 다른 값으로 나뉘거나 진동하여 적절한 $\delta$를 찾을 수 없다면 극한은 존재하지 않는다.
+    <blockquote>
+      <p>$\to$ 다시 위에서 다룬 “$h$는 무한소가 아니다”는 문장에 대해 들여다보자. 함수 $f(x)$의 특정 점 $x$에서의 미분계수(도함수) $f’(x) = L$이라고 할 때, $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = L$의 정확한 수학적 의미를 입실론-델타 논법으로 풀면 다음과 같다.</p>
+    </blockquote>
+  </li>
+</ul>
+
+\[\forall \epsilon &gt; 0, \exists \delta &gt; 0 \text{ s.t. } 0 &lt; |h| &lt; \delta \implies \left| \frac{f(x+h) - f(x)}{h} - L \right| &lt; \epsilon\]
+
+<p>(해석: 임의의 양수 $\epsilon$ (허용 가능한 오차)이 주어졌을 때, 이에 대응하는 어떤 양수 $\delta$ (입력값의 범위)가 존재하여, $h$가 $0 &lt; |h| &lt; \delta$를 만족하는 유한한 실수이기만 하면 평균변화율과 $L$의 차이가 $\epsilon$보다 작아진다.)  <br />
+이 정의를 보면 $h$는 무한소가 아니다. $h$는 단지 $0 &lt; |h| &lt; \delta$라는 구간 안에 존재하는 실수 변수이다.  <br />
+(참고로, 여기서 다룬 입실론-델타 논법은 일반적인 함수의 극한 상황과는 다르다. 표준 입실론-델타 논법은 특정 점 $a$ 근처에서 함수 $f(x)$가 극한값 $L$을 가진다는 것, 즉</p>
+
+\[\lim_{x \to a} f(x) = L\]
+
+<p>을 정의하기 위한 부등식이다. 이에 대한 해석은 “입력값 $x$가 $a-\delta$ 와 $a+\delta$ 사이에 있을 때, 출력값 $f(x)$가 $L-\epsilon$ 과 $L+\epsilon$ 사이의 바운더리 안으로 들어간다.”이다.  <br />
+반면, $h$가 무한소가 아님을 확인하기 위해 세운 위 부등식은 원래 함수 $f(x)$의 함숫값이 아닌, 평균변화율의 극한을 다루어 접선의 기울기인 $f’(x)$를 정의한다. 따라서 이에 대한 해석은 “입력값(간격) $h$가 $-\delta$ 와 $\delta$ 사이에 있을 때, 출력값(평균변화율) $\frac{f(x+h) - f(x)}{h}$가 $f’(x)-\epsilon$ 과 $f’(x)+\epsilon$ 사이의 바운더리 안으로 들어간다.”가 된다.)</p>
+
+<h3 id="극한이-정의되지-않는-경우">극한이 정의되지 않는 경우</h3>
+<p>극한이 정의되려면 앞서 살펴본 입입실론-델타 논법의 수학적 전제에 따라, 입력값이 특정한 위치로 한없이 다가갈 때 출력값 역시 단 하나의 유한한 실수값으로 수렴해야 한다.  <br />
+입력값 $x$가 목표값 $a$로 접근하는 방향은 수직선 상에서 왼쪽(좌극한)과 오른쪽(우극한) 두 가지가 존재한다. 이 두 방향에서의 극한값이 서로 다르다면, 단일한 극한값을 확정할 수 없으므로 극한이 존재하지 않는다. 극한이 정의되지 않는 경우의 첫 번째 예시는 이 경우를 다룬다.</p>
+
+<div style="text-align: center;">
+  <p><img src="/assets/3_left_right_limit_mismatch.png" alt="3_left_right_limit_mismatch.png" width="500" /></p>
+</div>
+
+<p>위 그림은 다음과 같은 함수이다.</p>
+
+\[f(x) = \frac{|x|}{x}\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>$x=0$일 때의 극한을 구해보자. $x$가 양수에서 $0$으로 다가갈 때(우극한), 절댓값 $</td>
+      <td>x</td>
+      <td>= x$이므로 함수값은 항상 $1$이다.</td>
+    </tr>
+  </tbody>
+</table>
+
+\[\lim_{x \to 0^+} \frac{|x|}{x} = 1\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>반면, $x$가 음수에서 $0$으로 다가갈 때(좌극한), 절댓값 $</td>
+      <td>x</td>
+      <td>= -x$이므로 함수값은 항상 $-1$이다.</td>
+    </tr>
+  </tbody>
+</table>
+
+\[\lim_{x \to 0^-} \frac{|x|}{x} = -1\]
+
+<p>우극한($1$)과 좌극한($-1$)이 명백히 다르기 때문에, $x=0$에서의 극한은 존재하지 않는다.  <br />
+입실론-델타 관점에서는 아무리 $\delta$ 구간을 좁혀도 출력값이 $1$과 $-1$로 양분되므로, 오차 범위 $\epsilon$ 이내로 출력값을 가둘 수 있는 단일한 수렴값 $L$을 설정할 수 없다.</p>
+
+<p>극한이 정의되지 않는 두 번째 예시는 입력값이 특정 값에 다가갈 때, 출력값이 유한한 실수에 머물지 않고 양의 무한대($\infty$)나 음의 무한대($-\infty$)로 끝없이 커지거나 작아지는 경우이다. 다음 함수의 $x=0$에서의 극한을 살펴보자.</p>
+
+<div style="text-align: center;">
+  <p><img src="/assets/3_diverges_to_infinity.png" alt="3_diverges_to_infinity.png" width="300" /></p>
+</div>
+
+\[f(x) = \frac{1}{x^2}\]
+
+<p>$x$가 $0$에 한없이 가까워질 때, 분모인 $x^2$은 양수로서 한없이 $0$에 가까워지므로, 전체 분수 값은 무한히 커진다.</p>
+
+\[\lim_{x \to 0} \frac{1}{x^2} = \infty\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>앞서 입입실론-델타 논법에서 극한값 $L$은 반드시 ‘유한한 실수(Real number)’여야 한다고 했다. 무한대($\infty$)는 크기가 한없이 커지는 ‘상태’를 나타내는 기호일 뿐 고정된 실수가 아니므로, $</td>
+      <td>f(x) - L</td>
+      <td>&lt; \epsilon$ 부등식을 성립시킬 수 있는 유한한 타겟값 $L$ 자체를 애초에 설정할 수 없다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>세 번째 예시로 입력값이 특정 값으로 다가갈 때, 출력값이 특정한 실수로 수렴하지도 않고 무한대로 발산하지도 않으면서, 두 개 이상의 값 사이를 끊임없이 오가는 무한 진동하는 경우이다.</p>
+
+\[f(x) = \sin\left(\frac{1}{x}\right)\]
+
+<p>이 함수에서 $x$가 $0$으로 한없이 가까워지는 상황을 가정해보자.</p>
+
+\[\lim_{x \to 0} \sin\left(\frac{1}{x}\right)\]
+
+<p>$x$가 작아질수록 그 역수인 $\frac{1}{x}$은 무한히 커진다. 사인(sine) 함수의 특성상 입력값이 커지면 출력값은 $-1$과 $1$ 사이를 계속해서 순환하게 되는데, $\frac{1}{x}$이 무한히 빠르게 커지므로 $x=0$ 근처에서는 진동하는 속도 역시 무한해진다.  <br />
+$x=0$ 주변에서 입력값의 범위($\delta$)를 아무리 미세하게 잡아도, 그 좁은 구간 안에서 함수값은 $-1$부터 $1$까지의 모든 값을 무한히 반복해서 가진다. 특정 지점으로 수렴하지 않기 때문에 이 경우에도 극한은 정의되지 않는다.</p>
+
+<blockquote>
+  <p>$\to$ 극한값이 존재한다고 그 함수가 연속적임을 의미하는건 아니다.<br />
+어떤 함수 $f(x)$가 특정 지점 $x=a$에서 연속이려면 $f(a)$가 유한한 실수로 정의되어야 하며(1), 좌극한과 우극한이 일치하여 유한한 극한값 $\lim_{x \to a} f(x) = L$이 존재해야 하며(2), 그 위치($x=a$)에서 극한값과 함숫값이 같아야 한다(3).  <br />
+예를 들어 다음과 같음 함수를 생각해보자.</p>
+</blockquote>
+
+\[f(x) = \frac{x^2 - 4}{x - 2}\]
+
+<p>$x$가 $2$에 한없이 가까워질 때, 극한값은 4로 수렴한다. 하지만 $x=2$를 대입하면 분모가 $0$이 되어 수학적으로 정의되지 않는다.</p>
+
+<div style="text-align: center;">
+  <p><img src="/assets/3_limit_exists_not_continuous.png" alt="3_limit_exists_not_continuous.png" width="300" /></p>
+</div>
+
+<h2 id="로피탈의-정리">로피탈의 정리</h2>
+<p>특정 점에서의 함수값이 정의되지 않은 $\frac{0}{0}$형태가 되는 경우가 존재한다. 가령, 다음과 같은 경우이다.</p>
+
+\[f(x) = \frac{\sin(\pi x)}{x^2 - 1} \quad (1)\]
+
+<p>이 함수에 $x=1$을 대입하면 분자인 $\sin(\pi)$도 $0$이 되고, 분모인 $1^2 - 1$도 $0$이 된다. 즉, $\frac{0}{0}$ 형태가 되어 수학적으로 값이 정의되지 않는다. 하지만 그래프를 그려보면 $x=1$ 부근에서 함수는 분명히 특정한 유한한 값으로 수렴하는 추세를 보이는데, 이 ‘숨겨진 극한값’을 어떻게 논리적으로 찾아낼 것인가가 로피탈의 정리의 출발점이다.</p>
+
+\[\lim_{x \to 1} \frac{\sin(\pi x)}{x^2 - 1} = \frac{?}{?}\]
+
+<p>(로피탈의 정리(l’Hôpital’s rule)는 베르누이의 규칙(Bernoulli’s rule)이라고도 불리는데 이는 그 당시 로피탈이 베르누이의 수학적 발견에 대한 권리 일부를 사들였기 때문이다.)  <br />
+이를 일반화하여, $x=a$에서 $f(a)=0$이고 $g(a)=0$인 두 함수 $f(x)$와 $g(x)$의 비율 $\frac{f(x)}{g(x)}$를 생각해보자. 두 함수가 미분 가능하다면, 아주 좁은 구간에서는 곡선인 그래프가 직선(접선)과 거의 일치하게 된다.  <br />
+이떄 $x=a$에서 아주 미세한 변화량인 $dx$만큼 이동한 지점 $x = a + dx$에서의 함숫값을 도함수를 이용해 근사해보면 다음을 유도한다.</p>
+
+\[f'(a) = \lim_{dx \to 0}\frac{f(a+dx)-f(a)}{dx}\]
+
+\[f'(a) \approx \frac{f(a+dx)-f(a)}{dx}\]
+
+\[f'(a)dx \approx f(a+dx)-f(a)\]
+
+\[f(a+dx) \approx f'(a)dx + f(a)\]
+
+<p>$f(a)=0$이므로</p>
+
+\[f(a+dx) \approx f'(a)dx\]
+
+<p>마찬가지로 $g(x)$에 대해 다음이 성립한다.</p>
+
+\[g(a + dx) \approx g'(a)dx\]
+
+<p>이제 원래 구하고자 했던 두 함수의 비율에 위에서 구한 선형 근사식을 대입한다.</p>
+
+\[\frac{f(a+dx)}{g(a+dx)} \approx \frac{f'(a)dx}{g'(a)dx}\]
+
+<p>분자와 분모에 공통으로 존재하는 유한한 변화량 $dx$를 약분하여 제거할 수 있다.</p>
+
+\[\frac{f(a+dx)}{g(a+dx)} \approx \frac{f'(a)}{g'(a)}\]
+
+<p>여기서 $dx$를 $0$으로 한없이 접근시키는 극한을 취하면, 이 근사는 오차 없는 완벽한 등식이 된다.</p>
+
+\[\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}\]
+
+<p>(이때 만약 분모의 도함수에 $x=a$를 대입한 값인 $g’(a)$마저 $0$이 되어버린다면 위 꼴은 정의할 수 없으므로 ‘$x=a$를 제외한 $a$의 근방 구간에서 $g’(x) \neq 0$이어야 한다’는 조건이 반드시 전제되어야 한다. 또한, 만약 계산 결과가 또다시 $\frac{0}{0}$ 꼴이 나온다면, 두 함수가 두 번 미분 가능하다는 가정하에 로피탈의 정리를 한 번 더 적용하여 $\frac{f’‘(x)}{g’‘(x)}$의 극한을 구할 수 있다는 점을 알아두자.)</p>
+
+<p>로피탈의 정리를 식 (1)에 대입해보자. 분자와 분모를 각각 $x$에 대해 미분하면 다음과 같다.</p>
+
+\[\frac{\frac{d}{dx} \sin(\pi x)}{\frac{d}{dx} (x^2 - 1)} = \frac{\pi \cos(\pi x)}{2x}\]
+
+<p>미분된 함수에 $x=1$을 대입하여 극한값을 구하면 다음과 같다.</p>
+
+\[\lim_{x \to 1} \frac{\pi \cos(\pi x)}{2x} = \frac{\pi \cos(\pi)}{2(1)} = \frac{\pi (-1)}{2} = -\frac{\pi}{2}\]
+
+<p>결론적으로, 로피탈의 정리는 특정 점에서 극한을 취했을 때 분자와 분모가 동시에 $0$으로 가는 $\frac{0}{0}$ 꼴이거나, 동시에 무한대로 커지는 $\frac{\infty}{\infty}$ 꼴일 때만 수학적으로 성립한다. 이를 값이 확정되지 않는다는 의미로 ‘부정형’이라고 부른다. 비슷한 경우로 분수 형태의 함수에서 분자는 $1$인데 분모가 $0$이 되는 $\frac{1}{0}$ 꼴도 수학적으로 함수값이 정의되지 않는데, 이때의 극한은 무한대로 발산하므로 로피탈의 정리를 적용할 수 없다.</p>
+
+<p>참고  <br />
+Wikipedia  <br />
+3Blue1Brown. Limits, L’Hôpital’s rule, and epsilon delta definitions | Chapter 7, Essence of calculus</p>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

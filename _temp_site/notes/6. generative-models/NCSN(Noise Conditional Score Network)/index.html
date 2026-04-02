@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>NCSN(Noise Conditional Score Network) | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="NCSN(Noise Conditional Score Network)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Generative Modeling by Estimating Gradients of the Data Distribution Yang Song, Stefano Ermon" />
+<meta property="og:description" content="Generative Modeling by Estimating Gradients of the Data Distribution Yang Song, Stefano Ermon" />
+<link rel="canonical" href="https://brighteen.github.io/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NCSN(Noise Conditional Score Network)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"Generative Modeling by Estimating Gradients of the Data Distribution Yang Song, Stefano Ermon","headline":"NCSN(Noise Conditional Score Network)","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/"},"url":"https://brighteen.github.io/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/">6. 음함수의 미분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/">7. 극한</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/" style="font-weight: bold; color: #2a7ae2;">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <h1 id="generative-modeling-by-estimating-gradients-of-the-data-distribution">Generative Modeling by Estimating Gradients of the Data Distribution</h1>
+<blockquote>
+  <p>Yang Song, Stefano Ermon</p>
+</blockquote>
+
+<h2 id="핵심-내용-정리">핵심 내용 정리</h2>
+
+<h3 id="1-문제-제기-기존-방식의-두-가지-한계">1. 문제 제기: 기존 방식의 두 가지 한계</h3>
+<p>데이터 분포의 그래디언트(스코어)를 학습하여 샘플링하는 방식이 이론적으로 완벽하지만, 실제 고차원 데이터에 적용하면 실패하는 이유를 두 가지로 분석함.</p>
+<ol>
+  <li>매니폴드 가설
+    <ul>
+      <li>실제 데이터는 고차원 공간 전체에 퍼져있는 것이 아니라, 매우 낮은 차원의 매니폴드 위에 존재함.</li>
+      <li>문제는 매니폴드 위에서는 확률 밀도가 정의되지만, 매니폴드를 벗어난 공간에서는 정의되지 않는다는 점임. 따라서 그래디온트(스코어)도 정의할 수 없고, 스코어 매칭이 실패함.</li>
+    </ul>
+  </li>
+  <li>저밀도 영역에서의 스코어 추정 및 느린 혼합
+    <ul>
+      <li>데이터가 희소한 영역에서는 학습 데이터가 없어서 스코어 네트워크가 정확한 그래디언트를 학습할 수 없음.</li>
+      <li>샘플링 시 Langevin Dynamics를 사용하는데, 데이터의 두 모드(Mode)가 저밀도 영역으로 분리되어 있으면, 샘플이 한 모드에서 다른 모드로 건너가지 못하고 갇히는 문제가 발생.</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Q. 샘플이 한 모드에서 다른 모드로 건너가지 못하는게 왜 문제인가?<br />
+A. Mode는 데이터 분포에서 확률 밀도가 높은 덩어리들을 의미함. 예를 들어, 개와 고양이 사진을 학습했다면 개와 고양이의 각 집합이 각각의 모드가 됨.<br />
+샘플링 과정(Langevin Dynamics)이 모드 사이의 저밀도 영역을 건너가지 못하고 특정 모드에 갇혀버린다면, 모델은 전체 데이터 분포의 비율을 정확하게 반영하지 못함. 위 예시에서 샘플링이 개 Mode에 갇히면 생성된 결과물이 개 99%, 고양이 1%가 될 수 있음. 이는 모델이 데이터 분포를 제대로 학습했다고 할 수 없음.<br />
+학습 중 큰 노이즈를 먼저 주입하여 분리되어 있든 모드들이 서로 연결되어(저밀도 영역이 채워져서) 샘플이 자유롭게 이동할 수 있게 됨.</p>
+</blockquote>
+
+<blockquote>
+  <p>Q. Langevin Dynamics를 사용한다는 의미가 무엇인가?<br />
+A. 기울기(스코어)만 보고 확률밀도가 높아지는 방향으로 가는 것임. <br />
+정의: 스코어 함수만들 사용하여 확률분포로부터 샘플을 생성하는 반복적인 절차임.</p>
+
+</blockquote>
+
+\[x_{t} = x_{t-1} + \frac{\epsilon}{2} \nabla_x \log p(x_{t-1}) + \sqrt{\epsilon} z_t\]
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Drift 항: 확률 밀도가 높은 곳으로 샘플을 밀어 올리는 힘.(등산)
+Noise: 랜덤한 방향으로 샘플을 흔드는 힘.(확산) 의미: 데이터의 확률 분포 자체는 모르지만, 그 기울기는 신경망으로 학습함. Langevin Dynamics는 이 Vector field를 따라가며 랜덤 노이즈를 점차 그럴듯한 데이터로 샘플링함.
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="2-해결책-noise-conditional-score-networkncsn">2. 해결책: Noise Conditional Score Network(NCSN)</h3>
+<p>이 문제를 해결하기 위해 데이터를 다양한 강도의 노이즈로 훼손(perturb, 섭동/perturbation)시키는 방법을 제안함.</p>
+<ul>
+  <li>다단계 노이즈 주입: $\sigma_1 &gt; \sigma_2 &gt; \dots &gt; \sigma_L$순서로 노이즈 레벨을 설정
+    <ul>
+      <li>큰 노이즈로 데이터 분포를 넓게 퍼뜨려 저밀도 영역을 채우고, 모드 간 이동이 쉬워지게 유도. 전체 공간에서 스코어가 잘 정의됨.</li>
+      <li>작은 노이즈로 원본 데이터 분포와 거의 유사한 스코어를 정의.</li>
+    </ul>
+  </li>
+  <li>조건부 스코어 네트워크: 각 노이즈 레벨에 대해 별도의 모델을 만드는 대신, 단일 신경망$s_\theta(x, \sigma)$를 학습시킴. 이 네트워크는 입력과 현재 노이즈 레벨을 받아 해당 분포의 스코어를 추정함.</li>
+  <li>학습목표: Donoising Score Matching 손실 함수를 모든 노이즈 레벨에 대해 합친 형태:</li>
+</ul>
+
+\[\mathcal{L}(\theta; \{\sigma_i\}) \propto \sum_{i=1}^L \sigma_i^2 \mathbb{E} [\|s_\theta(\tilde{x}, \sigma_i) + \frac{\tilde{x}-x}{\sigma_i^2}\|^2]\]
+
+<p>이때 $\sigma_i^2$가중치는 모든 노이즈 레벨에서 손실 함수의 크기를 맞춰주기 위함.</p>
+
+<h3 id="3-새로운-샘플링-annealed-langevin-dynamics">3. 새로운 샘플링: Annealed Langevin Dynamics</h3>
+<p>학습된 모델로 이미지를 생성할 때 담금질(Annealing)기법을 적용한 새로운 샘플링 알고리즘을 사용.</p>
+
+<div style="text-align: center;">
+  <p><img src="/assets/Pasted image 20251215145641.png" alt="Pasted image 20251215145641.png" width="500" /></p>
+</div>
+
+<ol>
+  <li>랜덤 노이즈에서 시작.</li>
+  <li>가장 큰 노이즈 레벨에 해당하는 스코어를 이용해 Langevin Dynamics를 수행.(큰 구조)</li>
+  <li>그 결과를 초기값으로 삼아, 다음 노이즈 레벨로 넘어감.</li>
+  <li>이를 제일 작은 노이즈 레벨까지 반복함.(세부 디테일)  <br />
+이 방식으로 큰 노이즈에서 Mode를 잘 찾아가게 한 뒤, 점차 노이즈를 줄여가며 원본 데이터 매니폴드에 안착하게 만듦.</li>
+</ol>
+
+<blockquote>
+  <p>Q. 노이즈가 특정 Mode로 수렴하게끔 만들면 결국 학습데이터와 유사한 데이터밖에 만들어내지 못하는게 아닌가? 무작위 노이즈를 주입한다 하더라도 결국 끝은 확률 밀도가 가장 높아지는, 학습 데이터 방향임.<br />
+A. 매니폴드 학습: 모델은 학습 데이터 포인트 그 자체가 아니라, 학습 데이터가 놓여 있는 매니폴드(데이터가 존재할 수 있는 공간의 구조)를 배움. 매니폴드는 학습 데이터 포인트 사이사이를 잇는 연속적인 집합임. Langevin Dynamics는 이 매니폴드 위의 임의의 점으로 수렴함.<br />
+랜덤 노이즈의 역할: Langevin Dynamics 식을 보면 마지막에 항상 $\sqrt{\epsilon} z_t$라는 노이즈 항이 있음. 이 덕분에 샘플은 확률 밀도가 가장 높은 한 점으로 붕괴되지 않고, 확률 밀도가 높은 영역 안에서 계속 요동침. 즉, 분포 자체에서 샘플링을 수행함.</p>
+</blockquote>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

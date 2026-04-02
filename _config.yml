@@ -1,8 +1,8 @@
 # Jekyll 설정
-title: Digital Garden
-email: your-email@example.com
+title: ymgu
+email: brightmgu@gmail.com
 description: >- # 이 부분은 사이트 설명으로 채워집니다.
-  Quartz에서 마이그레이션된 Jekyll 디지털 가든입니다.
+  주 목적은 제가 보기 위함입니다. 따라서 모든 표기는 제 맘입니다.
 baseurl: "" # username.github.io 루트 레포이므로 서브디렉토리 없음
 url: "https://brighteen.github.io" # 사용자 블로그 도메인
 
@@ -17,6 +17,9 @@ collections:
   mml:
     output: true
     permalink: /mml/:path/
+  memo:
+    output: true
+    permalink: /memo/:path/
 
 # 빌드 설정
 markdown: kramdown
@@ -32,25 +35,40 @@ plugins:
 # 한글 파일명 처리를 위한 설정
 encoding: utf-8
 
-# 추가 무시 파일
+# 추가 무시 파일 (기존 백업 폴더들)
 exclude:
   - Gemfile
   - Gemfile.lock
   - migrate_to_jekyll.py
+  - migrate_new_content.py
   - .agent/
   - README.md
+  - MML/
+  - Memo/
+  - "미적분/"
+  - "생성모델/"
+  - "확률과 통계/"
+  - "무제/"
+  - "_temp_site/"
+  - "_temp_site_trace/"
 
 # 문서별 기본 속성 (Frontmatter) 자동 지정
 defaults:
   - scope:
       path: ""
-      type: "mml" # _mml 폴더 내의 파일들
+      type: "mml"
     values:
       layout: "sidebar"
       collection_name: "mml"
   - scope:
       path: ""
-      type: "notes" # _notes 폴더 내의 파일들
+      type: "notes"
     values:
       layout: "sidebar"
       collection_name: "notes"
+  - scope:
+      path: ""
+      type: "memo"
+    values:
+      layout: "sidebar"
+      collection_name: "memo"

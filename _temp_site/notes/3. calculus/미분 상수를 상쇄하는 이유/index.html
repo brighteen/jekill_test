@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>미분 상수를 상쇄하는 이유 | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="미분 상수를 상쇄하는 이유" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="수학적 편의성 손실 함수를 $L = (f - y)^2$이라고 정의했을 때, 이를 예측값 $f$로 편미분하면 합성함수의 미분법에 의해 $2(f-y)$가 도출된다. 이 앞에 붙은 상수 2는 이후 역전파 과정에서 모든 레이어의 그래디언트 수식에 계속 곱해진다. 반면, 애초에 목적 함수를 $L = \frac{1}{2}(f - y)^2$으로 정의해 두면, 미분 값이 $(f - y)$라는 순수한 오차항 자체로만 떨어지게 되어, 논문에서 수식을 전개하거나 실제 코드를 구현할 때 불필요한 상수를 매번 추적하고 연산해야 하는 대수적 번거로움을 덜어준다." />
+<meta property="og:description" content="수학적 편의성 손실 함수를 $L = (f - y)^2$이라고 정의했을 때, 이를 예측값 $f$로 편미분하면 합성함수의 미분법에 의해 $2(f-y)$가 도출된다. 이 앞에 붙은 상수 2는 이후 역전파 과정에서 모든 레이어의 그래디언트 수식에 계속 곱해진다. 반면, 애초에 목적 함수를 $L = \frac{1}{2}(f - y)^2$으로 정의해 두면, 미분 값이 $(f - y)$라는 순수한 오차항 자체로만 떨어지게 되어, 논문에서 수식을 전개하거나 실제 코드를 구현할 때 불필요한 상수를 매번 추적하고 연산해야 하는 대수적 번거로움을 덜어준다." />
+<link rel="canonical" href="https://brighteen.github.io/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="미분 상수를 상쇄하는 이유" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"수학적 편의성 손실 함수를 $L = (f - y)^2$이라고 정의했을 때, 이를 예측값 $f$로 편미분하면 합성함수의 미분법에 의해 $2(f-y)$가 도출된다. 이 앞에 붙은 상수 2는 이후 역전파 과정에서 모든 레이어의 그래디언트 수식에 계속 곱해진다. 반면, 애초에 목적 함수를 $L = \\frac{1}{2}(f - y)^2$으로 정의해 두면, 미분 값이 $(f - y)$라는 순수한 오차항 자체로만 떨어지게 되어, 논문에서 수식을 전개하거나 실제 코드를 구현할 때 불필요한 상수를 매번 추적하고 연산해야 하는 대수적 번거로움을 덜어준다.","headline":"미분 상수를 상쇄하는 이유","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/"},"url":"https://brighteen.github.io/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/">6. 음함수의 미분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/">7. 극한</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/" style="font-weight: bold; color: #2a7ae2;">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <h2 id="수학적-편의성">수학적 편의성</h2>
+<p>손실 함수를 $L = (f - y)^2$이라고 정의했을 때, 이를 예측값 $f$로 편미분하면 합성함수의 미분법에 의해 $2(f-y)$가 도출된다. 이 앞에 붙은 상수 2는 이후 역전파 과정에서 모든 레이어의 그래디언트 수식에 계속 곱해진다.  <br />
+반면, 애초에 목적 함수를 $L = \frac{1}{2}(f - y)^2$으로 정의해 두면, 미분 값이 $(f - y)$라는 순수한 오차항 자체로만 떨어지게 되어, 논문에서 수식을 전개하거나 실제 코드를 구현할 때 불필요한 상수를 매번 추적하고 연산해야 하는 대수적 번거로움을 덜어준다.</p>
+
+<h2 id="결과의-차이가-있을까">결과의 차이가 있을까?</h2>
+<p>목적 함수에 상수를 곱하는 것이 최적해를 바꾸지 않을까 생각해볼 수 있다. 결론부터 말하면, 상수를 상쇄했을 때와 상쇄하지 않았을 때 신경망이 찾아내는 최종 파라미터 값(최적화 결과)은 수학적으로 완벽하게 동일하다.  <br />
+기계 학습의 최적화 목표는 손실 함수 $L(\theta)$의 값을 최소로 만드는 파라미터 $\theta$의 위치를 찾는 것, 즉 $\arg\min_{\theta} L(\theta)$를 구하는 것이다.  <br />
+임의의 양의 상수 $c$에 대하여 함수 $c \cdot L(\theta)$를 고려해보자. 모든 함숫값에 $c$를 곱하면 다차원 공간에서 손실 곡면(Loss landscape)의 전체적인 높낮이(Scale)만 가파르거나 완만하게 변할 뿐, 극소점이 위치한 밑면의 좌표 $\theta$ 자체는 기하학적으로 절대 이동하지 않습니다(함수 $x^2$의 계수가 변해도 바뀌어도 극소/극대점의 위치는 바뀌지 않는다). 따라서 목적 함수를 스케일링하는 것은 최적점의 위치에 아무런 영향을 주지 않는다는 논리가 성립합니다.</p>
+
+<p>그럼 상수를 더하는 연산은 어떨까. 이또한 극소점이 위치한 파라미터 $\theta$의 좌표(최적해)를 전혀 바꾸지 않는다.  <br />
+함수 $L(\theta)$에 상수 $C$를 더하여 $L_{new}(\theta) = L(\theta) + C$를 만든다는 것은, 기하학적으로 볼 때 손실 곡면(Loss landscape) 전체를 손실값 축(보통 높이를 나타내는 $z$축)을 따라 그대로 수직으로 평행 이동 시키는 것과 같다. 하지만 이 파라미터 공간 전체가 평행이동한다 해서, 그 공간의 극소점은 바뀌지 않는다.  <br />
+미분 관점에서 봐도 파라미터 $\theta$의 입장에서 상수 $C$는 아무런 변화율을 가지지 않는다:</p>
+
+\[\begin{aligned} \nabla_\theta L_{new}(\theta) &amp;= \nabla_\theta (L(\theta) + C) = \nabla_\theta L(\theta) + \nabla_\theta C \\ &amp;= \nabla_\theta L(\theta) + 0 = \nabla_\theta L(\theta) \end{aligned}\]
+
+<p>때문에, $\theta_{new} = \theta_{old} - \eta \nabla L$로 파라미터를 업데이트해도 수렴해는 최적해의 위치는 변하지 않는다.</p>
+
+<h2 id="그럼-무엇으로-인해-최적해가-바뀔까">그럼 무엇으로 인해 최적해가 바뀔까?</h2>
+<p>이에 대한 답으로 세 가지를 생각해볼 수 있다.  <br />
+첫 번째로 목적 함수에 $\theta$의 크기에 비례하는 패널티 항을 더하는 방법이다. 정규화(Regularization)라 하며 보통 능선 회귀(Redge Regression, L2 정규화)를 사용한다.</p>
+
+\[L_{new}(\theta) = L(\theta) + \lambda \|\theta\|^2\]
+
+<p>여기서 $\lambda$는 정규화의 강도를 조절하는 하이퍼파라미터이다. 이 함수를 $\theta$로 미분하면 다음과 같다:</p>
+
+\[\nabla_\theta L_{new}(\theta) = \nabla_\theta L(\theta) + 2\lambda\theta\]
+
+<p>미분 결과에 $2\lambda\theta$항이 생겼다. 기존에는 $\nabla_\theta L(\theta) = 0$이 되는 곳이 최적해였지만, 이제는 $\nabla_\theta L(\theta) = -2\lambda\theta$를 만족하는 새로운 지점으로 최적해 $\theta^*$가 강제로 이동한다. 기하학적으로 이는 원래의 손실 계곡을 원점($\theta=0$) 쪽으로 강하게 끌어당기는 것과 같다. 이를 통해 파라미터가 불필요하게 커지는 과적합을 방지할 수 있다.</p>
+
+<p>두 번째로 특정 데이터의 오차에 더 큰 가중치를 부여하는 방법이 있다.</p>
+
+\[L_{new}(\theta) = (y - f(\theta))^\top W (y - f(\theta))\]
+
+<p>대칭행렬 $W$가 중간에 삽입됨으로써, 손실 곡면(Loss landscape)의 기울어짐이 완전히 달라진다. $W$의 대각 원소 중 특정 값이 크다면, 모델은 그 특정 데이터 포인트에서 발생하는 오차를 비교적 크게 받아들이게 되며, 따라서 최적해 $\theta^*$는 가중치가 높은 데이터를 우선적으로 정답에 맞추는 방향으로 공간상에서 크게 이동하게 된다.</p>
+
+<p>세 번째로 오차를 측정하는 거리의 정의 자체를 바꾸는 방법도 있다. 보통 오차를 L2 Norm(MSE)로 구하는데, L1 손실(MAE)로 변경할 수 있다.</p>
+
+\[L_{new}(\theta) = \sum |y_i - f(\theta, x_i)|\]
+
+<p>MSE는 오차가 클수록 포물선처럼 손실값이 기하급수적으로 커지므로, 최적해가 이상치(Outlier, 튀는 데이터) 쪽으로 크게 끌려간다. 반면 MAE는 오차가 커져도 손실값이 선형적으로만 증가하므로 기울기가 일정($+1$ 또는 $-1$)하여 이상치에 저항성을 가진다. 목적 함수의 기하학적 형태가 포물면에서 V자 형태의 평면 결합으로 바뀌면서 극소점의 위치가 근본적으로 변한다.</p>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

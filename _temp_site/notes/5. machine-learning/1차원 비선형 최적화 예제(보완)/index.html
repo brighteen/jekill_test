@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>1차원 비선형 최적화 예제(보완) | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="1차원 비선형 최적화 예제(보완)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="목표: 원점에서 가장 가까운 $x$를 찾고 싶은데 단, $x$는 무조건 3보다 크거나 같아야 한다." />
+<meta property="og:description" content="목표: 원점에서 가장 가까운 $x$를 찾고 싶은데 단, $x$는 무조건 3보다 크거나 같아야 한다." />
+<link rel="canonical" href="https://brighteen.github.io/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="1차원 비선형 최적화 예제(보완)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"목표: 원점에서 가장 가까운 $x$를 찾고 싶은데 단, $x$는 무조건 3보다 크거나 같아야 한다.","headline":"1차원 비선형 최적화 예제(보완)","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/"},"url":"https://brighteen.github.io/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/">6. 음함수의 미분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/">7. 극한</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/" style="font-weight: bold; color: #2a7ae2;">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <p>목표: 원점에서 가장 가까운 $x$를 찾고 싶은데 단, $x$는 무조건 3보다 크거나 같아야 한다.</p>
+
+<div style="text-align: center;">
+
+<div style="text-align: center;">
+
+    <div style="text-align: center;">
+
+      <div style="text-align: center;">
+
+        <div style="text-align: center;">
+
+          <div style="text-align: center;">
+
+            <div style="text-align: center;">
+
+              <div style="text-align: center;">
+                <p><img src="/assets/5_original_problem.png" alt="원 문제와 제약조건" width="500" /></p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<p>$\min_{x} f(x) = x^2$</p>
+
+<p>s.t. $x \ge 3$</p>
+
+<p>먼저 눈으로 풀어보면, $x^2$을 가장 작게 만들고 싶은데 $x$가 3이상이어야 하니, 정답은 $x^{*}=3$이고, 그때 최솟값은 $p^{*} := 9$이다. 이제 이 9라는 값을 미분과 라그랑주 승수를 사용하여 유도할 수 있다.</p>
+
+<p>제약 조건을 다음과 같이 정의할 수 있다.  <br />
+$g(x) := 3 - x \le 0$</p>
+
+<p>제약 조건을 $g(x) \le 0$ 형태를 맞추는 이유는, $\lambda \ge 0$으로 설정했기 때문이다. 이는 어떤 $x$가 제약 조건을 지키지 못했을 경우에 $\lambda$만큼 패널티를 준다는 의미이다. 만약 $g(x) \ge 0$으로 제약 조건을 설정했다면, $\lambda \le 0$로 설정하면 똑같은 결과를 얻을 수 있다. 여기서는 $g(x) \le 0, \lambda \ge 0$로 두고 문제를 풀이하겠다.</p>
+
+<p>제약 조건을 목적 함수로 올리고, 라그랑주 승수 $\lambda$를 사용하여 다음과 같이 라그랑지안 함수를 정의한다. 이는 3차원 공간에서 안장점을 가진다.</p>
+
+<div style="text-align: center;">
+
+<div style="text-align: center;">
+
+    <div style="text-align: center;">
+
+      <div style="text-align: center;">
+
+        <div style="text-align: center;">
+
+          <div style="text-align: center;">
+
+            <div style="text-align: center;">
+
+              <div style="text-align: center;">
+                <p><img src="/assets/5_lagrangian.png" alt="라그랑지안 함수" width="500" /></p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+\[\mathfrak{L}(x, \lambda) := x^2 + \lambda(3 - x)\]
+
+\[\mathfrak{L}(x, \lambda) = x^2 - \lambda x + 3\lambda\]
+
+<p>이로써 $x$가 무조건 3보다 커야한다는 제약은 사라졌지만, 대신 원래 제약($x \ge 3$)을 지키지 않는다면 양수 $\lambda$를 곱해 $\mathfrak{L}$을 최소화하는데 패널티를 준다는 뜻이다.</p>
+
+<p>어떤 $x$가 제약 조건을 만족한다면 $g(x) \leqslant 0$이고, $\lambda$는 양수이므로 $\mathfrak{L}$의 값은 원 함수 $f(x)=x^2$보다 항상 작거나 같다. 이는 $\mathfrak{L}$가 $f$의 하한(lower bound)임을 뜻한다.</p>
+
+\[\mathfrak{L}(x, \lambda) = x^2 + \lambda g(x) \le x^2 = f(x)\]
+
+\[\mathfrak{L} \le f\]
+
+<p>만약 어떤 $x$가 제약 조건을 만족하지 않았다면, $g(x) &gt; 0$이며, $\lambda$또한 양수이므로 최소화하려는 목적 함수 $f(x)$에 강한 패널티를 주게 된다. 앞서 제약 조건과 라그랑주 승수를 $g(x) \le 0, \lambda \ge 0$으로 설정하는 이유는, 패널티 항이 어떤 $x$가 제약 조건을 지키지 못했을 경우 벌금(양수)으로 작동하도록 맞추는 작업이다.</p>
+
+<p>입력 변수 $x$에 대한 제약 조건이 없을 경우 주어진 함수의 미분함수를 0으로 만드는 점(임계점: 기울기=0)에서 최적해(최소값)가 나온다는 것은 쉽게 알 수 있다.</p>
+
+<p>라그랑지안 함수의 최소값을 구하기 위해 $x$또는 $\lambda$에 대해 미분하여 0이 되는 지점을 찾아야 한다. 이때 보다 일반적인 상황을 생각하므로 고려하여 $x$에 대해 미분할 것이다(이는 이후 KKT 조건으로 다루겠다).</p>
+
+\[\frac{\partial \mathfrak{L}}{\partial x} = 2x - \lambda = 0\]
+
+\[\implies x = \frac{\lambda}{2}\]
+
+<p>이는 기하학적으로 3차원 직교 좌표공간에 비스듬하게 있는 평면이다. 이를 라그랑지안에 대입하여 $x$를 소거한다는 것은 그 비스듬한 평면위에 3차원 궤적을 남긴 후 기존 직교좌표계의 $\lambda \times$함숫값 평면에 정사영하는 것과 같다. 결과적으로 오목(위로 볼록, concave)한 쌍대 함수 $\mathfrak{D}(\lambda)$를 얻는다.</p>
+
+<div style="text-align: center;">
+
+<div style="text-align: center;">
+
+    <div style="text-align: center;">
+
+      <div style="text-align: center;">
+
+        <div style="text-align: center;">
+
+          <div style="text-align: center;">
+
+            <div style="text-align: center;">
+
+              <div style="text-align: center;">
+                <p><img src="/assets/5_projection.png" alt="대입과 정사영" width="500" /></p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<p>desmos로도 시각화해봤다. 빨간 지형이 라그랑지안 함수이며, 파란 평면이 $x = \frac{\lambda}{2}$를 만족하는 평면이다.</p>
+
+<div style="text-align: center;">
+
+<div style="text-align: center;">
+
+    <div style="text-align: center;">
+
+      <div style="text-align: center;">
+
+        <div style="text-align: center;">
+
+          <div style="text-align: center;">
+
+            <div style="text-align: center;">
+
+              <div style="text-align: center;">
+                <p><img src="/assets/5_desmos_viz.png" alt="desmos시각화" width="500" /></p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+\[\mathfrak{D}(\lambda) := \left(\frac{\lambda}{2}\right)^2 + \lambda\left(3 - \frac{\lambda}{2}\right)\]
+
+\[= \frac{\lambda^2}{4} + 3\lambda - \frac{\lambda^2}{2}\]
+
+\[\mathfrak{D}(\lambda) = 3\lambda - \frac{\lambda^2}{4}\]
+
+<p>이 하한 $\mathfrak{D}(\lambda)$는 원래 참값보다 항상 아래에 있다(약한 쌍대성). 따라서 이 쌍대 함수를 최대화하기 위해 극대점을 찾아야 하므로 미분하여 0이 되는 $\lambda$를 찾아야 한다.</p>
+
+\[\frac{d\mathfrak{D}}{d\lambda} = 3 - \frac{2\lambda}{4} = 3 - \frac{\lambda}{2} = 0\]
+
+\[\implies \lambda^* = 6\]
+
+<p>이를 쌍대 함수에 대입해 쌍대 최적해 $d^{*}$를 구한다.</p>
+
+\[d^* = \mathfrak{D}(6) = 3(6) - \frac{6^2}{4} = 18 - 9 = 9\]
+
+<div style="text-align: center;">
+
+<div style="text-align: center;">
+
+    <div style="text-align: center;">
+
+      <div style="text-align: center;">
+
+        <div style="text-align: center;">
+
+          <div style="text-align: center;">
+
+            <div style="text-align: center;">
+
+              <div style="text-align: center;">
+                <p><img src="/assets/5_dual_max.png" alt="쌍대 문제 최대화" width="500" /></p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<p>관련 코드는 <a href="https://github.com/brighteen/brighteen/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/10.%20%EC%9D%BC%EB%B3%80%EC%88%98%20%EC%9D%B4%EC%B0%A8%20%ED%95%A8%EC%88%98%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C.ipynb">깃허브</a>를 참고하길 바란다.</p>
+
+<h2 id="ktt-조건">KTT 조건</h2>
+
+<p>L을 람다에 대해 미분하면 3-x=0을 만족하는 x가 3이어서 문제 푸는게 아닌가.  <br />
+이건 현재 예제에서 최적해서 제약 조건 바깥에 있기 때문에. 최적해가 제약조건 내에 존재한다면 제약 조건을 고려하지 않아도 되는게 아닌가?</p>
+
+<h2 id="reference">Reference</h2>
+<p>최적 의사결정을 위한 경영과학, 권수태외 5인, 청람, 2018</p>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

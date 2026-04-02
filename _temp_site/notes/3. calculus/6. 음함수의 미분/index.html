@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>음함수의 미분 | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="음함수의 미분" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="음함수 미분의 필요성과 기본 개념 일반적인 함수와 달리 $y$가 $x$에 대한 독립적인 함수(양함수) 형태로 정리되지 않는 기하학적 곡선의 접선 기울기를 구하기 위해 음함수의 미분(Implicit differentiation)이라는 수학적 기법이 도입된다. 가령, 중심이 원점이고 반지름이 5인 원의 방정식은 다음과 같이 정의된다." />
+<meta property="og:description" content="음함수 미분의 필요성과 기본 개념 일반적인 함수와 달리 $y$가 $x$에 대한 독립적인 함수(양함수) 형태로 정리되지 않는 기하학적 곡선의 접선 기울기를 구하기 위해 음함수의 미분(Implicit differentiation)이라는 수학적 기법이 도입된다. 가령, 중심이 원점이고 반지름이 5인 원의 방정식은 다음과 같이 정의된다." />
+<link rel="canonical" href="https://brighteen.github.io/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="음함수의 미분" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"음함수 미분의 필요성과 기본 개념 일반적인 함수와 달리 $y$가 $x$에 대한 독립적인 함수(양함수) 형태로 정리되지 않는 기하학적 곡선의 접선 기울기를 구하기 위해 음함수의 미분(Implicit differentiation)이라는 수학적 기법이 도입된다. 가령, 중심이 원점이고 반지름이 5인 원의 방정식은 다음과 같이 정의된다.","headline":"음함수의 미분","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/"},"url":"https://brighteen.github.io/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/" style="font-weight: bold; color: #2a7ae2;">6. 음함수의 미분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/">7. 극한</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <h2 id="음함수-미분의-필요성과-기본-개념">음함수 미분의 필요성과 기본 개념</h2>
+<p>일반적인 함수와 달리 $y$가 $x$에 대한 독립적인 함수(양함수) 형태로 정리되지 않는 기하학적 곡선의 접선 기울기를 구하기 위해 음함수의 미분(Implicit differentiation)이라는 수학적 기법이 도입된다.  <br />
+가령, 중심이 원점이고 반지름이 5인 원의 방정식은 다음과 같이 정의된다.</p>
+
+\[x^2 + y^2 = 5^2 \quad (1)\]
+
+<p>곡선 위의 특정 점 $(3, 4)$에서 접선의 기울기를 구하기 위해서는, 곡선을 미소 구간으로 확대하여 $x$의 미소 변화량 $dx$와 $y$의 미소 변화량 $dy$의 비율인 $\frac{dy}{dx}$을 계산해야 한다. 하지만 이 방정식은 $y = f(x)$와 같이 $y$가 $x$에 대해 명시적으로 정리된 ‘양함수’가 아니므로, 일반적인 단일 변수 함수의 미분법을 직접 적용할 수 없다.</p>
+
+<h2 id="양함수와-음함수">양함수와 음함수</h2>
+<p>양함수와 음함수가 무엇인지 짚고 넘어갈 필요가 있다.  <br />
+양함수(Explicit Function)란 종속변수 $y$가 독립변수 $x$에 대해 완전히 분리되어, $y$가 $x$의 식으로 명시적으로(explicitly) 드러나는 형태인데 일반적으로 다음과 같은 형태이다.</p>
+
+\[y = f(x)\]
+
+<p>가령, 다음과 같은 일차함수나 이차함수가 양함수이다.</p>
+
+\[y = 3x + 2\]
+
+\[y = x^2 - 4x + 3\]
+
+<p>음함수(Implicit Function)는 독립변수 $x$와 종속변수 $y$가 하나의 방정식 안에 섞여 있어, $y$가 $x$에 대해 명시적으로 정리되어 있지 않은 형태이다(필자는 ‘음’함수라 해서 부호가 음수인 함수인줄 알았다). 즉, $x$와 $y$의 관계성만이 방정식의 형태로 내재되어(implicitly) 있다. 일반적인 형태는 모든 항을 한쪽으로 몰아 우변을 $0$으로 만든 다음의 다변수 함수 형태로 표현된다.</p>
+
+\[F(x, y) = 0\]
+
+<p>대표적인 예로 중심이 원점이고 반지름이 $5$인 원을 생각해볼 수 있다.</p>
+
+\[x^2 + y^2 - 25 = 0\]
+
+<blockquote>
+  <p>$\to$ 원의 방정식 $x^2 + y^2 = 25$는 하나의 $x$ 값(예: $x=3$)에 대해 두 개의 $y$ 값($y=4$, $y=-4$)이 대응되므로 엄밀한 의미에서 단일 변수 ‘함수’의 정의를 만족하지 않는다. 그렇다면 이 개념을 ‘음함수’라고 부르는 논리적 전제를 확인해볼 필요가 있다.<br />
+$x^2 + y^2 = 25$ 전체는 함수가 아니라 기하학적인 곡선을 나타내는 방정식(equation) 또는 관계(relation)이다. 그럼에도 이를 음함수라고 부르는 이유는, 특정 점의 근방에서는 y를 x에 대한 함수로 정의할 수 있기 때문이다. 이를 수학적으로 보장하는 정리가 바로 음함수 정리(Implicit Function Theorem)이다.  <br />
+위의 반지름이 5인 원의 방정식을 $y$에 대해 풀면 다음과 같이 두 개의 양함수로 쪼개진다.</p>
+</blockquote>
+
+\[y = +\sqrt{25 - x^2} \quad \text{(상반원)}\]
+
+\[y = -\sqrt{25 - x^2} \quad \text{(하반원)}\]
+
+<p>즉, 곡선 전체를 하나의 양함수로 표현할 수는 없지만, 조건을 만족하는 국소적인 범위 내에서는 $y = f(x)$ 형태의 함수가 “방정식 안에 숨어 있다(Implicit)”는 의미에서 음함수라는 명칭을 사용한다.</p>
+
+<p>다시 돌아와서 식 (1)에 대해 양변을 그대로 미분해보자.</p>
+
+\[2x\,dx + 2y\,dy = 0\]
+
+<p>이를 정리하여 다음의 식을 얻을 수 있다.</p>
+
+\[\frac{dy}{dx} = -\frac{x}{y} \quad (2)\]
+
+<p>여기에 점 $(3, 4)$를 대입하면 구하고자 하는 기울기 $-\frac{3}{4}$이 도출된다.</p>
+
+<blockquote>
+  <p>$\to$ 모든 방정식을 $y = f(x)$ 형태로 깔끔하게 정리할 수 있다면 좋겠지만, 대수적으로 불가능하거나 매우 비효율적인 경우가 많다. 가령, 다음과 같은 방정식이 있다고 가정해보자.</p>
+</blockquote>
+
+\[x^3 + y^3 - 6xy = 0\]
+
+<p>이 방정식(데카르트의 엽선)은 $y$에 대해 명시적으로 정리하는 것이 대수적으로 매우 복잡하다. 이럴 때 식을 억지로 $y = f(x)$ 형태로 변환하려 하지 않고, $F(x, y) = 0$ 이라는 음함수 형태 그대로 둔 상태에서 미적분학의 법칙(연쇄 법칙 등)을 적용하여 접선의 기울기 $\frac{dy}{dx}$를 구하는 것이 훨씬 효율적이며, 이것이 앞서 영상에서 소개된 ‘음함수의 미분법’의 핵심이다.</p>
+
+<h2 id="관련-변화율">관련 변화율</h2>
+<p>식 (1)이 (2)로 도출되는 과정에서 $x$와 $y$는 서로 독립적인 변수가 아니라 방정식으로 묶여 있는데, 어떻게 각 항을 개별적으로 미분한 뒤 $dx$와 $dy$를 임의로 붙여도 등식이 성립할 수 있는 것인지 의문이 든다. 이를 해결하기 위해 (1)을 시간 $t$를 공통 매개변수로 갖는 사다리 문제(관련 변화율 문제)로 바꿔 생각해보자.  <br />
+벽에 기대어 미끄러지는 길이가 $5$인 사다리의 수직 높이를 $y(t)$, 수평 거리를 $x(t)$라고 하면, 피타고라스 정리에 의해 다음 항등식이 매 순간 성립한다.</p>
+
+\[x(t)^2 + y(t)^2 = 5^2 \quad (3)\]
+
+<p>이 식의 양변은 시간 $t$에 대한 함수이므로, 양변을 $t$에 대해 미분할 수 있다. 상수의 도함수는 $0$이며, 좌변에는 연쇄 법칙이 적용된다.</p>
+
+\[2x(t) \frac{dx}{dt} + 2y(t) \frac{dy}{dt} = 0 \quad (4)\]
+
+<p>이 방정식은 ‘시간 $t$가 아주 미세하게 흐를 때($dt$), 좌변 전체의 변화량은 $0$이어야 한다’를 의미한다. 또한 음함수 미분 과정에서 양변을 미분할 때 등장하는 $dx$와 $dy$는 독립적인 미소 변화로 해석할 수 있다.</p>
+<blockquote>
+  <p>$\to$ 식 (3)에서 두 변수 $x,y$가 $xy$꼴이 아니라고 해서 두 변수가 독립적이라고 의문이 들 수 있지만, 이 식에서 $x(t)$와 $y(t)$는 독립적이지 않다. 독립변수란 다른 변수의 값에 영향을 받지 않고 임의의 값을 가질 수 있는 변수를 뜻하는데, 식 (3)은 $x(t)$와 $y(t)$가 항상 제곱의 합이 $25$가 되어야 한다는 대수적인 제약 조건을 내재하고 있다.<br />
+시간 $t$에 따라 $x(t)$의 값이 변하게 되면, 등식을 만족시키기 위해 $y(t)$의 값은 필연적으로 그에 맞춰 변해야만 한다. 따라서 두 변수는 서로 종속적인 관계이다.  <br />
+$\to$ 또한 좌변에 왜 연쇄 법칙이 적용되는가에 대해서도 의문이 들 수 있다. 이는 우리가 미분하려는 기준 변수가 $x$나 $y$가 아니라 제 3의 변수인 시간 $t$이기 때문이다.<br />
+엄밀하게 말하자면, 단순히 변수가 다르기 때문에 연쇄 법칙을 쓰는게 아니라 $x(t)^2$ 이라는 식은 사실 두 개의 함수가 합성된 합성함수이다. 겉함수는 어떤 값을 제곱하는 함수 $f(x(t)) = x(t)^2$이고, 속함수는 시간에 따른 위치를 나타내는 함수 $u = x(t)$이다. 겉함수$f$를 $x(t)$에 대해 미분하면 $2x(t)$가 되며, 속함수$x(t)$를 $t$에 대해 미분하면 $\frac{dx}{dt}$가 된다.</p>
+</blockquote>
+
+\[\frac{d(x(t)^2)}{dt} = \frac{d(x(t)^2)}{d(x(t))}\frac{d(x(t)}{dt}= 2x(t) \frac{dx}{dt}\]
+
+<p>이는 $y(t)^2$에 대해서도 동일한 논리로 적용되며, 결과적으로 식 (3)의 양변을 $t$에 대해 미분하면 두 변수의 변화율($\frac{dx}{dt}, \frac{dy}{dt}$)이 얽혀있는 식 (4)가 도출되는 것이다.</p>
+
+<p>사다리 문제에는 시간 $t$라는 공통 기준이 있었지만, 원의 방정식에는 그런 기준이 없다. 따라서 이를 다변수 함수의 관점으로 확장해본다. $x$와 $y$를 독립적인 두 입력값으로 받는 새로운 함수 $S(x, y)$를 다음과 같이 정의할 수 있다.</p>
+
+\[S(x, y) = x^2 + y^2\]
+
+<p>좌표평면 상의 임의의 점에서 $x$ 방향으로 $dx$, $y$ 방향으로 $dy$만큼 아주 미세하게 이동했을 때, 함수 $S$의 값의 전체 미소 변화량 $dS$는 각각의 편미분 성분들의 합으로 근사된다</p>
+
+\[dS = 2x\,dx + 2y\,dy\]
+
+<p>이 다변수 함수의 변화량이 접선의 기울기와 어떻게 연결될까? 여기서 점의 이동 경로를 단순한 평면 위가 아니라, $x^2 + y^2 = 25$라는 곡선, 즉 $S(x, y) = 25$를 만족하는 집합 위로 제한된다면, 함수 $S$의 값은 $25$로 일정하게 유지되므로 $dS = 0$이 되어야 한다. 따라서, 곡선 위를 벗어나지 않는 이동($dx, dy$)에 대해 다음 등식이 성립한다.</p>
+
+\[0 = 2x\,dx + 2y\,dy\]
+
+<p>위 등식을 정리하면 처음 목표였던 접선의 기울기를 도출할 수 있다.</p>
+
+\[\frac{dy}{dx} = -\frac{x}{y}\]
+
+<p>이는 곱의 미분법을 적용해야 하는 다른 예시에 대해서도 동일한 논리가 전개된다.</p>
+
+<div style="text-align: center;">
+  <p>![content/Note/미적분/assets/(sin(x)y)square=x.png](/assets/content/Note/미적분/assets/(sin(x){: width=”500” }</p>
+</div>
+
+<p>y)square=x.png){: width=”300” }</p>
+
+\[\sin(x)y^2 = x\]
+
+<p>위 방정식 역시 양변의 미소 변화량이 같다는 조건 하에 도함수를 유도할 수 있다. 선 위에서 미소 변화 $dx, dy$가 일어날 때, 곡선의 정의를 유지하려면 양변의 미소 변화량이 정확히 일치해야 한다.  <br />
+좌변에 곱의 미분법을 적용한 미소 변화량은 다음과 같다.</p>
+
+\[\sin(x)(2y\,dy) + y^2(\cos(x)\,dx)\]
+
+<p>우변 $x$의 미소 변화량은 단순히 $dx$이다. 따라서 다음 등식이 성립한다.</p>
+
+\[\sin(x) \cdot 2y\,dy + y^2 \cos(x)\,dx = dx\]
+
+<p>이 식을 $\frac{dy}{dx}$에 대해 대수적으로 정리하면 다음과 같다.</p>
+
+\[\frac{dy}{dx}= \frac{1-y^2 \cos(x)}{\sin(x)2y}\]
+
+<p>이 결과 함의하는 바는, 아무리 복잡한 곡선이라도 특정점에서의 접선 기울기를 구할 수 있다는 것이다.</p>
+
+<h2 id="역함수의-도함수-도출">역함수의 도함수 도출</h2>
+<p>이러한 음함수 미분의 논리를 활용하면 자연로그 함수인 $y = \ln(x)$의 도함수도 대수적으로 명확히 유도할 수 있다.  <br />
+로그함수의 정의에 의해 위 식은 다음과 같은 지수 형태의 음함수로 변환된다.</p>
+
+\[e^y = x\]
+
+<p>방정식을 만족하며 이동하는 미소 변화 $dx$와 $dy$에 대해, 양변의 변화량은 같아야 한다. $e^y$의 도함수는 자기 자신이므로 다음과 같은 관계가 성립한다.</p>
+
+\[e^y\,dy = dx\]
+
+<p>따라서 기울기를 구하기 위해 이를 미소 변화율로 정리하고, 원래의 제약 조건인 $e^y = x$를 대입하면 자연로그의 도함수 공식이 유도된다.</p>
+
+\[\frac{dy}{dx} = \frac{1}{e^y} = \frac{1}{x}\]
+
+<p>음함수의 미분은 단일 변수의 변화뿐만 아니라, 여러 입력 변수를 가진 함수들이 상호 의존적으로 어떻게 변화하는지를 다루는 다변수 미적분학의 기초적인 수학적 논리를 담고 있다. 변수들의 미소 변화가 어떻게 얽혀있는지를 기하학적 및 대수적으로 파악하는 것이 핵심이다.</p>
+
+<blockquote>
+  <p>$\to$ 음함수는 단순히 양함수(어떤 변수를 다른 변수들로 명시적으로 나타낸 함수)를 얽어 놓은 재표현인가?<br />
+음함수는 오히려 양함수보다 훨씬 더 포괄적이고 본질적인 ‘기하학적 관계’와 ‘집합’을 나타내는 상위 개념의 표현 방식이다.  <br />
+우리가 아는 양함수 형태, 즉 $y = f(x)$는 수학적으로 매우 엄격한 제약을 받습니다. ‘함수’의 절대적인 정의는 “정의역의 모든 $x$ 값은 반드시 단 하나의 공역 $y$ 값에만 대응되어야 한다”는 것이다.  <br />
+이 제약 때문에 양함수 $y = f(x)$가 2차원 평면 위에 그릴 수 있는 기하학적 도형은 극히 제한적이다.  <br />
+	1. 절대 닫힌 도형(원, 타원 등)이 될 수 없다.  <br />
+	2. 곡선이 자기 자신을 교차할 수 없다.  <br />
+	3. $x$축의 한 지점에서 수직선을 그었을 때, 곡선과 두 점 이상에서 만날 수 없다 (수직선 판정법, Vertical Line Test).  <br />
+차원을 하나 높여 3차원 공간의 관점에서 원의 방정식을 바라보자. $x$와 $y$를 모두 독립변수로 입력받아 고도(Height) $z$를 출력하는 3차원 곡면(Surface) 함수를 정의하면 다음과 같다.</p>
+</blockquote>
+
+\[z = F(x, y)\]
+
+<p>이 다변수 함수에서 $z$의 값을 $0$으로 고정하여 $F(x, y) = 0$으로 만든다는 것은, 기하학적으로 3차원의 곡면을 고도가 0인 평면($xy$ 평면)으로 수평하게 잘라냈을 때 생기는 2차원 교선(Intersection curve), 즉 등위선(Level curve)을 구하는 작업과 완벽히 동일하다.  <br />
+이 등위선 위의 점들은 애초에 ‘하나의 $x$에 하나의 $y$가 대응되어야 한다’는 1차원적 양함수의 규칙을 지킬 의무가 없다. 그저 $F(x, y) = 0$이라는 대수적 조건(높이가 $0$이다)을 만족하는 점들의 자유로운 집합일 뿐이다.  <br />
+다시 음함수 방정식(원의 방정식)을 보자.</p>
+
+\[x^2 + y^2 - 25 = 0\]
+
+<p>이 식의 기하학적 본질은 3차원 포물면 $z = x^2 + y^2 - 25$를 $z=0$ 평면으로 자른 단면, 즉 완벽하게 닫힌 ‘원’이다. $x = 3$일 때 $y$는 $4$와 $-4$, 두 개의 값이 존재한다. 애초에 하나의 입력에 두 개의 출력이 대응되는 기하학적 구조를 가지고 태어났기 때문에, 이를 아무리 대수적으로 잘 풀어헤친다고 해도 ‘단일한’ 양함수 $y=f(x)$ 하나로 되돌아가는 것은 불가능하다. 억지로 양함수로 만들려면, 정의역을 제한하여 상반원과 하반원이라는 두 개의 독립된 양함수로 강제로 쪼개야만 한다.  <br />
+그렇다면 전체 곡선이 함수가 될 수 없음에도 불구하고 왜 원의 방정식에 ‘함수’라 할까?  <br />
+전체 원은 하나의 함수가 아니지만, 곡선 위의 특정한 점을 국소적으로 바라보면, 그 좁은 구간 내에서는 곡선이 꺾이거나 겹치지 않으므로 수직선 판정법을 통과한다. 즉, 국소적인 구간 내에서는 $y$를 $x$에 대한 함수로 취급할 수 있다는 것이다.  <br />
+결론적으로, “전역적으로는 함수가 아니지만, 국소적으로는 함수 $y=f(x)$의 존재가 이 방정식 안에 암묵적으로 내재되어 있다”는 수학적 사실을 기리기 위해 음함수라는 명칭이 붙은 것이다.  <br />
+요약하자면, 양함수는 ‘음함수’라는 집합 내 ‘입력과 출력이 1:1로 대응된다’는 특수한 조건을 만족하는 극히 좁은 부분집합이다.</p>
+
+<blockquote>
+  <p>$\to$ 어떤 변수들이 독립적이라는 것은, 다변수 함수 $z = f(x, y)$에서 입력값 $x$와 $y$처럼 서로 아무런 영향을 주지 않고 좌표평면 위의 모든 점을 자유롭게 선택할 수 있을 때를 의미한다.<br />
+다변수 함수 $z = f(x, y)$를 $f(x, y) - z = 0$ 꼴로 바꾸어 새로운 함수 $F(x, y, z) = 0$으로 정의하면 이 세 변수는 전체로서 서로 종속적이지만, 그 내부에서는 독립변수와 종속변수를 나눌 수 있다.  이를 자유도의 개념을 통해 이해해보고자 한다.  <br />
+자유도(Degrees of Freedom)란 수학적으로 서로 아무런 영향을 주지 않고 완전하게 독립적으로 값을 선택할 수 있는 변수의 최대 개수를 의미한다. 변수의 개수와 방정식(제약 조건)의 개수 사이에 다음과 같은 등식이 성립한다.</p>
+</blockquote>
+
+\[\text{자유도} = \text{총 변수의 개수} - \text{독립적인 방정식(제약 조건)의 개수}\]
+
+<p>(중요한 것은 여기서 방정식의 개수는 단순히 개수가 아닌 ‘선형 독립적인 제약 조건의 개수’이다.)  <br />
+함수 $F(x, y, z) = f(x, y) - z = 0$의 자유도를 분석해보자. 이 식에는 3개의 변수$(x,y,z)$가 등장하고, 이들을 묶는 1개의 방정식(제약 조건)이 존재한다.</p>
+
+\[\text{자유도} = 3 - 1 = 2\]
+
+<p>자유도가 2라는 것은 세개의 변수 중 임의의 두 개는 서로 완벽하게 독립적인 변수로 자유롭게 선택할 수 있고, 나머지 한개의 변수는 앞서 선택한 두 변수의 값에 의해 대수적으로 유일하게 결정되므로, 종속 변수가 된다.  <br />
+즉, $F(x, y, z) = 0$이라는 방정식 하나가 주어졌을 때, 세 변수 모두가 서로에게 완전히 자유로울 수는 없다(전체적으로 종속적). 하지만 그 종속성 안에서 어떤 변수를 독립 변수로 취급하고 어떤 변수를 종속 변수로 취급할지 역할을 임의로 부여할 수 있다.  <br />
+이 관계를 기하학적으로 보자. 3개의 변수 $x, y, z$가 아무런 제약 조건 없이 모두 독립적이라면, 이는 3차원 공간($\mathbb{R}^3$) 전체를 채우는 모든 점을 의미한다.  <br />
+하지만 $f(x, y) - z = 0$이라는 방정식 1개가 부여되는 순간, 3차원 공간 전체를 돌아다니던 점들은 3차원 공간 내에 떠 있는 2차원 곡면 위로 이동이 제한된다. 어떤 점이 2차원 곡면 위에 위치한다는 것은, 그 점의 위치를 특정하기 위해 정확히 2개의 독립적인 정보(좌표)만 필요하다는 것이다. 나머지 하나의 정보(예: 높이 z)는 점이 그 곡면이 벗어나지 않아야 한다는 제약 조건에 의해 자동으로 종속되어 결정되기 때문이다.</p>
+
+<blockquote>
+  <p>$\to$ 또한 위 자유도 공식은 선형대수에서 랭크-널리티 정리(차원 정리)와 동일하다.</p>
+</blockquote>
+
+\[n = \text{rank}(A) + \text{nullity}(A)\]
+
+<p>변수들이 존재하는 공간의 차원($n$)은 변수들을 얽매는 독립적인 제약 조건의 개수(rank($A$))와 제약 조건 $A\mathbf{x}=\mathbf{0}$을 만족하는 해공간(Null Space)의 차원의 합이다.  <br />
+이 관계가 어떤 기하학적 의미를 가지는지 생각해보자. 3차원 벡터 공간($x_1,x_2,x_3 \in \mathbb{R}^3$)에서 만약 하나의 방정식(제약 조건)만 있다면 해 공간의 차원(자유도)는 2이며, 이는 기하학적을 3차원 공간 내 2차원 평면이다. 이 평면 위의 점을 특정하기 위해서는 2개의 좌표축(독립 변수)이 필요하며, 나머지 1개의 좌표는 평면의 방정식에 의해 종속되어 결정된다.  <br />
+만약 서로 독립적인 두 개의 제약 조건이 있다면, 해 공간의 차원(자유도)는 1이다. 기하학적으로 이는 3차원 공간에서 두 평면이 교차하여 만들어지는 하나의 직선이다. 직선 위의 점은 1개의 매개변수(독립 변수)만으로 위치를 정의할 수 있고, 나머지 2개의 변수는 그 매개변수에 종속된다.  <br />
+(여기서 알 수 있는 점은 선형대수학에서 다루는 모든 연립일차선형계의 방정식들은 음함수의 가장 단순하고 특수한 형태이다. 또한 이 특수한 형태들은 계수가 0이 아닌 어떤 변수에 대해서든 완벽하게 전역적인 양함수로 풀어낼 수 있다.)</p>
+
+<blockquote>
+  <p>$\to$ 선형 로지스틱 회귀나 선형 SVM에서 클래스를 가르는 결정 경계또한 선형 음함수(초평면)이다. 비선형 신경망의 경우에서의 결정 경계는 비선형 음함수(manifold)이다. 만약 데이터가 원형으로 분포하거나 닫힌 형태의 군집(Cluster)을 이룰 경우, 수직선 판정법에 위배되므로 양함수로는 그 군집을 감싸는 닫힌 경계선을 절대 수학적으로 그려낼 수 없다. 따라서 머신러닝 분류기는 태생적으로 모든 변수를 독립 변수로 취급하는 음함수의 공간 $F(\mathbf{x}) = 0$에서 작동해야만 한다.(이 부분은 다시 보자.)</p>
+</blockquote>
+
+<p>잠재공간의 feature들이 얽혀있는 경우도 하나의 음함수인가? 관점에서 음함수를 어떻게 설명할 수 있을까?  <br />
+국소적으로 매끄럽지 않은 대상이 존재하는가?</p>
+
+<p>참고  <br />
+3Blue1Brown. Implicit differentiation, what’s going on here? | Chapter 6, Essence of calculus</p>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>

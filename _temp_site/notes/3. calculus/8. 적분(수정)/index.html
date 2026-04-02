@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>적분(수정) | ymgu</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="적분(수정)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="적분(integral)은 정의된 함수의 그래프와 그 구간으로 둘러싸인 도형의 넓이를 구하는 것이다. 리만 적분에서 다루는 고전적인 정의에 따르면, 실수의 척도를 사용하여 측도 공간에 나타낼 수 있는 연속인 함수 f(x)에 대하여 그 함수의 정의역의 부분 집합을 이루는 구간 [a,b]에 대응하는 치역으로 이루어진 곡선의 리만 합의 극한을 구하는 것이다. 이를 정적분(definite integral)이라 한다. 구간 [a,b]에 대하여 $f(x) \ge 0$이면 적분은 곡선의 면적과 동일하다. 그러나, 구간 가운데 일부가 음수인 치역을 갖는다면 적분 값은 서로 상쇄되어 곡선이 이루는 면적과 다를 수 있다.(때문에 적분을 “부호 있는 넓이를 잰다”고 한다)" />
+<meta property="og:description" content="적분(integral)은 정의된 함수의 그래프와 그 구간으로 둘러싸인 도형의 넓이를 구하는 것이다. 리만 적분에서 다루는 고전적인 정의에 따르면, 실수의 척도를 사용하여 측도 공간에 나타낼 수 있는 연속인 함수 f(x)에 대하여 그 함수의 정의역의 부분 집합을 이루는 구간 [a,b]에 대응하는 치역으로 이루어진 곡선의 리만 합의 극한을 구하는 것이다. 이를 정적분(definite integral)이라 한다. 구간 [a,b]에 대하여 $f(x) \ge 0$이면 적분은 곡선의 면적과 동일하다. 그러나, 구간 가운데 일부가 음수인 치역을 갖는다면 적분 값은 서로 상쇄되어 곡선이 이루는 면적과 다를 수 있다.(때문에 적분을 “부호 있는 넓이를 잰다”고 한다)" />
+<link rel="canonical" href="https://brighteen.github.io/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/" />
+<meta property="og:url" content="https://brighteen.github.io/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/" />
+<meta property="og:site_name" content="ymgu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-03T01:40:25+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="적분(수정)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-03T01:40:25+09:00","datePublished":"2026-04-03T01:40:25+09:00","description":"적분(integral)은 정의된 함수의 그래프와 그 구간으로 둘러싸인 도형의 넓이를 구하는 것이다. 리만 적분에서 다루는 고전적인 정의에 따르면, 실수의 척도를 사용하여 측도 공간에 나타낼 수 있는 연속인 함수 f(x)에 대하여 그 함수의 정의역의 부분 집합을 이루는 구간 [a,b]에 대응하는 치역으로 이루어진 곡선의 리만 합의 극한을 구하는 것이다. 이를 정적분(definite integral)이라 한다. 구간 [a,b]에 대하여 $f(x) \\ge 0$이면 적분은 곡선의 면적과 동일하다. 그러나, 구간 가운데 일부가 음수인 치역을 갖는다면 적분 값은 서로 상쇄되어 곡선이 이루는 면적과 다를 수 있다.(때문에 적분을 “부호 있는 넓이를 잰다”고 한다)","headline":"적분(수정)","mainEntityOfPage":{"@type":"WebPage","@id":"https://brighteen.github.io/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/"},"url":"https://brighteen.github.io/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://brighteen.github.io/feed.xml" title="ymgu" /><!--- MathJax Support --->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="layout-sidebar"><header class="site-header" role="banner">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">ymgu</a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <div class="trigger">
+        <a class="page-link" href="/">Home</a>
+        <a class="page-link" href="/mml/">MML</a>
+        <a class="page-link" href="/notes/">노트</a>
+        <a class="page-link" href="/memo/">Memo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="page-content sidebar-layout-container" aria-label="Content">
+      
+      <aside class="left-sidebar">
+        <ul class="sidebar-list"><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">2. linear-algebra</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/4%EB%8C%80%20%EB%B6%80%EB%B6%84%EA%B3%B5%EA%B0%84/">4대 부분공간</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/A%EC%9D%98%20%EC%97%AD%ED%96%89%EB%A0%AC%EC%9D%84%20%EA%B8%B0%EB%B3%B8%20%ED%96%89%EB%A0%AC%EB%93%A4%EC%9D%98%20%EA%B3%B1%EC%9C%BC%EB%A1%9C%20%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0/">A의 역행렬을 기본 행렬들의 곱으로 나타내기</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Hadamard%20product/">Hadamard product</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/L1%20%EC%A0%95%EA%B7%9C%ED%99%94/">L1 정규화</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/Matrix%20norm/">Matrix norm</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EA%B8%B0%EB%B3%B8%20%ED%96%89%20%EC%97%B0%EC%82%B0%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">기본 행 연산의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%8B%A4%ED%95%AD%EC%8B%9D%EB%8F%84%20%EB%B2%A1%ED%84%B0%EC%9D%B4%EB%8B%A4/">다항식도 벡터이다</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EB%82%B4%EC%A0%81%EC%9D%80%201x2%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EB%B3%80%ED%99%98%EC%9D%B4%EB%8B%A4/">두 벡터의 내적은 1x2 행렬의 변환이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%91%90%20%ED%96%89%EB%A0%AC%EC%9D%98%20%EA%B3%B1/">두 행렬의 곱</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%94%A5%EB%9F%AC%EB%8B%9D%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EC%84%A0%ED%98%95%20%EB%B3%80%ED%99%98%EC%9D%B4%20%EC%95%84%ED%95%80%20%EB%B3%80%ED%99%98%EC%9D%B8%20%EC%9D%B4%EC%9C%A0/">딥러닝 모델의 선형 변환이 아핀 변환인 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EB%B2%A1%ED%84%B0%EB%8A%94%20%EC%99%9C%20%EC%9B%90%EC%A0%90%EC%97%90%20%EA%B3%A0%EC%A0%95%EB%90%98%EC%96%B4%20%EC%9E%88%EC%9D%84%EA%B9%8C/">벡터는 왜 원점에 고정되어 있을까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%83%81(morphism)/">사상(morphism)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%AC%EC%98%81/">사영</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%82%BC%EA%B0%81%ED%95%A8%EC%88%98%EC%99%80%20%ED%9A%8C%EC%A0%84%ED%96%89%EB%A0%AC/">삼각함수와 회전행렬</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%EB%A5%BC%20%EC%99%9C%20%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/">선형대수를 왜 공부해야 할까</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%84%A0%ED%98%95%EC%84%B1/">선형성</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%96%91%EC%9D%98%20%EC%A0%95%EB%B6%80%ED%98%B8/">양의 정부호</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%9C%20%EC%A0%9C%EA%B3%B1'%EA%B7%BC'%EC%9D%B8%EA%B0%80/">왜 제곱'근'인가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%99%B8%EC%A0%81/">외적</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%9D%B4%EC%B0%A8%20%ED%98%95%EC%8B%9D/">이차 형식</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EB%8B%A8/">전단</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%99%80%20%ED%9B%84%EC%A7%84%20%EB%AA%A8%EB%93%9C%EC%9D%98%20%EB%8F%99%EC%9D%BC%ED%95%A8/">전진 모드와 후진 모드의 동일함</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%EC%A0%95%EB%8B%B5%20%EB%B2%A1%ED%84%B0%EC%99%80%20%EC%98%88%EC%B8%A1%20%EB%B2%A1%ED%84%B0%EC%9D%98%20%EC%B0%A8%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20'%EC%86%90%EC%8B%A4'%EC%9D%B4%20%EB%90%98%EB%8A%94%EA%B0%80/">정답 벡터와 예측 벡터의 차이가 어떻게 '손실'이 되는가</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4%20%EC%A0%95%EB%A6%AC/">피타고라스 정리</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%95%AD%EB%93%B1%ED%96%89%EB%A0%AC%20I%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%84%A0%ED%98%95%20%EC%8B%9C%EC%8A%A4%ED%85%9C/">항등행렬 I에 대한 선형 시스템</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%96%89%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EC%98%81%EA%B3%B5%EA%B0%84%EC%9D%80%20%ED%95%AD%EC%83%81%20%EC%88%98%EC%A7%81%EC%9D%B4%EB%8B%A4/">행공간과 영공간은 항상 수직이다.</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/2.%20linear-algebra/%ED%97%A4%EC%8B%9C%EC%95%88%20%ED%96%89%EB%A0%AC%EC%9D%B4%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%A1%EB%A5%A0%EC%9D%84%20'%EC%B8%A1%EC%A0%95'%ED%95%98%EB%8A%94%EA%B0%80/">헤시안 행렬이 어떻게 곡률을 '측정'하는가</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">3. calculus</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/5.%20%EC%A7%80%EC%88%98%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84%EA%B3%BC%20%EC%98%A4%EC%9D%BC%EB%9F%AC%20%EC%83%81%EC%88%98%20e/">5. 지수함수의 미분과 오일러 상수 e</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/6.%20%EC%9D%8C%ED%95%A8%EC%88%98%EC%9D%98%20%EB%AF%B8%EB%B6%84/">6. 음함수의 미분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/7.%20%EA%B7%B9%ED%95%9C/">7. 극한</a></li><li class="sidebar-item sidebar-item-active" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84(%EC%88%98%EC%A0%95)/" style="font-weight: bold; color: #2a7ae2;">8. 적분(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/8.%20%EC%A0%81%EB%B6%84/">8. 적분</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EA%B7%B8%EB%9E%98%EB%94%94%EC%96%B8%ED%8A%B8%EA%B0%80%20%ED%95%AD%EC%83%81%20%EA%B0%80%EC%9E%A5%20%EA%B0%80%ED%8C%8C%EB%A5%B8%20%EB%B0%A9%ED%96%A5%EC%9D%84%20%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">그래디언트가 항상 가장 가파른 방향을 가리키는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EB%AF%B8%EB%B6%84%20%EC%83%81%EC%88%98%EB%A5%BC%20%EC%83%81%EC%87%84%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/">미분 상수를 상쇄하는 이유</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/3.%20calculus/%EC%99%84%EC%A0%84%EB%AF%B8%EB%B6%84%EB%B0%A9%EC%A0%95%EC%8B%9D%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">완전미분방정식의 기하학적 의미</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">4. probability-statistics</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/Q-Q%20Plot/">Q-Q Plot</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EA%B0%80%EC%84%A4%20%EC%84%A4%EC%A0%95%EA%B3%BC%20%EA%B0%80%EC%84%A4%20%EA%B2%80%EC%A0%95/">가설 설정과 가설 검정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%88%84%EC%A0%81%20%EB%B6%84%ED%8F%AC%20%ED%95%A8%EC%88%98/">누적 분포 함수</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%8F%85%EB%A6%BD%20%ED%95%AD%EB%93%B1%20%EB%B6%84%ED%8F%AC/">독립 항등 분포</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EB%B6%88%ED%8E%B8%EC%B6%94%EC%A0%95%EB%9F%89(%EC%88%98%EC%A0%95%EC%A4%91)/">불편추정량(수정중)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%83%98%ED%94%8C%EA%B0%84%EC%9D%98%20%EA%B4%80%EA%B3%84(%EC%88%98%EC%A0%95)/">샘플간의 관계(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%88%9C%EC%97%B4%EA%B3%BC%20%EC%A1%B0%ED%95%A9/">순열과 조합</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%A4%91%EC%8B%AC%EA%B7%B9%ED%95%9C%EC%A0%95%EB%A6%AC(%EC%88%98%EC%A0%95)/">중심극한정리(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%EC%B5%9C%EB%8C%80%20%EC%9A%B0%EB%8F%84%20%EC%B6%94%EC%A0%95(%EC%88%98%EC%A0%95)/">최대 우도 추정(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%95%84%EC%9A%94%EC%B6%A9%EB%B6%84%EC%A1%B0%EA%B1%B4(%EC%88%98%EC%A0%95)/">필요충분조건(수정)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/4.%20probability-statistics/%ED%99%95%EB%A5%A0%EC%9D%B4%EB%9E%80(%EC%88%98%EC%A0%95)/">확률이란(수정)</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">5. machine-learning</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/1%EC%B0%A8%EC%9B%90%20%EB%B9%84%EC%84%A0%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94%20%EC%98%88%EC%A0%9C(%EB%B3%B4%EC%99%84)/">1차원 비선형 최적화 예제(보완)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98%20%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%20%EC%9D%98%EB%AF%B8/">다중공선성의 기하학적 의미</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%8B%A4%EC%B0%A8%EC%9B%90%20%ED%99%95%EB%A5%A0%20%EB%B3%80%EC%88%98%EC%9D%98%20%EB%B6%84%EC%82%B0/">다차원 확률 변수의 분산</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC%20%EC%8A%B9%EC%88%98%EB%B2%95/">라그랑주 승수법</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/5.%20machine-learning/%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%9D%BC/">테스트파일</a></li><li class="sidebar-folder-heading" style="margin-top: 20px; font-weight: bold; color: #555; font-size: 0.9em; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 8px;">6. generative-models</li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/AAE/">AAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Denoising%20Autoencoder/">Denoising Autoencoder</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/GAN/">GAN</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/JSD/">JSD</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/NCSN(Noise%20Conditional%20Score%20Network)/">NCSN(Noise Conditional Score Network)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/SDE%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SBM/">SDE를 통한 SBM</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/Score-Based%20Generative%20Modeling%20Through%20Stochastic%20Differential%20Equations(SBM)/">Score-Based Generative Modeling Through Stochastic Differential Equations(SBM)</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/VAE/">VAE</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%AF%B8%EC%A0%81%EB%B6%84%20%EA%B8%B0%EC%B4%88/">미적분 기초</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EB%B3%BC%EC%B8%A0%EB%A7%8C%20%EB%A8%B8%EC%8B%A0/">볼츠만 머신</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%83%9D%EC%84%B1%EB%AA%A8%EB%8D%B8%20%EB%A9%94%EB%AA%A8/">생성모델 메모</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9C%84%EB%84%88%20%EA%B3%BC%EC%A0%95/">위너 과정</a></li><li class="sidebar-item" style="margin-left: 10px;"><a href="/notes/6.%20generative-models/%EC%9D%B4%ED%86%A0%20%EC%A0%81%EB%B6%84/">이토 적분</a></li></ul>
+      </aside>
+
+      <div class="main-content">
+        <div class="wrapper">
+          <p>적분(integral)은 정의된 함수의 그래프와 그 구간으로 둘러싸인 도형의 넓이를 구하는 것이다.  <br />
+리만 적분에서 다루는 고전적인 정의에 따르면, 실수의 척도를 사용하여 측도 공간에 나타낼 수 있는 연속인 함수 f(x)에 대하여 그 함수의 정의역의 부분 집합을 이루는 구간 [a,b]에 대응하는 치역으로 이루어진 곡선의 리만 합의 극한을 구하는 것이다. 이를 정적분(definite integral)이라 한다. 구간 [a,b]에 대하여 $f(x) \ge 0$이면 적분은 곡선의 면적과 동일하다. 그러나, 구간 가운데 일부가 음수인 치역을 갖는다면 적분 값은 서로 상쇄되어 곡선이 이루는 면적과 다를 수 있다.(때문에 적분을 “부호 있는 넓이를 잰다”고 한다)</p>
+
+<p>어떤 변화율(e.g., 속도)이 주어졌을 때 그 값들의 연속적인 누적 총량(e.g., 변위)을 구하려는 대수적 목적은, 기하학적으로 속도 함수 아래의 면적을 구하는 과정과 완벽하게 동치이다.  <br />
+이 과정을 근사와 극한으로 확인해보자. 함수의 특정 구간에서 곡선 아래의 면적을 구하기 위해, 해당 구간을 매우 작은 너비 $dt$를 가진 무수히 많은 직사각형으로 분할한다.  <br />
+어떤 시간에 따른 속도 함수 $v(t)$가 주어졌을 때, 아주 짧은 시간 $dt$동안의 변위는 $v(t)dt$로 근사할 수 있으며, 이는 그래프 상에서 얇은 직사각형의 넓이와 같다. 분할하는 너비 $dt$가 $0$에 한없이 가까워질수록 이 직사각형들의 총합은 곡선 아래의 실제 면적에 완벽하게 수렴하게 된다.  <br />
+이를 수식으로 표현하면 다음과 같다.</p>
+
+\[\lim_{dt \to 0} \sum v(t)dt = \int v(t) dt\]
+
+<p>적분 구간의 상한을 고정된 상수가 아닌 변수 $T$로 설정하여, 시작점부터 $T$까지의 면적을 나타내는 새로운 함수 $s(T)$를 정의한다.  <br />
+이 면적 함수 $s(T)$에서 입력값 $T$가 아주 미세한 $dT$만큼 증가할 때, 추가되는 면적 $ds$는 높이가 $v(T)$이고 밑변이 $dT$인 얇은 직사각형의 넓이로 근사된다.</p>
+
+\[ds \approx v(T)dT\]
+
+<p>양변을 $dT$로 나누고, 극한의 논리를 적용하여 $dT \to 0$으로 한없이 접근시키면, 오차는 완전히 사라져 다음과 같은 대수적 관계가 성립한다.</p>
+
+\[\frac{ds}{dT} = v(T)\]
+
+<p>즉, ‘면적 함수의 도함수는 곧 원래의 함수(피적분함수)’라는 결론(적분은 미분의 역연산)이 도출된다. 따라서 면적 함수 $s(T)$는 $v(T)$를 미분하기 전의 상태, 즉 역도함수(Antiderivative) 중 하나가 된다.</p>
+
+<p>$v(T)$의 일반적인 역도함수를 $F(T)$라고 하면, 면적 함수 $s(T)$는 미분하면 $0$이 되어 사라지는 임의의 상수항(적분 상수) $C$만큼의 차이를 가질 수 있다.</p>
+
+\[s(T) = F(T) + C\]
+
+<p>여기서 $C$를 확정하기 위해 자명한 기하학적 초기 조건을 대입해보자. 적분 구간이 시작점인 $0$부터 $0$까지라면, 너비가 존재하지 않으므로 면적은 수학적으로 $0$이어야 한다. 즉, $s(0) = 0$이다.</p>
+
+\[s(0) = F(0) + C = 0 \implies C = -F(0)\]
+
+<p>이를 원래 식에 대입하면, $0$부터 $T$까지의 면적 함수는 적분 상수 없이 다음과 같이 특정된다.</p>
+
+\[s(T) = F(T) - F(0)\]
+
+<p>이제 이를 시작점이 $0$이 아닌 임의의 구간 $[a, b]$에 대한 정적분으로 확장해보자. 함수 $f(x)$의 $a$부터 $b$까지의 면적은, 전체 면적( $0$부터 $b$ )에서 불필요한 앞부분의 면적( $0$부터 $a$ )을 빼는 대수적 연산으로 도출할 수 있다.</p>
+
+\[\int_{a}^{b} f(x) dx = s(b) - s(a)\]
+
+<p>앞서 도출한 $s(T) = F(T) - F(0)$ 식을 여기에 대입하면 다음이 성립한다.</p>
+
+\[s(b) - s(a) = (F(b) - F(0)) - (F(a) - F(0))\]
+
+<p>$F(0)$ 항이 상쇄되면서 최종적으로 매우 간결한 수식만 남게 된다.</p>
+
+\[\int_{a}^{b} f(x) dx = F(b) - F(a)\]
+
+<p>무한히 많은 얇은 직사각형의 합을 구하는 복잡한 극한 연산이, 단지 역도함수를 구하여 양 끝값을 대입한 뒤 빼는 간단한 연산으로 귀결된다. 이것이 적분의 계산을 획기적으로 가능하게 만든 미적분학의 기본정리의 완전한 수학적 논리 구조이다.</p>
+
+<p>또한 적분은 무한한 연속 값의 평균을 구할때도 사용된다. 연속적인 값의 평균이라니. 이는 무한대를 더하고 무한대로 나누는 꼴($\frac{\infty}{\infty}$)이다. 이를 대수적으로 타당하게 해결하기 위해 유한한 표본 추출에서부터 극한으로 나아가며 방식을 취해보자.  <br />
+구간의 길이를 $L$이라 하고, 아주 작은 일정한 간격 $dx$마다 점을 찍어 함수값(높이)들을 추출한다고 가정해 보자. 이때 추출되는 표본의 총 개수는 구간의 길이를 간격으로 나눈 $\frac{L}{dx}$이 된다.  <br />
+이 유한한 표본들의 평균을 구하는 식은 다음과 같이 전개된다.</p>
+
+\[\text{평균 높이} \approx \frac{\sum f(x)}{\frac{L}{dx}} = \frac{\sum f(x)dx}{L}\]
+
+<p>여기서 분자에 있는 $\sum f(x)dx$는 밑변이 $dx$이고 높이가 $f(x)$인 무수히 많은 얇은 직사각형들의 넓이 합, 즉 구간 내의 ‘전체 면적’을 의미한다. 이제 극한 기호를 도입하여 $dx$를 $0$으로 한없이 접근시키면, 오차가 사라지며 연속 함수의 완벽한 평균값 공식이 적분을 통해 유도된다.</p>
+
+\[\text{평균 높이} = \frac{\int_{a}^{b} f(x) dx}{b - a}\]
+
+<p>즉, 기하학적으로 어떤 구간에서 곡선의 ‘평균 높이’는 ‘곡선 아래의 전체 면적을 구간의 밑변 길이로 나눈 값’과 같다.</p>
+
+<p>위 식의 분자를 다시 보자. $\int_{a}^{b} f(x) dx$는 앞서 증명했듯이, $f(x)$의 역도함수인 $F(x)$의 양 끝값의 차이인 $F(b) - F(a)$로 계산할 수 있다. 따라서 위 식은 다음과 같이 다시 쓸 수 있다.</p>
+
+\[\text{평균 높이} = \frac{F(b) - F(a)}{b - a}\]
+
+<p>여기서 우변은 좌표평면 위에서 $(a, F(a))$와 $(b, F(b))$를 직접 연결한 ‘할선의 기울기(평균 변화율)’이다. 연속된 함수값들의 무한한 합(적분)을 구하는 문제가, 역도함수 그래프 상의 단 두 점을 연결한 기울기를 구하는 문제로 바뀐 것이다.</p>
+
+<p>결론적으로 다음 두 명제가 동일함을 증명한다.</p>
+<ul>
+  <li>원래 함수 $f(x)$ 그래프의 $a$부터 $b$까지의 ‘평균 높이’</li>
+  <li>역도함수 $F(x)$ 그래프에서 두 점 $a$와 $b$를 이은 ‘할선의 기울기’(또는 구간 내 모든 접선의 평균 기울기)<br />
+이것이 직관적으로 타당한 이유는 미분의 정의 그 자체에 있다. $f(x)$는 애초에 $F(x)$를 미분한 도함수이므로, $f(x)$의 각 높이들은 $F(x)$ 그래프가 가진 무수히 많은 ‘순간의 접선 기울기(순간변화율, 미분계수)’들을 의미한다.  <br />
+따라서, 그 무수히 많은 접선 기울기($f(x)$)들을 전부 모아서 평균을 내면, 당연히 출발점과 도착점을 직선으로 연결한 전체 구간의 평균 기울기($\frac{F(b)-F(a)}{b-a}$, 평균변화율)와 같아져야 한다는 인과관계가 성립한다.</li>
+</ul>
+
+<p>실제로 역도함수가 존재하지만 수식으로 다루기 힘든 상황에서는 어떻게 적분하는가?  <br />
+다변수함수 혹은 3차 이상의 함수에서는 적분이 어떻게 정의되는가? 2차 함수의 개념이 일반화될 수 있는가?</p>
+
+<p>적분해야 하는 차원이 매우 높아지거나 함수가 매우 복잡할 때, 기하학적 분할 대신 무작위 표본 추출을 사용하여 적분값을 추정할 수 있다.  <br />
+먼저 함수를 둘러싸는 거대한 직사각형 공간을 정의하고 면적을 구한다. 그 공간 안에 수만 개의 점을 무작위로 흩뿌린 다음 전체 점의 개수 대비, 곡선 아래쪽에 찍힌 점들의 비율을 계산한다. (전체 공간 면적 $\times$ 곡선 아래 점의 비율)을 계산하면, 대수의 법칙에 의해 이 값이 점차 실제 적분 면적으로 수렴한다.</p>
+
+<p>참고  <br />
+wikipedia  <br />
+3blue1brown. Integration and the fundamental theorem of calculus | Chapter 8, Essence of calculus / What does area have to do with slope? | Chapter 9, Essence of calculus</p>
+</div>
+      </div>
+
+    </main>
+
+    <style>
+      .mml-nav-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #2a7ae2;
+        color: #2a7ae2;
+      }
+    </style>
+
+  </body>
+</html>
