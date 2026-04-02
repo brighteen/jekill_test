@@ -1,6 +1,6 @@
----
 layout: page
 title: 머신러닝 노트 목록
+permalink: /notes/머신러닝/
 ---
 
 # 🤖 머신러닝 지식 저장소
