@@ -1,0 +1,19 @@
+# Jekyll 전용 무시 파일
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata/
+
+# 로컬 다움패키지 및 젬 라이브러리
+vendor/
+.bundle/
+Gemfile.lock
+
+# OS 및 에디터 관련
+.DS_Store
+Thumbs.db
+.vscode/
+
+# 마이그레이션 스크립트 및 에이전트 지침
+migrate_to_jekyll.py
+.agent/

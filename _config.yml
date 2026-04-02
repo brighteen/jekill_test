@@ -1,0 +1,34 @@
+# Jekyll 설정
+title: Digital Garden
+email: your-email@example.com
+description: >- # 이 부분은 사이트 설명으로 채워집니다.
+  Quartz에서 마이그레이션된 Jekyll 디지털 가든입니다.
+baseurl: "/jekill_test" # 레포지토리 이름이 jekill_test이므로 서브디렉토리로 설정
+url: "https://brighteen.github.io" # 사용자 블로그 도메인
+
+# 테마 설정
+theme: minima
+
+# Collections 설정 (중요)
+collections:
+  notes:
+    output: true
+    permalink: /notes/:path/
+
+# 빌드 설정
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# 한글 파일명 처리를 위한 설정
+encoding: utf-8
+
+# 추가 무시 파일
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - migrate_to_jekyll.py
+  - .agent/
+  - README.md
