@@ -7,7 +7,6 @@ _site/
 # 로컬 다움패키지 및 젬 라이브러리
 vendor/
 .bundle/
-Gemfile.lock
 
 # OS 및 에디터 관련
 .DS_Store
