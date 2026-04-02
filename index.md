@@ -10,6 +10,6 @@ title: My Digital Garden
 ### 📚 주요 주제
 현재 다음 주제들이 정리되어 있습니다:
 
-- [머신러닝]({{ site.baseurl }}/notes/머신러닝/)
+- [머신러닝]({{ site.baseurl }}/notes/machine-learning/)
 
 최근 업데이트된 자료들을 확인해 보세요.
