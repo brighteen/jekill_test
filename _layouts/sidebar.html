@@ -64,14 +64,20 @@
       <div class="main-content">
         <div class="wrapper">
           {{ content }}
+          
+          {%- assign is_index = false -%}
+          {%- if page.name == "index.md" or page.name == "index.html" -%}
+            {%- assign is_index = true -%}
+          {%- endif -%}
 
-          {%- if col_name == "mml" -%}
-            {%- assign mml_sorted = site.mml | sort: "path" -%}
+          {%- if is_index == false -%}
+            {%- if col_name == "mml" or col_name == "research" -%}
+            {%- assign col_sorted = site[col_name] | sort: "path" -%}
             {%- assign prev_page = nil -%}
             {%- assign next_page = nil -%}
             {%- assign found_current = false -%}
 
-            {%- for doc in mml_sorted -%}
+            {%- for doc in col_sorted -%}
               {%- if doc.name == "index.md" or doc.name == "index.html" -%}{%- continue -%}{%- endif -%}
 
               {%- if found_current and next_page == nil -%}
@@ -101,7 +107,7 @@
               </div>
 
               <div style="flex: 0; padding: 0 12px;">
-                <a href="{{ site.baseurl }}/mml/" style="font-size: 0.85em; color: #888; text-decoration: none;">목차</a>
+                <a href="{{ site.baseurl }}/{{ col_name }}/" style="font-size: 0.85em; color: #888; text-decoration: none;">목차</a>
               </div>
 
               <div style="flex: 1; text-align: right;">
@@ -116,6 +122,7 @@
                 {%- endif -%}
               </div>
             </nav>
+          {%- endif -%}
           {%- endif -%}
 
         </div>

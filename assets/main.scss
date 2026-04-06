@@ -115,9 +115,115 @@ body.layout-sidebar {
   flex-grow: 1;
   overflow-y: auto;
   padding: 20px 0;
+  overflow-wrap: break-word; /* 표준적인 줄바꿈 허용 */
 }
 
 /* Override default footer in main to avoid squishing if included */
 .main-content .site-footer {
   margin-top: 50px;
+}
+
+/* Premium Explain Box 스타일 */
+.explain-box {
+  background-color: #fcfdfe; /* 매우 연한 푸른빛 배경 */
+  border-left: 5px solid #2a7ae2; /* 왼쪽 강조 선 */
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-size: 0.95em;
+  line-height: 1.7;
+  color: #333;
+  overflow-wrap: break-word; /* 상자 내 긴 텍스트 자동 줄바꿈 */
+  
+  /* 박스 내의 문단 간격 조정 */
+  p {
+    margin-bottom: 1em;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 박스 내의 수식 블록 여백 조정 */
+  .MathJax_Display, .katex-display, .math-block {
+    margin: 1.2em 0 !important;
+  }
+
+  /* 강조 문구 등 추가 스타일 (필요 시) */
+  em, i {
+    color: #555;
+  }
+}
+
+.img-normal {
+  max-width: 100%; /* 부모 너비를 넘지 않도록 강제 */
+  max-height: 450px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 1.5em auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.img-normal:hover {
+  transform: scale(1.02);
+}
+
+/* 수식 블록 내 가로 스크롤 허용하여 바깥으로 튀어나가는 현상 방지 */
+.math-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 1em 0;
+  margin: 1.5em 0;
+  text-align: center !important;
+
+  /* MathJax 3 및 하위 요소들이 컨테이너 밖으로 나가지 않도록 함 */
+  mjx-container, .mjx-chtml, .MathJax {
+    display: table !important; /* 내용물 너비만큼만 차지하도록 테이블 레이아웃 사용 */
+    margin: 1em auto !important; /* 중앙 정렬 */
+    text-align: center !important;
+    min-width: 100%; /* 기본적으로 전체 너비 차지 시도 */
+    
+    /* 실제 너비가 부모보다 긴 경우 스크롤이 발생하도록 강제 */
+    &.mjx-overflow {
+        display: block !important;
+        width: max-content !important;
+        max-width: none !important;
+    }
+  }
+}
+
+/* 옵시디언의 인용구(>)를 대체하는 Callout 박스 디자인 */
+.obsidian-callout {
+  background-color: #fbfbfb;
+  border-left: 4px solid #ccd1d9;
+  padding: 1.2em 1.5em;
+  margin: 2em 0;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+  /* 내부 마크다운 요소 간격 조절 */
+  p:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; }
+
+  /* Callout 안의 텍스트가 이탈릭으로 도배되는 것 방지 */
+  font-style: normal !important;
+  color: #444;
+
+  /* Callout 안의 수식 컨테이너 여백 조정 */
+  .math-container {
+    background: transparent;
+    margin: 1em 0;
+  }
+}
+.math-container::-webkit-scrollbar {
+  height: 6px;
+}
+.math-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
 }

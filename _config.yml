@@ -17,9 +17,9 @@ collections:
   mml:
     output: true
     permalink: /mml/:path/
-  memo:
+  research:
     output: true
-    permalink: /memo/:path/
+    permalink: /research/:path/
 
 # 빌드 설정
 markdown: kramdown
@@ -44,13 +44,10 @@ exclude:
   - .agent/
   - README.md
   - MML/
-  - Memo/
-  - "미적분/"
-  - "생성모델/"
-  - "확률과 통계/"
-  - "무제/"
-  - "_temp_site/"
-  - "_temp_site_trace/"
+  - Note/
+  - Research/
+  - _temp_site/
+  - _temp_site_trace/
 
 # 문서별 기본 속성 (Frontmatter) 자동 지정
 defaults:
@@ -68,7 +65,7 @@ defaults:
       collection_name: "notes"
   - scope:
       path: ""
-      type: "memo"
+      type: "research"
     values:
       layout: "sidebar"
-      collection_name: "memo"
+      collection_name: "research"

@@ -16,3 +16,13 @@ Thumbs.db
 # 마이그레이션 스크립트 및 에이전트 지침
 migrate_to_jekyll.py
 .agent/
+
+# 로컬 작업용 백업 및 임시 파일
+backup_assets/
+tmp/
+__pycache__/
+*.bak
+*.pyc
+
+# 옵시디언 자체 설정 폴더 (원격 공유 불필요 시)
+.obsidian/

@@ -1,13 +1,11 @@
 ---
 layout: sidebar
-collection_name: mml
 title: Mathematics for Machine Learning
+collection_name: mml
 permalink: /mml/
 ---
 
-<div style="text-align: center;" markdown="1">
-  ![MML 책표지]({{ site.baseurl }}/assets/1_mml_book_cover.png){: width="300" }
-</div>
+![MML.png]({{ site.baseurl }}/assets/mml_cover.png){: .img-normal .img-normal width="300" }
 
 본 포스팅은 비상업적인 교육 및 학습 공유 목적으로 제작되었습니다.  
 
@@ -16,9 +14,12 @@ permalink: /mml/
 모든 내용의 저작권은 원저작자에게 있으며, 원본 웹사이트 및 관련 자료는 [링크](https://mml-book.github.io/)에서 확인하실 수 있습니다.  
 원작자의 라이선스 규정을 준수하며, 상업적 이용을 금합니다.  
 
+
 원활한 이해를 위해 교재 중간중간 본인만의 설명과 구절을 추가했습니다. 이 내용은 다소 주관적일 수 있으며, 다회독 과정을 거치며 지속적으로 보완 및 수정될 예정입니다.  
 
 연습 문제는 다루지 않으며, 이론적 배경과 개념 정리에 집중하고 있습니다.  
+
+
 
 - [ ] 포스팅을 끝마치면 마크 데이젠로스(저자)에게 공유하기.
 
