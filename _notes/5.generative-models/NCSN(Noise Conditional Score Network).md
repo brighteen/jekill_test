@@ -28,15 +28,22 @@ Q. 샘플이 한 모드에서 다른 모드로 건너가지 못하는게 왜 문
 A. Mode는 데이터 분포에서 확률 밀도가 높은 덩어리들을 의미함. 예를 들어, 개와 고양이 사진을 학습했다면 개와 고양이의 각 집합이 각각의 모드가 됨.  
 샘플링 과정(Langevin Dynamics)이 모드 사이의 저밀도 영역을 건너가지 못하고 특정 모드에 갇혀버린다면, 모델은 전체 데이터 분포의 비율을 정확하게 반영하지 못함. 위 예시에서 샘플링이 개 Mode에 갇히면 생성된 결과물이 개 99%, 고양이 1%가 될 수 있음. 이는 모델이 데이터 분포를 제대로 학습했다고 할 수 없음.  
 학습 중 큰 노이즈를 먼저 주입하여 분리되어 있든 모드들이 서로 연결되어(저밀도 영역이 채워져서) 샘플이 자유롭게 이동할 수 있게 됨.  
+</div>
 
+
+
+<div class="obsidian-callout" markdown="1">
 Q. Langevin Dynamics를 사용한다는 의미가 무엇인가?  
 A. 기울기(스코어)만 보고 확률밀도가 높아지는 방향으로 가는 것임.   
 정의: 스코어 함수만들 사용하여 확률분포로부터 샘플을 생성하는 반복적인 절차임.  
+
 <div class="math-container" markdown="1">
 $$
 x_{t} = x_{t-1} + \frac{\epsilon}{2} \nabla_x \log p(x_{t-1}) + \sqrt{\epsilon} z_t
 $$  
 </div>
+
+
 Drift 항: 확률 밀도가 높은 곳으로 샘플을 밀어 올리는 힘.(등산)  
 Noise: 랜덤한 방향으로 샘플을 흔드는 힘.(확산)  
 의미: 데이터의 확률 분포 자체는 모르지만, 그 기울기는 신경망으로 학습함. Langevin Dynamics는 이 Vector field를 따라가며 랜덤 노이즈를 점차 그럴듯한 데이터로 샘플링함.  
@@ -50,11 +57,14 @@ Noise: 랜덤한 방향으로 샘플을 흔드는 힘.(확산)
 	- 작은 노이즈로 원본 데이터 분포와 거의 유사한 스코어를 정의.
 - 조건부 스코어 네트워크: 각 노이즈 레벨에 대해 별도의 모델을 만드는 대신, 단일 신경망$$s_\theta(x, \sigma)$$를 학습시킴. 이 네트워크는 입력과 현재 노이즈 레벨을 받아 해당 분포의 스코어를 추정함.
 - 학습목표: Donoising Score Matching 손실 함수를 모든 노이즈 레벨에 대해 합친 형태:
+
 <div class="math-container" markdown="1">
 $$
 \mathcal{L}(\theta; \{\sigma_i\}) \propto \sum_{i=1}^L \sigma_i^2 \mathbb{E} [\|s_\theta(\tilde{x}, \sigma_i) + \frac{\tilde{x}-x}{\sigma_i^2}\|^2]
 $$  
 </div>
+
+
 이때 $$\sigma_i^2$$가중치는 모든 노이즈 레벨에서 손실 함수의 크기를 맞춰주기 위함.  
 
 ### 3. 새로운 샘플링: Annealed Langevin Dynamics

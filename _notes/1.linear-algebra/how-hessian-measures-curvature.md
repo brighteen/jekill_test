@@ -11,27 +11,36 @@ collection_name: notes
 고유값의 부호가 양수와 음수가 섞여 있는 경우(Indefinite), 어떤 방향으로는 아래로 볼록하지만, 직교하는 다른 방향으로는 위로 볼록한 기하학적 형태를 띈다. 이를 안장점(Saddle Point)이라고 부르며, 1차 미분이 0임에도 극소점이 아니다.  
 
 간단한 예시로 함수 $$f(x,y)=xy$$를 생각해보자. 이 다변수 함수의 헤시안 행렬을 구하기 앞서, 1차 편도함수를 계산하면 다음과 같다.  
+
 <div class="math-container" markdown="1">
 $$
 \frac{\partial f}{\partial x} = y, \quad \frac{\partial f}{\partial y} = x
 $$  
 </div>
+
+
 1차 편도함수들을 다시 다른 변수에 대해 편미분하여 2차 편도함수들을 구할 수 있다.   
+
 <div class="math-container" markdown="1">
 $$
 H = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
 $$  
 </div>
+
+
 (대각 성분이 0인 이유는 두 변수가 서로 종속적이기 때문인가?)  
 (클레로의 정리에 의해 교차 편도함수가 동일함을 확인할 수 있다.)  
 이 함수의 헤시안 행렬이 좌표 $$(x,y)$$에 의존하지 않는 상수행렬이다. 이는 곡면 $$f(x,y)=xy$$의 휘어지는 성질(곡률)이 공간상의 어느 지점에서나 동일하게 유지된다는 것을 의미한다.  
 
 위 헤시안 행렬의 특성 방정식을 세워 고유값을 구하여 기하학적 의미를 파악해보자.  
+
 <div class="math-container" markdown="1">
 $$
 \det(H - \lambda I) = \det\left( \begin{bmatrix} -\lambda & 1 \\ 1 & -\lambda \end{bmatrix} \right) = (-\lambda)(-\lambda) - (1)(1) = \lambda^2 - 1 = 0
 $$  
 </div>
+
+
 따라서 고유값은 $$\lambda_1 = 1, \quad \lambda_2 = -1$$이다.  
 고유값의 부호가 양수와 음수가 혼재되어 있다. 이 경우 해당 지점은 극소점도 극대점도 아닌 안장점이 된다.  
 고유값에 대응되는 고유벡터의 방향은 각각 $$y=x, y=-x$$이다.  

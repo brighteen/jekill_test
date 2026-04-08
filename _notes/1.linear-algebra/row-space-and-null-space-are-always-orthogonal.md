@@ -7,25 +7,34 @@ collection_name: notes
 임의의 $$m \times n$$ 행렬 $$A$$에 대해 행공간과 영공간은 $$\mathbb{R}^n$$공간 상에서 항상 수직 관계에 있다. 엄밀히 말하면 이 두 공간은 서로의 직교 여공간(orthogonal complement)이다.  
 
 MML 2.3절 예시  
+
 <div class="math-container" markdown="1">
 $$
 \begin{bmatrix} 1 & 0 & 8 & -4 \\ 0 & 1 & 2 & 12 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} 42 \\ 8 \end{bmatrix}. \quad (2.38)
 $$  
 </div>
+
+
 이때 일반해는 다음과 같다.  
+
 <div class="math-container" markdown="1">
 $$
 \left\{ \boldsymbol{x} \in \mathbb{R}^4 : \boldsymbol{x} = \begin{bmatrix} 42 \\ 8 \\ 0 \\ 0 \end{bmatrix} + \lambda_1 \begin{bmatrix} 8 \\ 2 \\ -1 \\ 0 \end{bmatrix} + \lambda_2 \begin{bmatrix} -4 \\ 12 \\ 0 \\ -1 \end{bmatrix}, \ \lambda_1, \lambda_2 \in \mathbb{R} \right\}. \quad (2.43)
 $$  
 </div>
+
+
 이때 A의 행들과 일반해의 영공간의 해가 모두 수직(내적 0)인 관계를 가진다.  
 
 $$A\mathbf{x}=\mathbf{0}$$을 행단위로 풀어쓰면 다음과 같다.  
+
 <div class="math-container" markdown="1">
 $$
 \begin{bmatrix} - & \mathbf{r}_1 & - \\ - & \mathbf{r}_2 & - \\ & \vdots & \\ - & \mathbf{r}_m & - \end{bmatrix} \begin{bmatrix} \mathbf{x} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix}
 $$  
 </div>
+
+
 이를 연립방정식의 형태로 나타내면 다음과 같다.  
 $$\mathbf{r}_1 \cdot \mathbf{x} = 0$$  
 $$\mathbf{r}_2 \cdot \mathbf{x} = 0$$  

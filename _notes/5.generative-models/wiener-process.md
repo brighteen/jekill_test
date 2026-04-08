@@ -9,11 +9,14 @@ collection_name: notes
 물리학에서 브라운 운동(액체나 기체 속 미세 입자가 불규칙하게 움직이는 현상)이라고 부르며, 수학적으로 엄밀하게 정의할 때 위너 과정(Wiener Process)이라고 함. 보통 $$W(t)$$ 혹은 $$B(t)$$로 표기함.(SBM 논문에서는 $$w$$로 표기)  
 확률 과정 $${W(t)}_{t\ge 0}$$가 다음 세 가지 성질을 만족할 때, 이를 위너 과정이라고 정의함.  
 ## 1) 초기 조건:
+
 <div class="math-container" markdown="1">
 $$
 W(0) = 0
 $$  
 </div>
+
+
 시간 t = 0에서의 값은 항상 0에서 시작함,(확률 1로 0)  
 
 
@@ -43,11 +46,14 @@ ex. 구간A: t가 1초에서 2초 사이, 구간B: t가 3초에서 4초 사이.
 
 ## 3) 정규 증분(Gaussian Increments):
 시간 $$s$$에서 $$t$$ 사이의 변화량 $$(W(t) - W(s))$$은 평균이 0이고 분산이 시간 차이$$(t - s)$$인 정규 분포를 따름.  
+
 <div class="math-container" markdown="1">
 $$
 W(t) - W(s) \sim \mathcal{N}(0, t - s)
 $$  
 </div>
+
+
 의미: 시간이 길어질수록 움직임의 불확실성(분산)이 선형적으로 증가함.  
 
 
@@ -83,32 +89,45 @@ A. 위너 과정의 정의 중 정규 증분에서 비롯됨.
 $$W(t+\Delta t) - W(t) \sim \mathcal{N}(0, \Delta t)$$. 즉, 시간 간격 $$\Delta t$$ 동안의 변화량($$\Delta W$$)은 평균이 0이고 분산이 $$\Delta t$$인 정규분포를 따름.  
 표준편차: 분산의 제곱근을 취한 형태. $$\sqrt{\text{분산}} = \sqrt{\Delta t}$$  
 $$\Delta t$$가 매우 작을 때(ex. 0.01), $$\Delta t$$자체보다 $$\sqrt{\Delta t}$$(ex. 0.1)가 훨씬 큼. 이 때문에 미분 계산에서 노이즈 항이 사라지지 않고 지배적인 영향을 미침.  
+</div>
 
+
+
+<div class="obsidian-callout" markdown="1">
 Q. 변화율의 크기란? (미분 불가능성의 증명)  
 A. 변화율이란 흔히 기울기를 뜻함.  
 일반적인 기울기의 정의: $$\frac{\text{y의 변화량}}{\text{x의 변화량}} = \frac{\Delta W}{\Delta t}$$  
 크기(절대값)의 기댓값을 대략적으로 계산해보면:  
+
 <div class="math-container" markdown="1">
 $$
 \left| \frac{\Delta W}{\Delta t} \right| \approx \frac{\text{변화량의 표준편차}}{\Delta t} = \frac{\sqrt{\Delta t}}{\Delta t} = \frac{1}{\sqrt{\Delta t}}
 $$  
 </div>
+
+
 극한을 보내면:  
+
 <div class="math-container" markdown="1">
 $$
 \lim_{\Delta t \to 0} \frac{1}{\sqrt{\Delta t}} = \infty
 $$  
 </div>
+
+
 아주 짧은 찰나의 순간을 보면, 위너 과정은 무한대의 속도로 진동하고 있음. 그래프의 접선을 그릴 수 없을 정도로 뾰족하다는 뜻임. 이것이 변화율(미분값)이 존재하지 않는다는 말의 의미임.  
 </div>
 
 
 # 3. 논문과의 연결
+
 <div class="math-container" markdown="1">
 $$
 dx = f(x, t)dt + g(t)dw
 $$  
 </div>
+
+
 여기서 $$dw$$가 방금 위너 과정의 미소 증분임.  
 - $$f(x,t)dt$$: 데이터가 결정론적으로 변화하는 흐름임.(Drift)
 - $$g(t)dw$$: 데이터에 무작위 노이즈가 주입되는 과정임.(Diffusion)

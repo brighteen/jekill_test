@@ -5,26 +5,35 @@ collection_name: notes
 ---
 
 우리는 다차원 공간에서 임의의 방향 벡터 $$\boldsymbol{v}$$ (크기가 $$1$$ 인 단위 벡터, $$\|\boldsymbol{v}\| = 1$$)로 이동했을 때 함수값 $$f(\boldsymbol{x})$$가 최소가 되길 원한다. 이때 방향 도함수는 기울기 벡터(그래디언트)와 방향 벡터의 내적으로 정의된다.  
+
 <div class="math-container" markdown="1">
 $$
 D_{\boldsymbol{v}} f(\boldsymbol{x}) = \nabla f(\boldsymbol{x}) \cdot \boldsymbol{v}
 $$  
 </div>
+
+
 이때 그래디언트 벡터 $$\nabla f(\boldsymbol{x})$$가 어떤 방향을 가르키는지 확인해보자.  
 
 위 변화율을 벡터 내적으로 다음과 같이 정의할 수 있다.  
+
 <div class="math-container" markdown="1">
 $$
 \nabla f(\boldsymbol{x}) \cdot \boldsymbol{v} = \|\nabla f(\boldsymbol{x})\| \|\boldsymbol{v}\| \cos(\theta)
 $$  
 </div>
+
+
 (여기서 $$\theta$$ 는 두 벡터 사이의 각도)  
 $$\|\boldsymbol{v}\| = 1$$ 이고 $$\|\nabla f(\boldsymbol{x})\|$$ 는 현재 위치에서 고정된 상수이므로,  
+
 <div class="math-container" markdown="1">
 $$
 \text{변화율} = \|\nabla f(\boldsymbol{x})\| \cos(\theta)
 $$  
 </div>
+
+
 함수값의 변화율을 가장 크게 만들기 위해서는 $$\cos(\theta)$$가 가질 수 있는 최댓값 1을 만드는 것이다. 즉, 두 벡터($$\nabla f(\boldsymbol{x}), \boldsymbol{v}$$)의 사잇각이 $$0^\circ$$이어야 한다.  
 결론적으로, 함수값이 제일 커지는 방향($$\boldsymbol{v}$$)을 구해보니, 그 방향이 그래디언트($$\nabla f$$)의 방향과 일치한다는 것을 알 수 있다.  
 

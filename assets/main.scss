@@ -177,14 +177,14 @@ body.layout-sidebar {
   overflow-x: auto;
   overflow-y: hidden;
   max-width: 100%;
-  padding: 1em 0;
-  margin: 1.5em 0;
+  padding: 0.2em 0;
+  margin: 0.6em 0;
   text-align: center !important;
 
   /* MathJax 3 및 하위 요소들이 컨테이너 밖으로 나가지 않도록 함 */
   mjx-container, .mjx-chtml, .MathJax {
     display: table !important; /* 내용물 너비만큼만 차지하도록 테이블 레이아웃 사용 */
-    margin: 1em auto !important; /* 중앙 정렬 */
+    margin: 0.5em auto !important; /* 중앙 정렬 */
     text-align: center !important;
     min-width: 100%; /* 기본적으로 전체 너비 차지 시도 */
     

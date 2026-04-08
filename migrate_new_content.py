@@ -85,17 +85,8 @@ KOREAN_TO_ENG = {
 }
 
 # ─── 상수 설정 ─────────────────────────────────────────────────────────────
-MML_CHAPTERS = [
-    '1. Introduction and Motivation',
-    '2. Linear Algebra',
-    '3. Analytic Geometry',
-    '4. Matrix Decompositions',
-    '5. Vector Calculus',
-    '6. Probability and Distributions',
-    '7. Continuous Optimization',
-]
-MML_SRC = REPO / 'MML' / 'Part I Mathematical Foundations'
-MML_DST = REPO / '_mml' / 'Part I Mathematical Foundations'
+MML_ROOT_SRC = REPO / 'MML'
+MML_ROOT_DST = REPO / '_mml'
 
 NOTES_CONFIGS = [
     {'src': REPO / 'Note' / '1.linear-algebra',          'dst': REPO / '_notes' / '1.linear-algebra', 'col': 'notes'},
@@ -165,13 +156,14 @@ def build_notes_map() -> dict:
                     notes_map[f"251219 {kor}"] = f'{url_prefix}/{url}' 
                     break
                     
-            # MML 섹션 번호 (예: 7.1)
-            m = re.match(r'^(\d+\.\d+)', md.stem)
-            if m:
-                if m.group(1) not in notes_map:
-                    notes_map[m.group(1)] = f'{url_prefix}/{url}'
             
-            # MML 챕터 (예: 7.)
+            # MML 섹션 번호 (예: 7.1) 또는 챕터 번호 (예: 7.)
+            # MML은 Part 구조로 인해 폴더가 깊으므로 파일명에서 번호를 추출하여 매핑 보강
+            m_sec = re.match(r'^(\d+\.\d+)', md.stem)
+            if m_sec:
+                if m_sec.group(1) not in notes_map:
+                    notes_map[m_sec.group(1)] = f'{url_prefix}/{url}'
+            
             m_ch = re.match(r'^(\d+)\.', md.stem)
             if m_ch and m_ch.group(1) not in notes_map:
                 notes_map[m_ch.group(1)] = f'{url_prefix}/{url}'
@@ -315,17 +307,10 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str) -> 
             if lines[i].lstrip().startswith('>'):
                 # 블록 시작
                 block = []
-                while i < len(lines) and (lines[i].lstrip().startswith('>') or lines[i].strip() == ''):
-                    # 만약 중간에 빈 줄이 있고 그 다음 줄이 > 가 아니면 블록 끝
-                    if lines[i].strip() == '' and (i+1 >= len(lines) or not lines[i+1].lstrip().startswith('>')):
-                        break
-                    
+                while i < len(lines) and lines[i].lstrip().startswith('>'):
                     line = lines[i].lstrip()
-                    if line.startswith('>'):
-                        content = line[1:].lstrip() # '>' 제거
-                        block.append(content)
-                    else:
-                        block.append('') # 빈 줄 유지
+                    content = line[1:].lstrip() # '>' 제거
+                    block.append(content)
                     i += 1
                 
                 # 블록 완성
@@ -338,15 +323,12 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str) -> 
 
     body = group_blockquotes(body)
 
-    # 블록 수식 ($$) 처리 - markdown="1" 부활 및 Callout 내 중복 방지
+    # 블록 수식 ($$) 처리 - 전방 탐색(?=\n|$)을 사용하여 수식 뒤의 줄바꿈을 소비하지 않고 확인만 함으로써 연속된 수식을 모두 매칭함
     def rep_math(m):
         inner = m.group(1).strip()
-        
-        # 이미 callout div 작업에서 > 를 떼어냈으므로 여기서 추가 prefix 처리는 불필요함
-        return f'\n<div class="math-container" markdown="1">\n$$\n{inner}\n$$\n</div>\n'
+        return f'\n\n<div class="math-container" markdown="1">\n$$\n{inner}\n$$\n</div>\n\n'
 
-    # 수식 정규식도 단순화 - 끝부분 $$ 뒤의 공백(\s*)까지 허용하도록 개선
-    body = re.sub(r'(?:\n|^)\s*\$\$(.*?)\$\$\s*(?:\n|$)', rep_math, body, flags=re.DOTALL)
+    body = re.sub(r'(?:\n|^)\s*\$\$(.*?)\$\$\s*(?=\n|$)', rep_math, body, flags=re.DOTALL)
 
     # 인라인 수식($ ... $)을 ($$ ... $$)로 변환하여 Kramdown의 마크다운 엔진 간섭(기울임표 등) 차단
     # (?<!\$) : 앞에 $가 없을 것
@@ -428,19 +410,35 @@ def main():
             shutil.copy2(src_p, ASSETS / f_name)
             ASSETS_MAP[src_p.name] = f_name
 
-    # 2. MML 에셋 (MML은 챕터별 assets 폴더 사용)
-    for chapter in MML_CHAPTERS:
-        src_dir = MML_SRC / chapter
-        dst_dir = MML_DST / chapter
-        dst_dir.mkdir(parents=True, exist_ok=True)
-        # 마크다운 복사
-        for f in sorted(src_dir.iterdir()):
-            if f.suffix == '.md':
-                dst = dst_dir / f.name
-                shutil.copy2(f, dst)
-                newly_copied.append((dst, 'mml'))
-        # 에셋 복사 (mml_ 접두사)
-        process_assets(src_dir / 'assets', "mml_")
+    # 2. MML 에셋 및 문서 (Part I, II 등 모든 Part 자동 탐색)
+    if MML_ROOT_SRC.exists():
+        for part_dir in sorted(MML_ROOT_SRC.iterdir()):
+            if part_dir.is_dir() and part_dir.name.startswith('Part'):
+                print(f'  -> Processing {part_dir.name}...')
+                # 각 Part 하위의 장(Chapter) 폴더 탐색
+                for src_chapter_dir in sorted(part_dir.iterdir()):
+                    if src_chapter_dir.is_dir():
+                        # 장 번호 추출 (예: '1. Intro' -> '1')
+                        m_ch = re.match(r'^(\d+)\.', src_chapter_dir.name)
+                        prefix = f"mml_{m_ch.group(1)}_" if m_ch else "mml_"
+                        
+                        # 폴더명 공백 제거 (윈도우 빌드 오류 방지 강함 방어)
+                        clean_part_name = part_dir.name.strip()
+                        clean_chapter_name = src_chapter_dir.name.strip()
+                        dst_chapter_dir = MML_ROOT_DST / clean_part_name / clean_chapter_name
+                        dst_chapter_dir.mkdir(parents=True, exist_ok=True)
+                        
+                        # 마크다운 파일 복사
+                        for f in src_chapter_dir.iterdir():
+                            if f.is_file() and f.suffix == '.md':
+                                # 파일명 필터링 및 공백 제거
+                                clean_name = f.name.strip()
+                                dst = dst_chapter_dir / clean_name
+                                shutil.copy2(f, dst)
+                                newly_copied.append((dst, 'mml'))
+                        
+                        # 에셋 복사 (각 장의 assets 폴더)
+                        process_assets(src_chapter_dir / 'assets', prefix)
 
     # 3. Notes & Research 에셋
     for cfg in NOTES_CONFIGS:

@@ -7,18 +7,24 @@ collection_name: mml
 연습문제  
 
 2.1 우리는 $$(\mathbb{R}\setminus{-1}, \star)$$을 고려한다. 여기서 연산은 다음과 같이 정의된다:  
+
 <div class="math-container" markdown="1">
 $$
 a \star b := ab + a + b, \quad a, b \in \mathbb{R}\setminus\{-1\} \quad (2.134)
 $$  
 </div>
+
+
 a. $$(\mathbb{R}\setminus{-1}, \star)$$이 아벨 군(Abelian group)임을 보여라.  
 b. 아벨 군 $$(\mathbb{R}\setminus{-1}, \star)$$에서 다음 식을 풀어라. 여기서 $$\star$$는 (2.134)에 정의된 것이다.  
+
 <div class="math-container" markdown="1">
 $$
 3 \star x \star x = 15
 $$  
 </div>
+
+
 풀이  
 a. 아벨 군임을 증명  
 아벨 군이 되기 위해서는 5가지 성질(닫혀있음, 결합법칙, 항등원, 역원, 교환법칙)을 만족해야 합니다.  
@@ -82,31 +88,50 @@ b. 방정식 풀이
 ---  
 
 2.2 $$n \in \mathbb{N}\setminus\{0\}$$이라 하자. $$k, x$$는 정수($$\mathbb{Z}$$)이다. 우리는 정수 $$k$$의 합동류(congruence class) $$\bar{k}$$를 다음과 같은 집합으로 정의한다:  
+
 <div class="math-container" markdown="1">
 $$
 \bar{k} = \{ x \in \mathbb{Z} | x - k = 0 \pmod n \}
 $$  
 </div>
-$$= \{ x \in \mathbb{Z} | \exists a \in \mathbb{Z} : (x - k = n \cdot a) \}$$  
+
+
+
+<div class="math-container" markdown="1">
+$$
+= \{ x \in \mathbb{Z} | \exists a \in \mathbb{Z} : (x - k = n \cdot a) \}
+$$  
+</div>
+
+
 우리는 이제 $$\mathbb{Z}/n\mathbb{Z}$$ (때때로 $$\mathbb{Z}_n$$으로 표기됨)를 법(modulo) $$n$$에 대한 모든 합동류의 집합으로 정의한다. 유클리드 나눗셈은 이 집합이 $$n$$개의 원소를 포함하는 유한 집합임을 암시한다:  
+
 <div class="math-container" markdown="1">
 $$
 \mathbb{Z}_n = \{ \bar{0}, \bar{1}, \dots, \overline{n-1} \}
 $$  
 </div>
+
+
 모든 $$\bar{a}, \bar{b} \in \mathbb{Z}_n$$에 대하여, 우리는 다음을 정의한다:  
+
 <div class="math-container" markdown="1">
 $$
 \bar{a} \oplus \bar{b} := \overline{a+b}
 $$  
 </div>
+
+
 a. $$(\mathbb{Z}_n, \oplus)$$가 군임을 보여라. 이것은 아벨 군인가?  
 b. 우리는 이제 $$\mathbb{Z}_n$$의 모든 $$\bar{a}$$와 $$\bar{b}$$에 대하여 또 다른 연산 $$\otimes$$를 정의한다:  
+
 <div class="math-container" markdown="1">
 $$
 \bar{a} \otimes \bar{b} := \overline{a \times b} \quad (2.135)
 $$  
 </div>
+
+
 여기서 $$a \times b$$는 $$\mathbb{Z}$$에서의 일반적인 곱셈을 나타낸다.  
 $$n=5$$라 하자. $$\mathbb{Z}_5\setminus\{\bar{0}\}$$ 원소들의 $$\otimes$$ 연산에 대한 곱셈표(times table)를 그려라. 즉, $$\mathbb{Z}_5\setminus{\bar{0}}$$의 모든 $$\bar{a}$$와 $$\bar{b}$$에 대해 곱 $$\bar{a} \otimes \bar{b}$$를 계산하라.  
 이를 통해, $$\mathbb{Z}_5\setminus{\bar{0}}$$가 $$\otimes$$에 대해 닫혀 있으며 $$\otimes$$에 대한 항등원을 가짐을 보여라. $$\otimes$$에 대한 $$\mathbb{Z}_5\setminus{\bar{0}}$$의 모든 원소의 역원을 보여라. $$(\mathbb{Z}_5\setminus{\bar{0}}, \otimes)$$가 아벨 군이라고 결론지어라.  

@@ -9,11 +9,14 @@ collection_name: notes
 
 ## 핵심 정의(리만 합, Riemann Sum)
 구간 $$[0, T]$$를 N개로 쪼개고($$\Delta t$$), 각 구간에서 함숫값(높이)을 하나 골라 더함.  
+
 <div class="math-container" markdown="1">
 $$
 \int_0^T f(t) dt \approx \sum_{i=0}^{N-1} f(t_i^*) \Delta t
 $$  
 </div>
+
+
 여기서 $$t_i^*$$은 i번째 구간 $$[t_i, t_{i+1}]$$사이의 아무 점임.  
 
 
@@ -48,18 +51,24 @@ A. 비슷하지만 엄밀히 말하면 함수의 연속성을 의미함.
 
 ## 테일러 급수 전개:
 함수 $$f(x)$$의 변화량을 근사하면 다음과 같음.  
+
 <div class="math-container" markdown="1">
 $$
 \Delta f = f(x + \Delta x) - f(x) \approx f'(x)\Delta x + \frac{1}{2}f''(x)(\Delta x)^2 + \cdots
 $$  
 </div>
+
+
 ## 일반 미적분학의 대전제
 우리는 미분$$dy$$을 정의할 때, 1차항($$\Delta x$$)만 남기고 2차항 이상($$(\Delta x)^2, (\Delta x)^3 \dots$$)은 버림.  
+
 <div class="math-container" markdown="1">
 $$
 dy = f'(x)dx
 $$  
 </div>
+
+
 - $$\Delta x$$가 아주 작을 때(0.001), $$(\Delta x)^2$$은 더욱 작아서 무시해도 오차가 없기 때문임.($$dx\cdot dx = 0$$)
 - SDE에서는 노이즈 $$dW$$가 꽤 큼.($$\sqrt{dt}$$). 그래서 $$(dW)^2$$은 $$dt$$ 크기가 되어 무시할 수 없음. ($$dW \cdot dW = dt \neq 0$$) 따라서 이토 미적분에서는 연쇄 법칙 공식 뒤에 보정항(2차항)이 뒤에 붙음.
 
@@ -67,19 +76,29 @@ $$
 <div class="obsidian-callout" markdown="1">
 Q. 함수 f(x)의 변화량을 근사할 때 어떻게 테일러 급수로 유도되는가?  
 A. 테일러 급수는 어떤 함수를 다항식의 합으로 표현하는 방법임. x에서 아주 조금 떨어진 $$x + \Delta x$$지점의 함숫값은 다음과 같이 전개됨.  
+
 <div class="math-container" markdown="1">
 $$
 f(x + \Delta x) = f(x) + \frac{f'(x)}{1!} \Delta x + \frac{f''(x)}{2!} (\Delta x)^2 + \frac{f'''(x)}{3!} (\Delta x)^3 + \cdots
 $$  
 </div>
+
+
 여기서 변화량 $$\Delta f (= f(x+\Delta x) - f(x))$$를 구하기 위해 $$f(x)$$를 좌변으로 이항하면:  
+
 <div class="math-container" markdown="1">
 $$
 \Delta f = f'(x)\Delta x + \frac{1}{2}f''(x)(\Delta x)^2 + \cdots
 $$  
 </div>
-흔히 사용하는 미분 근사식$$\Delta f \approx f'(x)\Delta x$$는 바로 이 식에서 2차 이상의 항들을 너무 작다고 보고 잘라냄.  
 
+
+흔히 사용하는 미분 근사식$$\Delta f \approx f'(x)\Delta x$$는 바로 이 식에서 2차 이상의 항들을 너무 작다고 보고 잘라냄.  
+</div>
+
+
+
+<div class="obsidian-callout" markdown="1">
 Q. 미분 dy를 정의할 때 $$\Delta x$$가 큰 경우가 있는가? 만약 있다면 이때 테일러급수에서 2차항 이상을 무시할 수 없는가?  
 A.  $$\Delta x$$가 큰경우는 변화를 관찰하는 구간을 크게 잡으면 $$\Delta x$$도 커짐.  
 $$\Delta x$$가 커지면 $$(\Delta x)^2$$은 더 커질 수 있으므로 이 경우에서 2차항 이상을 무시할 수 없음. 근사식 $$\Delta y \approx f'(x)\Delta x$$를 쓰면 오차가 너무 커져서 틀린 값이 나옴.  

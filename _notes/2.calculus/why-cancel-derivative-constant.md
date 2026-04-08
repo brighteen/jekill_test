@@ -16,41 +16,56 @@ collection_name: notes
 그럼 상수를 더하는 연산은 어떨까. 이또한 극소점이 위치한 파라미터 $$\theta$$의 좌표(최적해)를 전혀 바꾸지 않는다.  
 함수 $$L(\theta)$$에 상수 $$C$$를 더하여 $$L_{new}(\theta) = L(\theta) + C$$를 만든다는 것은, 기하학적으로 볼 때 손실 곡면(Loss landscape) 전체를 손실값 축(보통 높이를 나타내는 $$z$$축)을 따라 그대로 수직으로 평행 이동 시키는 것과 같다. 하지만 이 파라미터 공간 전체가 평행이동한다 해서, 그 공간의 극소점은 바뀌지 않는다.  
 미분 관점에서 봐도 파라미터 $$\theta$$의 입장에서 상수 $$C$$는 아무런 변화율을 가지지 않는다:  
+
 <div class="math-container" markdown="1">
 $$
 \begin{aligned} \nabla_\theta L_{new}(\theta) &= \nabla_\theta (L(\theta) + C) = \nabla_\theta L(\theta) + \nabla_\theta C \\ &= \nabla_\theta L(\theta) + 0 = \nabla_\theta L(\theta) \end{aligned}
 $$  
 </div>
+
+
 때문에, $$\theta_{new} = \theta_{old} - \eta \nabla L$$로 파라미터를 업데이트해도 수렴해는 최적해의 위치는 변하지 않는다.  
 
 ## 그럼 무엇으로 인해 최적해가 바뀔까?
 이에 대한 답으로 세 가지를 생각해볼 수 있다.  
 첫 번째로 목적 함수에 $$\theta$$의 크기에 비례하는 패널티 항을 더하는 방법이다. 정규화(Regularization)라 하며 보통 능선 회귀(Redge Regression, L2 정규화)를 사용한다.  
+
 <div class="math-container" markdown="1">
 $$
 L_{new}(\theta) = L(\theta) + \lambda \|\theta\|^2
 $$  
 </div>
+
+
 여기서 $$\lambda$$는 정규화의 강도를 조절하는 하이퍼파라미터이다. 이 함수를 $$\theta$$로 미분하면 다음과 같다:  
+
 <div class="math-container" markdown="1">
 $$
 \nabla_\theta L_{new}(\theta) = \nabla_\theta L(\theta) + 2\lambda\theta
 $$  
 </div>
+
+
 미분 결과에 $$2\lambda\theta$$항이 생겼다. 기존에는 $$\nabla_\theta L(\theta) = 0$$이 되는 곳이 최적해였지만, 이제는 $$\nabla_\theta L(\theta) = -2\lambda\theta$$를 만족하는 새로운 지점으로 최적해 $$\theta^*$$가 강제로 이동한다. 기하학적으로 이는 원래의 손실 계곡을 원점($$\theta=0$$) 쪽으로 강하게 끌어당기는 것과 같다. 이를 통해 파라미터가 불필요하게 커지는 과적합을 방지할 수 있다.  
 
 두 번째로 특정 데이터의 오차에 더 큰 가중치를 부여하는 방법이 있다.  
+
 <div class="math-container" markdown="1">
 $$
 L_{new}(\theta) = (y - f(\theta))^\top W (y - f(\theta))
 $$  
 </div>
+
+
 대칭행렬 $$W$$가 중간에 삽입됨으로써, 손실 곡면(Loss landscape)의 기울어짐이 완전히 달라진다. $$W$$의 대각 원소 중 특정 값이 크다면, 모델은 그 특정 데이터 포인트에서 발생하는 오차를 비교적 크게 받아들이게 되며, 따라서 최적해 $$\theta^*$$는 가중치가 높은 데이터를 우선적으로 정답에 맞추는 방향으로 공간상에서 크게 이동하게 된다.  
 
 세 번째로 오차를 측정하는 거리의 정의 자체를 바꾸는 방법도 있다. 보통 오차를 L2 Norm(MSE)로 구하는데, L1 손실(MAE)로 변경할 수 있다.  
+
 <div class="math-container" markdown="1">
 $$
 L_{new}(\theta) = \sum |y_i - f(\theta, x_i)|
 $$  
 </div>
+
+
 MSE는 오차가 클수록 포물선처럼 손실값이 기하급수적으로 커지므로, 최적해가 이상치(Outlier, 튀는 데이터) 쪽으로 크게 끌려간다. 반면 MAE는 오차가 커져도 손실값이 선형적으로만 증가하므로 기울기가 일정($$+1$$ 또는 $$-1$$)하여 이상치에 저항성을 가진다. 목적 함수의 기하학적 형태가 포물면에서 V자 형태의 평면 결합으로 바뀌면서 극소점의 위치가 근본적으로 변한다.

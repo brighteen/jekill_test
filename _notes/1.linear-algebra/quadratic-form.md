@@ -9,17 +9,23 @@ collection_name: notes
 [양의 정부호]({{ site.baseurl }}/notes/1.linear-algebra/positive-definite/)  
 
 이차 형식(quadratic form) 은 다차원 벡터 $$\boldsymbol{v}$$를 입력으로 받아 단 하나의 스칼라(실수) 값을 내뱉는 다변수 스칼라 함수 $$f(\boldsymbol{v})$$이다. 단순하게 2차원 공간 $$\mathbb{R}^2$$의 임의의 대칭 행렬 $$\boldsymbol{A}$$와 변수 벡터 $$\boldsymbol{v}$$를 다음과 같이 정의한다.  
+
 <div class="math-container" markdown="1">
 $$
 \boldsymbol{A} = \begin{bmatrix} a & b \\ b & c \end{bmatrix}, \quad \boldsymbol{v} = \begin{bmatrix} x \\ y \end{bmatrix}
 $$  
 </div>
+
+
 이를 이차 형식 $$\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v}$$으로 전개하면 다음과 같다.  
+
 <div class="math-container" markdown="1">
 $$
 \begin{bmatrix} x & y \end{bmatrix} \begin{bmatrix} a & b \\ b & c \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x & y \end{bmatrix} \begin{bmatrix} ax + by \\ bx + cy \end{bmatrix} = ax^2 + 2bxy + cy^2
 $$  
 </div>
+
+
 대수적으로 이차 형식은 변수들의 1차항(예: $$x$$, $$y$$)이나 상수항 없이, 오직 2차항($$x^2, y^2, xy$$)들로만 구성된 순수한 이차 다항식을 행렬의 형태로 표기한 것이다.  
 
 
@@ -29,11 +35,14 @@ $$\boldsymbol{A}$$가 비대칭 행렬인 경우를 생각해보자. $$\boldsymb
 
 
 $$\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v}$$을 다음과 같이 괄호로 묶어 표현하면 기하학적 의미를 생각해볼 수 있다.  
+
 <div class="math-container" markdown="1">
 $$
 \boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v} = \boldsymbol{v}^\top (\boldsymbol{A} \boldsymbol{v})
 $$  
 </div>
+
+
 행렬 $$\boldsymbol{A}$$는 다차원 공간을 찌그러뜨리거나 회전시키는 선형 변환이다. 입력 벡터 $$\boldsymbol{v}$$에 행렬 $$\boldsymbol{A}$$를 곱하면, 원래의 위치에서 새로운 위치로 변환된 벡터 $$\boldsymbol{A} \boldsymbol{v}$$가 만들어진다.  
 따라서 이는 원래의 벡터 $$\boldsymbol{v}$$와 변환된 벡터 $$\boldsymbol{A} \boldsymbol{v}$$ 사이의 내적(Inner Product)이다. 원래 벡터와 변환된 벡터가 얼마나 같은 방향을 바라 보고 있는가(유사도)를 측정한다.  
 

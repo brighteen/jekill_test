@@ -3,6 +3,7 @@ source "https://rubygems.org"
 # Jekyll과 minima 테마 고정
 gem "jekyll", "~> 4.3.3"
 gem "minima", "~> 2.5"
+gem "jekyll-sass-converter", "~> 2.0"
 
 # 필수 플러그인 및 서버
 group :jekyll_plugins do
