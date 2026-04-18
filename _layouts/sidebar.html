@@ -7,7 +7,7 @@
     {%- include header.html -%}
 
     {%- assign col_name = page.collection_name | default: "notes" -%}
-    {%- assign items = site[col_name] -%}
+    {%- assign items = site[col_name] | sort: "nav_order" -%}
 
     <main class="page-content sidebar-layout-container" id="sidebar-layout-container" aria-label="Content">
       
@@ -36,7 +36,8 @@
             {%- endif -%}
 
             {%- if l1_name != current_l1 and l1_name != "" -%}
-              <li class="sidebar-folder-heading-l1" style="margin-top: 25px; font-weight: 800; color: #222; font-size: 1.05em; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 10px;">{{ l1_name }}</li>
+              {%- assign l1_display = l1_name | replace: "-", " " -%}
+              <li class="sidebar-folder-heading-l1" style="margin-top: 25px; font-weight: 800; color: #222; font-size: 1.05em; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 10px;">{{ l1_display }}</li>
               {%- assign current_l1 = l1_name -%}
               {%- assign current_l2 = "" -%}
             {%- endif -%}
@@ -72,7 +73,7 @@
 
           {%- if is_index == false -%}
             {%- if col_name == "mml" or col_name == "research" -%}
-            {%- assign col_sorted = site[col_name] | sort: "path" -%}
+            {%- assign col_sorted = site[col_name] | sort: "nav_order" -%}
             {%- assign prev_page = nil -%}
             {%- assign next_page = nil -%}
             {%- assign found_current = false -%}
@@ -153,6 +154,23 @@
         const activeItem = document.querySelector('.sidebar-item-active');
         if (activeItem) {
           activeItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+
+        // Restore scroll position
+        const containerElem = document.querySelector('.main-content');
+        if (containerElem) {
+          const scrollKey = 'scrollPos-' + location.pathname;
+          const savedPos = localStorage.getItem(scrollKey);
+          if (savedPos) {
+            // 수식 렌더링 등으로 인해 높이가 변할 수 있으므로 약간의 지연 후 이동
+            setTimeout(() => {
+              containerElem.scrollTop = parseInt(savedPos, 10);
+            }, 100);
+          }
+
+          window.addEventListener('beforeunload', function() {
+            localStorage.setItem(scrollKey, containerElem.scrollTop);
+          });
         }
       });
     </script>

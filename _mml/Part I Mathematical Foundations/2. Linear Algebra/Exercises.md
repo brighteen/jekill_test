@@ -2,13 +2,14 @@
 layout: sidebar
 title: Exercises
 collection_name: mml
+nav_order: 101212
 ---
 
 연습문제  
 
 2.1 우리는 $$(\mathbb{R}\setminus{-1}, \star)$$을 고려한다. 여기서 연산은 다음과 같이 정의된다:  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
 a \star b := ab + a + b, \quad a, b \in \mathbb{R}\setminus\{-1\} \quad (2.134)
 $$  
@@ -18,7 +19,7 @@ $$
 a. $$(\mathbb{R}\setminus{-1}, \star)$$이 아벨 군(Abelian group)임을 보여라.  
 b. 아벨 군 $$(\mathbb{R}\setminus{-1}, \star)$$에서 다음 식을 풀어라. 여기서 $$\star$$는 (2.134)에 정의된 것이다.  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
 3 \star x \star x = 15
 $$  
@@ -89,24 +90,24 @@ b. 방정식 풀이
 
 2.2 $$n \in \mathbb{N}\setminus\{0\}$$이라 하자. $$k, x$$는 정수($$\mathbb{Z}$$)이다. 우리는 정수 $$k$$의 합동류(congruence class) $$\bar{k}$$를 다음과 같은 집합으로 정의한다:  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
-\bar{k} = \{ x \in \mathbb{Z} | x - k = 0 \pmod n \}
+\bar{k} = \{ x \in \mathbb{Z} \vert  x - k = 0 \pmod n \}
 $$  
 </div>
 
 
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
-= \{ x \in \mathbb{Z} | \exists a \in \mathbb{Z} : (x - k = n \cdot a) \}
+= \{ x \in \mathbb{Z} \vert  \exists a \in \mathbb{Z} : (x - k = n \cdot a) \}
 $$  
 </div>
 
 
 우리는 이제 $$\mathbb{Z}/n\mathbb{Z}$$ (때때로 $$\mathbb{Z}_n$$으로 표기됨)를 법(modulo) $$n$$에 대한 모든 합동류의 집합으로 정의한다. 유클리드 나눗셈은 이 집합이 $$n$$개의 원소를 포함하는 유한 집합임을 암시한다:  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
 \mathbb{Z}_n = \{ \bar{0}, \bar{1}, \dots, \overline{n-1} \}
 $$  
@@ -115,7 +116,7 @@ $$
 
 모든 $$\bar{a}, \bar{b} \in \mathbb{Z}_n$$에 대하여, 우리는 다음을 정의한다:  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
 \bar{a} \oplus \bar{b} := \overline{a+b}
 $$  
@@ -125,7 +126,7 @@ $$
 a. $$(\mathbb{Z}_n, \oplus)$$가 군임을 보여라. 이것은 아벨 군인가?  
 b. 우리는 이제 $$\mathbb{Z}_n$$의 모든 $$\bar{a}$$와 $$\bar{b}$$에 대하여 또 다른 연산 $$\otimes$$를 정의한다:  
 
-<div class="math-container" markdown="1">
+<div class="math-container">
 $$
 \bar{a} \otimes \bar{b} := \overline{a \times b} \quad (2.135)
 $$  

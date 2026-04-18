@@ -2,6 +2,7 @@
 layout: sidebar
 title: Notes
 collection_name: notes
+nav_order: 0
 permalink: /notes/
 ---
 

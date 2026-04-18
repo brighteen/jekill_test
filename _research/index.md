@@ -2,6 +2,7 @@
 layout: sidebar
 title: Research
 collection_name: research
+nav_order: 0
 permalink: /research/
 ---
 

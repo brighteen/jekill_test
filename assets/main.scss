@@ -161,8 +161,9 @@ body.layout-sidebar {
   max-height: 450px;
   width: auto;
   height: auto;
-  display: block;
-  margin: 1.5em auto;
+  display: inline-block; /* 병렬 배치를 위해 inline-block으로 유지 */
+  vertical-align: top;
+  margin: 1em 0.5em; /* 이미지 간 간격 부여 */
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   transition: transform 0.3s ease;
@@ -170,6 +171,12 @@ body.layout-sidebar {
 
 .img-normal:hover {
   transform: scale(1.02);
+}
+
+/* 이미지를 포함한 단락(p)을 중앙 정렬 */
+.main-content .wrapper > p:has(.img-normal),
+.main-content .wrapper > p:has(img) {
+  text-align: center;
 }
 
 /* 수식 블록 내 가로 스크롤 허용하여 바깥으로 튀어나가는 현상 방지 */
@@ -198,6 +205,7 @@ body.layout-sidebar {
 }
 
 /* 옵시디언의 인용구(>)를 대체하는 Callout 박스 디자인 */
+/* 옵시디언의 인용구(>)를 대체하는 Callout 박스 디자인 */
 .obsidian-callout {
   background-color: #fbfbfb;
   border-left: 4px solid #ccd1d9;
@@ -205,14 +213,25 @@ body.layout-sidebar {
   margin: 2em 0;
   border-radius: 0 4px 4px 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  color: #444;
+
+  /* Callout 안의 텍스트가 이탈릭으로 도배되는 것 방지 및 중복 선 제거 (Minima 테마 덮어쓰기) */
+  blockquote {
+    border-left: none;
+    padding-left: 0;
+    margin: 0;
+    font-style: normal;
+    color: inherit;
+    letter-spacing: normal;
+  }
 
   /* 내부 마크다운 요소 간격 조절 */
-  p:first-child { margin-top: 0; }
-  p:last-child { margin-bottom: 0; }
-
-  /* Callout 안의 텍스트가 이탈릭으로 도배되는 것 방지 */
-  font-style: normal !important;
-  color: #444;
+  p, blockquote > p { 
+    margin-bottom: 1em; /* 문단 간격 강제 지정 */
+  }
+  
+  p:first-child, blockquote > p:first-child { margin-top: 0; }
+  p:last-child, blockquote > p:last-child { margin-bottom: 0; }
 
   /* Callout 안의 수식 컨테이너 여백 조정 */
   .math-container {
