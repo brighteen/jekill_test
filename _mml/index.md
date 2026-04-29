@@ -21,10 +21,10 @@ permalink: /mml/
 
 또한 이 포스팅을 보는 누구든지, 더 나은 학습을 위해 피드백을 주시면 감사하겠습니다.  
 
-- [ ] 포스팅을 끝마치면 마크 데이젠로스(저자)에게 공유하기.
 
 ### References
 [Wikipedia](https://www.wikipedia.org/)  
-[Essence of calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) - - 3Blue1Brown  
-[Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) - 3Blue1Brown  
-[공돌이의 수학정리노트](https://angeloyeo.github.io/)
+[Essence of calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) - youtube. 3Blue1Brown  
+[Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) - youtube. 3Blue1Brown  
+[공돌이의 수학정리노트](https://angeloyeo.github.io/)  
+[junstar92](https://junstar92.github.io/mml-study-note/)

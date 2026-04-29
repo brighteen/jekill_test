@@ -19,7 +19,7 @@ nav_order: 1999
 
 다변수 데이터에서 거리를 측정할 때, 우리는 '데이터의 맥락'을 고려해야 한다.  
 
-![두 변수간의 양의 상관관계.png]({{ site.baseurl }}/assets/notes/linear-algebra/두-변수간의-양의-상관관계.png){: .img-normal width="500" }
+![두 변수간의 양의 상관관계.png]({{ site.baseurl }}/assets/notes/linear-algebra/asset.png){: .img-normal width="500" }
 
 위는 두 확률 변수가 양의 상관관계를 가지는 데이터의 공분산 행렬이  $\begin{bmatrix}3.0 & 2.5 \\ 2.5 & 3.0\end{bmatrix}$ 인 타원형 분포이다. 이때, 두 점 A, B를 생각해보자.  
 - 중심에서  $y=x$  방향(긴 축)으로 떨어져 있는 점 A.
@@ -29,7 +29,7 @@ nav_order: 1999
 
 이 주관적인 '데이터의 맥락'을 수학적으로 어떻게 정의할 수 있을까? 이를 이해하기 위해서는 공간 변환의 관점이 필요하다.  
 
-기하학적으로 공분산 행렬  $\boldsymbol{\Sigma}$ 가 완벽한 원을 타원으로 길게 늘리는 변환이라면, 그 역행렬인 정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )은 그 늘어난 타원을 다시 꾹 눌러서 완벽한 원형으로 압축하는(되돌리는, 역산) 성질을 갖는다.  
+기하학적으로 공분산 행렬  $\boldsymbol{\Sigma}$ 가 완벽한 원을 타원으로 길게 늘리는 변환이라면, 그 역행렬인 정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )은 그 늘어난 타원을 다시 꾹 눌러서 완벽한 원형으로 압축하는(되돌리는, 역산,  $\boldsymbol{\Sigma}^{-1}\boldsymbol{\Sigma}=\boldsymbol{I}$ ) 변환이다.  
 -  $y=x$  축처럼 데이터가 넓게 퍼져 분산이 큰 방향은 압축.
 -  $y=-x$  축처럼 데이터가 좁게 뭉친 방향으로 늘림.
 - 상관관계(기울기)를 회전시켜 제거.
@@ -63,7 +63,7 @@ $$
 
 여기서 주의할 점이 있다. 데이터를 공간적으로 압축하여 구형으로 만든다고 할 때, 정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ ) 자체를 데이터에 직접 곱하는 것이 아니다. 데이터 변환 시에는 **정밀도 행렬의 제곱근( $\boldsymbol{\Sigma}^{-1/2}$ )**을 곱해야 한다(표준편차는 원본 데이터와 단위가 같지만, 분산은 단위의 제곱임을 상기하자).  
 
-만약 데이터에  $\boldsymbol{\Sigma}^{-1}$ 를 직접 곱하면 결과 확률 변수의 분산은 1이 되는 것이 아니라, 오히려 원래 분산의 역수가 되어버린다.  
+만약 데이터에  $\boldsymbol{\Sigma}^{-1}$ 를 직접 곱하면 결과 확률 변수의 분산은 1이 되는 것이 아니라, 오히려 원래 분산의 역수가 되어버린다. 이를 아래 일변수, 다변수에서 유도하였다.  
 
 ### 일변수(1D)에서의 증명
 어떤 일변수 데이터  $X$ 의 분산이  $\sigma^2$  이라고 해보자 ( $Var(X) = \sigma^2$ ). 목표는 새로운 데이터  $Y$ 의 분산을 1로 만드는 것이다.  
@@ -136,7 +136,7 @@ ZCA백색화: 타원이 원으로 압축되며, 고유벡터의 방향은 변하
 
 PCA 백색화: 타원이 원으로 압축됨과 동시에 고유벡터 축으로 공간이 회전한다.  
 (`np.linalg.eigh(cov)` 함수는 디폴트로 행렬의 고유값(`vals`)과 고유벡터(`vecs`)를 계산할 때, 크기를 기준으로 오름차순(작은 값부터 큰 값 순서)으로 정렬하여 반환하기 때문에 첫 번째 주성분이 변환된 공간에서  $y$ 축, 두번째 주성분이  $x$ 축으로 정렬되었다.)  
-<video controls class="img-normal" width="100%"><source src="{{ site.baseurl }}/assets/notes/linear-algebra/PCAWhitening-반전.mp4" type="video/mp4"></video>
+<video controls class="img-normal" width="100%"><source src="{{ site.baseurl }}/assets/notes/linear-algebra/pcawhitening.mp4" type="video/mp4"></video>
 
 PCA 백색화(반전X)  
 <video controls class="img-normal" width="100%"><source src="{{ site.baseurl }}/assets/notes/linear-algebra/pcawhitening-1.mp4" type="video/mp4"></video>
@@ -255,7 +255,7 @@ $$
 </div>
 
 
-결론적으로, **백색화( $\boldsymbol{\Sigma}^{-1/2}$ )**를 통해 공간 자체를 구형으로 펴주는 변환을 수행한 뒤 그 공간에서 거리를 재는 것과, 애초에 거리 공식 내부에 **정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )**을 넣어 거리를 계산하는 것은 수학적으로 완전히 동치이다. 거리를 구하기 위해 내적(제곱)을 하는 과정에서  $\boldsymbol{\Sigma}^{-1/2}$ 가 두 번 곱해지기 때문에 자연스럽게 정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )로 귀결되는 것이다.  
+결론적으로, **백색화( $\boldsymbol{\Sigma}^{-1/2}$ )**를 통해 공간 자체를 구형으로 펴주는 변환을 수행한 뒤 그 공간에서 유클리드 거리를 재는 것과, 애초에 거리 공식 내부에 **정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )**을 넣어 거리를 계산하는 것은 수학적으로 완전히 동치이다. 거리를 구하기 위해 내적(제곱)을 하는 과정에서  $\boldsymbol{\Sigma}^{-1/2}$ 가 두 번 곱해지기 때문에 자연스럽게 정밀도 행렬( $\boldsymbol{\Sigma}^{-1}$ )로 귀결되는 것이다.  
 
 
 
@@ -288,7 +288,7 @@ $$
 
 
 
-## 고윳값 분해(Eigendecomposition) 관점의 해석
+## 고윳값 분해 관점
 
 
 
@@ -362,7 +362,7 @@ $$
 
 
 
-## 심화 및 미해결 질문 모음
+## further
 
 
 

@@ -3,14 +3,20 @@
 
   {%- include head.html -%}
 
-  <body class="layout-sidebar">
+  {%- assign is_home = false -%}
+  {%- if page.url == "/" or page.url == "/index.html" -%}
+    {%- assign is_home = true -%}
+  {%- endif -%}
+
+  <body class="layout-sidebar {% if is_home %}no-sidebar-body{% endif %}">
     {%- include header.html -%}
 
     {%- assign col_name = page.collection_name | default: "notes" -%}
     {%- assign items = site[col_name] | sort: "nav_order" -%}
 
-    <main class="page-content sidebar-layout-container" id="sidebar-layout-container" aria-label="Content">
+    <main class="page-content sidebar-layout-container {% if is_home %}no-sidebar-layout{% endif %}" id="sidebar-layout-container" aria-label="Content">
       
+      {%- unless is_home -%}
       <button id="sidebar-toggle" aria-label="Toggle Sidebar">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
@@ -61,6 +67,7 @@
           {%- endfor -%}
         </ul>
       </aside>
+      {%- endunless -%}
 
       <div class="main-content">
         <div class="wrapper">
@@ -72,7 +79,7 @@
           {%- endif -%}
 
           {%- if is_index == false -%}
-            {%- if col_name == "mml" or col_name == "research" -%}
+            {%- if col_name == "mml" -%}
             {%- assign col_sorted = site[col_name] | sort: "nav_order" -%}
             {%- assign prev_page = nil -%}
             {%- assign next_page = nil -%}
@@ -126,6 +133,7 @@
           {%- endif -%}
           {%- endif -%}
 
+          {%- include footer.html -%}
         </div>
       </div>
 
@@ -136,6 +144,25 @@
         background-color: #f5f5f5;
         border-color: #2a7ae2;
         color: #2a7ae2;
+      }
+      .no-sidebar-layout .main-content {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important; /* Let body handle scrolling */
+      }
+      .no-sidebar-layout .wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      .no-sidebar-layout {
+        display: block !important;
+        overflow: visible !important;
+      }
+      body.no-sidebar-body {
+        overflow: auto !important;
+        height: auto !important;
       }
     </style>
 

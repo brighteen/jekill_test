@@ -1,0 +1,17 @@
+<footer class="site-footer" style="padding: 15px 0; border-top: 1px solid #f0f0f0; margin-top: 40px; color: #aaa; font-size: 0.75em;">
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+    
+    <div style="display: flex; gap: 15px;">
+      <span style="font-weight: bold;">{{ site.title | escape }}</span>
+      {%- if site.email -%}
+      <a href="mailto:{{ site.email }}" style="color: #bbb; text-decoration: none;">{{ site.email }}</a>
+      {%- endif -%}
+      <a href="https://github.com/brighteen" style="color: #bbb; text-decoration: none;">GitHub</a>
+    </div>
+
+    <div style="text-align: right; color: #ccc;">
+      {{ site.description | escape | truncate: 50 }}
+    </div>
+
+  </div>
+</footer>

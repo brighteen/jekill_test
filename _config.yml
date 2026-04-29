@@ -2,9 +2,10 @@
 title: ymgu
 email: brightmgu@gmail.com
 description: >- # 이 부분은 사이트 설명으로 채워집니다.
-  주 목적은 제가 보기 위함입니다. 따라서 모든 표기는 제 맘입니다.
 baseurl: "" # username.github.io 루트 레포이므로 서브디렉토리 없음
 url: "https://brighteen.github.io" # 사용자 블로그 도메인
+github_username: brighteen
+twitter_username: bright_mgu # If applicable, otherwise remove
 
 # 테마 설정
 theme: minima
@@ -20,6 +21,9 @@ collections:
   research:
     output: true
     permalink: /research/:path/
+  genai:
+    output: true
+    permalink: /genai/:path/
 
 # 빌드 설정
 markdown: kramdown
@@ -46,6 +50,7 @@ exclude:
   - MML/
   - Note/
   - Research/
+  - GenAI/
   - _temp_site/
   - _temp_site_trace/
 
@@ -69,3 +74,9 @@ defaults:
     values:
       layout: "sidebar"
       collection_name: "research"
+  - scope:
+      path: ""
+      type: "genai"
+    values:
+      layout: "sidebar"
+      collection_name: "genai"

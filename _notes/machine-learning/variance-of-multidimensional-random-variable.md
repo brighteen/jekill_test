@@ -146,7 +146,7 @@ $$
 
 
 이를 위에서 유도한 이차 형식처럼 다뤄보자.  
-mean centering한 m개의 샘플을 임의의 1차원 축  $\boldsymbol{v}$  (단위 벡터,  $\Vert \boldsymbol{v}\Vert = 1$ ) 위로 정사영시킨다고 가정해보자. 행렬과 벡터의 곱셈  $\boldsymbol{Z}\_c \boldsymbol{v}$  를 수행하면, 그 결과는  $m \times 1$  크기의 열벡터가 된다. 편의상 이 결과 벡터를  $\boldsymbol{y}$ 라고 하겠다.  
+mean-centering한 m개의 샘플을 임의의 1차원 축  $\boldsymbol{v}$  (단위 벡터,  $\Vert \boldsymbol{v}\Vert = 1$ ) 위로 정사영시킨다고 가정해보자. 행렬과 벡터의 곱셈  $\boldsymbol{Z}\_c \boldsymbol{v}$  를 수행하면, 그 결과는  $m \times 1$  크기의 열벡터가 된다. 편의상 이 결과 벡터를  $\boldsymbol{y}$ 라고 하겠다.  
 
 <div class="math-container">
 $$  
@@ -334,7 +334,7 @@ $$
 
 그렇다면 고유벡터와 고유값은 어떻게 구할까.  $n$ 차원 공간의 대칭 행렬인 공분산 행렬  $\boldsymbol{\Sigma}$ 는 서로 직교하는  $n$ 개의 고유벡터를 가진다. 위에서 라그랑주 상수를 사용한 목적함수의 그래디언트를 영으로 만드는 고유벡터를 구해야 하는데, 식을 보면 또 하나의 미지수  $\lambda$ 가 있다. 보통 이는 목적함수를  $\lambda$ 로도 미분하여 연립방정식을 풀이하는데, 현재는 특수한 경우로, 특성방정식  $\det(\boldsymbol{\Sigma} - \lambda\boldsymbol{I}) = 0$ 을 만족하는  $\lambda$ 를 구하면  $n$ 개의 고유벡터  $\boldsymbol{v}\_i$ 은 자명하다. 이때 이  $n$ 개의 고윳값들을 크기순으로 정렬했을 때 ( $\lambda\_1 \ge \lambda\_2 \ge \dots \ge \lambda\_n$ ), 가장 큰 고윳값  $\lambda\_1$ 에 대응하는 제1 고유벡터 방향이며, 이 방향에서 분산일 가장 크다.  
 
-"평균 중심화( $\boldsymbol{Z}\_c$ )와 정규화( $\frac{1}{m}$ )를 동일하게 적용한 상태에서, 행렬곱의 순서를 바꾼  $\frac{1}{m} \boldsymbol{Z}\_c \boldsymbol{Z}\_c^\top$  연산은 어떤 의미를 가지는가?"에 대한 내용은 [이 글]({{ site.baseurl }}/notes/probability-statistics/relationship-between-samples-revised/)에 작성하였다.  
+"평균 중심화( $\boldsymbol{Z}\_c$ )와 정규화( $\frac{1}{m}$ )를 동일하게 적용한 상태에서, 행렬곱의 순서를 바꾼  $\frac{1}{m} \boldsymbol{Z}\_c \boldsymbol{Z}\_c^\top$  연산은 어떤 의미를 가지는가?"에 대한 내용은 [이 글]({{ site.baseurl }}/notes/probability-statistics/샘플간의 관계/)에 작성하였다.  
 
 Reference  
 wikipidea  

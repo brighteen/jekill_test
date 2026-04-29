@@ -93,6 +93,19 @@ KOREAN_TO_ENG = {
     '볼츠만 머신 2': 'boltzmann-machine-2',
     'desmos시각화': 'desmos-viz',
     '생성모델': 'generative-models',
+    '로그': 'log',
+    '제곱근': 'square-root',
+    '열역학 제2법칙': 'second-law-of-thermodynamics',
+    'Diffusion 1': 'diffusion-1',
+    'Diffusion 2': 'diffusion-2',
+    '관련 논문': 'related-papers',
+    '디퓨전을 이해하기 위한 개념들': 'concepts-for-diffusion',
+    '랑주뱅 동역학': 'langevin-dynamics',
+    '브라운 운동': 'brownian-motion',
+    '비평형 열역학': 'non-equilibrium-thermodynamics',
+    '젠슨 부등식': 'jensens-inequality',
+    '엔트로피': 'entropy',
+    '정보량': 'information-amount',
 }
 
 # ─── 상수 설정 ─────────────────────────────────────────────────────────────
@@ -100,13 +113,15 @@ MML_ROOT_SRC = REPO / 'MML'
 MML_ROOT_DST = REPO / '_mml'
 
 NOTES_CONFIGS = [
+    {'src': REPO / 'Note' / '기초',              'dst': REPO / '_notes' / 'basics', 'col': 'notes', 'order': 0},
     {'src': REPO / 'Note' / '선형대수',          'dst': REPO / '_notes' / 'linear-algebra', 'col': 'notes', 'order': 1},
     {'src': REPO / 'Note' / '미적분',            'dst': REPO / '_notes' / 'calculus', 'col': 'notes', 'order': 2},
     {'src': REPO / 'Note' / '확률과통계',        'dst': REPO / '_notes' / 'probability-statistics', 'col': 'notes', 'order': 3},
     {'src': REPO / 'Note' / '머신러닝',          'dst': REPO / '_notes' / 'machine-learning', 'col': 'notes', 'order': 4},
     {'src': REPO / 'Note' / '정보이론',          'dst': REPO / '_notes' / 'information-theory', 'col': 'notes', 'order': 5},
-    {'src': REPO / 'Note' / '생성모델',          'dst': REPO / '_notes' / 'generative-models', 'col': 'notes', 'order': 6},
-    {'src': REPO / 'Research',                   'dst': REPO / '_research', 'col': 'research', 'order': 7},
+    {'src': REPO / 'GenAI' / 'Diffusion',         'dst': REPO / '_genai' / 'diffusion', 'col': 'genai', 'order': 6},
+    {'src': REPO / 'GenAI' / 'Score Based Model', 'dst': REPO / '_genai' / 'score-based-model', 'col': 'genai', 'order': 7},
+    {'src': REPO / 'Research',                   'dst': REPO / '_research', 'col': 'research', 'order': 8},
 ]
 
 # ─── 헬퍼 함수 ─────────────────────────────────────────────────────────────
@@ -125,17 +140,15 @@ def get_english_name(stem: str) -> str:
 
 def sanitize_asset_name(name: str) -> str:
     name = unicodedata.normalize('NFC', name)
-    stem = Path(name).stem
     ext = Path(name).suffix.lower()
-    clean = strip_leading_numbers(stem)
-    eng_name = KOREAN_TO_ENG.get(clean, clean)
-    if any(ord(c) > 127 for c in eng_name):
-        safe = re.sub(r'[\s\(\)\[\]\{\}\=,]', '-', eng_name)
-    else:
-        safe = re.sub(r'[^a-zA-Z0-9]', '-', eng_name).lower()
+    # 파일명에서 확장자를 제외한 부분만 가져와서 처리
+    base_name = Path(name).stem
+    eng_name = KOREAN_TO_ENG.get(base_name, base_name)
+    # 한글 및 특수문자 제거하고 소문자로 변환
+    safe = re.sub(r'[^a-zA-Z0-9]', '-', eng_name).lower()
     safe = re.sub(r'-+', '-', safe).strip('-')
-    if not safe: safe = "asset-" + urllib.parse.quote(clean).replace('%', '')[:10].lower()
-    return f"{safe}{ext}"
+    final_name = safe if safe else 'asset'
+    return f"{final_name}{ext}"
 
 def get_assets_map_value(raw_name: str) -> str:
     if not raw_name: return None
@@ -150,7 +163,7 @@ def get_assets_map_value(raw_name: str) -> str:
 
 def build_notes_map() -> dict:
     notes_map = {}
-    for coll_dir, url_prefix in [('_notes', 'notes'), ('_mml', 'mml'), ('_research', 'research')]:
+    for coll_dir, url_prefix in [('_notes', 'notes'), ('_mml', 'mml'), ('_research', 'research'), ('_genai', 'genai')]:
         d = REPO / coll_dir
         if not d.exists(): continue
         for md in d.rglob('*.md'):
@@ -309,15 +322,22 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav
     body = '\n'.join(lns)
 
     # Front matter
-    fm = {'layout': 'sidebar', 'title': title, 'collection_name': col_name, 'nav_order': nav_order}
+    fm = {'layout': 'sidebar', 'title': title}
+    if col_name:
+        fm['collection_name'] = col_name
+        fm['nav_order'] = nav_order
     if fm_content:
         try:
             ex = yaml.safe_load(fm_content)
             if isinstance(ex, dict): fm.update(ex)
         except: pass
     if file_path.name == 'index.md':
-        fm['permalink'] = f'/{col_name}/'
-        fm['title'] = 'Mathematics for Machine Learning' if col_name == 'mml' else col_name.capitalize()
+        if col_name:
+            fm['permalink'] = f'/{col_name}/'
+            fm['title'] = 'Mathematics for Machine Learning' if col_name == 'mml' else col_name.capitalize()
+        else:
+            # 루트 index.md인 경우 permalink는 그대로(/) 두거나 title만 유지
+            pass
         fm['layout'] = 'sidebar'
     
     fm_str = yaml.dump(fm, allow_unicode=True, sort_keys=False).strip()
@@ -326,7 +346,7 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav
 def main():
     print('=' * 60); print('  V11 Jekyll Migration (Final Corrected)'); print('=' * 60)
     newly_copied = []
-    for col_dir in ['_mml', '_notes', '_research']:
+    for col_dir in ['_mml', '_notes', '_research', '_genai']:
         target = REPO / col_dir
         if target.exists(): shutil.rmtree(target)
     
@@ -369,17 +389,22 @@ def main():
         src, dst_dir, col, fo = cfg['src'], cfg['dst'], cfg['col'], cfg['order']
         dst_dir.mkdir(parents=True, exist_ok=True)
         if not src.exists(): continue
-        for f in sorted(src.iterdir()):
-            if f.suffix == '.md':
+        for f in sorted(src.rglob('*.md')):
+            if f.is_file():
+                rel_f = f.relative_to(src)
                 m_n = re.match(r'^(\d+)\.', f.name)
-                dst = dst_dir / f'{get_english_name(f.stem)}.md'
+                # Note 컬렉션의 경우 NOTES_CONFIGS에서 지정한 dst_dir 하위에 파일 배치
+                # GenAI 등도 마찬가지로 dst_dir 하위에 rel_f.parent를 유지하여 사이드바에서 계층 구조 표현
+                dst = dst_dir / rel_f.parent / f'{get_english_name(f.stem)}.md'
+                dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(f, dst); newly_copied.append((dst, col, (fo*1000) + (int(m_n.group(1)) if m_n else 999)))
         for adir in src.rglob('assets'): process_assets(adir, Path(col) / dst_dir.name)
 
     midx, ridx = REPO/'MML'/'index.md', REPO/'index.md'
     if midx.exists(): dst = REPO/'_mml'/'index.md'; shutil.copy2(midx, dst); newly_copied.append((dst, 'mml', 100000))
     if ridx.exists():
-        for col in ['notes', 'research']: dst = REPO/f'_{col}'/'index.md'; dst.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(ridx, dst); newly_copied.append((dst, col, 0))
+        newly_copied.append((ridx, None, 0)) # 루트 index.md도 변환 대상에 포함
+        for col in ['notes', 'research', 'genai']: dst = REPO/f'_{col}'/'index.md'; dst.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(ridx, dst); newly_copied.append((dst, col, 0))
 
     notes_map = build_notes_map(); processed = set()
     for fp, cn, no in newly_copied:

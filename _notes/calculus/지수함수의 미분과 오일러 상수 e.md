@@ -2,7 +2,7 @@
 layout: sidebar
 title: 지수함수의 미분과 오일러 상수 e
 collection_name: notes
-nav_order: 2005
+nav_order: 2999
 ---
 
 ## 지수함수의 미분과 비례 상수
