@@ -373,7 +373,8 @@ def main():
             else: os.remove(it)
     ASSETS.mkdir(exist_ok=True)
     
-    for fn, sp in [('0_me.png', REPO/'me.png'), ('mml_cover.png', REPO/'MML'/'MML.png'), ('passport_img.jpg', REPO/'passport_img.jpg'), ('present1.jpg', REPO/'present1.jpg')]:
+    profile_src = REPO / 'profile_assets'
+    for fn, sp in [('0_me.png', profile_src/'me.png'), ('mml_cover.png', REPO/'MML'/'MML.png'), ('passport_img.jpg', profile_src/'passport_img.jpg'), ('present1.jpg', profile_src/'present1.jpg')]:
         if sp.exists(): shutil.copy2(sp, ASSETS/fn); ASSETS_MAP[sp.name] = fn
 
     if MML_ROOT_SRC.exists():

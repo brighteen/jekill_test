@@ -16,6 +16,17 @@ title: Mathematics for Machine Learning
 
 또한 이 포스팅을 보는 누구든지, 더 나은 학습을 위해 피드백을 주시면 감사하겠습니다.
 
+This post was created solely for non-commercial, educational purposes and to share knowledge.
+
+Please note that this is not an official translation; it was written based on my personal understanding gained during my studies. Consequently, there may be slight discrepancies with the original author's intent. For the most accurate and precise information, please refer to the original source text.
+
+This post does not cover the practice exercises, focusing instead on theoretical backgrounds and summarizing core concepts. All copyrights belong to the original author, and links to the original website and related materials are provided below. This content strictly adheres to the original author’s licensing terms and prohibits any commercial use.
+
+To be completely honest, thoroughly reading through this textbook was quite challenging. While this is partly due to my own limitations, I highly recommend that anyone without a relevant background allocate ample time to study it.
+
+To facilitate a smoother understanding, I have interspersed my own explanations and supplementary notes throughout the content. These additions may be somewhat subjective, and I plan to continuously refine and update them as I review the material multiple times.
+
+Furthermore, I welcome any feedback or suggestions from readers to help improve the quality of learning for everyone.
 
 ### References
 [Wikipedia](https://www.wikipedia.org/)
