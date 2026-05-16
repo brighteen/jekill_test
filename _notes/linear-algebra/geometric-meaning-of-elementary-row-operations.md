@@ -173,7 +173,7 @@ $$
 
     두 번째 방정식이  $3y = 3$ 으로 변환된다. 기하학적으로 첫 번째 직선  $x + y = 1$ 은 불변하며, 두 직선의 선형 결합으로 도출된 두 번째 방정식은 법선 벡터가  $\begin{bmatrix}-2 \ 1\end{bmatrix}$ 에서  $\begin{bmatrix}0 \ 3\end{bmatrix}$ 으로 변환되어 교점  $(0, 1)$ 을 지나는 기울기 0의 수평선이 된다.  
 ![기본행렬 변환2.png]({{ site.baseurl }}/assets/notes/linear-algebra/2.png){: .img-normal width="400" }
-	  
+    
 - **2단계:**  $R\_2 \leftarrow \frac{1}{3}R\_2$   
 
 <div class="math-container">

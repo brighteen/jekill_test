@@ -2,7 +2,7 @@
 layout: sidebar
 title: 브라운 운동
 collection_name: genai
-nav_order: 6999
+nav_order: 9999
 ---
 
 액체나 기체 속에서 미소입자들이 불규칙하게 운동하는 현상이다. 브라운 운동에 의한 물체의 움직임을 표류라고 한다.  
@@ -11,7 +11,7 @@ nav_order: 6999
 위너 과정은 다음의 성질을 갖는다.  
 1. 독립 증분(independent increments): 겹치지 않는 시간 구간에서의 변위는 서로 독립적이다.
 2. 정규 증분(stationary gaussian increments): 시간  $t$ 에서  $t+\Delta t$ 까지의 변위는 평균이 0이고 분산이 시간 차이  $\Delta t$ 에 비례하는 정규 분포를 따릅니다. 즉,  $W\_{t+\Delta t} - W\_t \sim \mathcal{N}(0, \Delta t I)$ 이다.  
-브라운 시간이 지날수록 분산이 무한대로 발산한다( $t \to \infty$ 일 때  $Var(W\_t) \to \infty$ ). 데이터가 무한히 발산하는 것을 막기 위해 DDPM은 단순 브라운 운동에 평균 회귀(mean-reverting)항을 추가한 이산형 확률 과정을 사용한다. 이는 연속 시간 모델에서 랑주뱅 역학 중 하나인 Ornstein-Uhlecbeck 과정을 이산화한 형태와 같다.  
+브라운 운동은 시간이 지날수록 분산이 무한대로 발산한다( $t \to \infty$ 일 때  $Var(W\_t) \to \infty$ ). 데이터가 무한히 발산하는 것을 막기 위해 DDPM은 단순 브라운 운동에 평균 회귀(mean-reverting)항을 추가한 이산형 확률 과정을 사용한다. 이는 연속 시간 모델에서 랑주뱅 역학 중 하나인 Ornstein-Uhlecbeck 과정을 이산화한 형태와 같다.  
 
 
 

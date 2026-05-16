@@ -6,8 +6,8 @@ nav_order: 4999
 ---
 
 이 글을 보기 전 참고하면 좋은 글들  
-[20.이차 형식](#)  
-[19.양의 정부호](#)  
+[이차 형식]({{ site.baseurl }}/notes/linear-algebra/quadratic-form/)  
+[양의 정부호]({{ site.baseurl }}/notes/linear-algebra/positive-definite/)  
 딥러닝 09_04_02 선형차원축소  
 
 [MML 6.4절]({{ site.baseurl }}/mml/Part I Mathematical Foundations/6. Probability and Distributions/6.4 Summary Statistics and Independence/) 정의 6.7을 보면 다차원 확률 변수의 분산은 행렬로 정의되는데, 그것이 외적으로 정의되는 이유와 이 공분산 행렬이 왜 항상 양의 준정부호 행렬인지 그것이 가지는 기하학적 의미를 확인해보려 한다.  
@@ -43,7 +43,7 @@ $$
 반면  $n \times 1$  열벡터와  $1 \times n$  행벡터를 곱하는 **외적**  $(\boldsymbol{x} - \boldsymbol{\mu})(\boldsymbol{x} - \boldsymbol{\mu})^\top$ 을 수행하면  $n \times n$  크기의 행렬이 생성된다. 이 행렬의  $i$ 행  $j$ 열에 위치한 원소는 대수적으로 정확히  $(x\_i - \mu\_i)(x\_j - \mu\_j)$ 가 된다. 여기에 기댓값 연산자  $\mathbb{E}$ 의 선형성을 적용하면, 대각선 원소는 자기 자신의 편차 제곱 기댓값(분산)이 되고, 비대각선 원소는 서로 다른 변수 간 편차 곱의 기댓값(공분산)이 된다. 즉, 다차원 공간에서 모든 변수 쌍 간의 선형적 관계를 온전히 담아낸 행렬이 구축되는 것이다.  
 
 ## 양의 준정부호(PSD)를 '행렬의 관점'에서 이해하기
-어떤 변환  $\boldsymbol{A}$ 를 취했을 때( $\boldsymbol{Ax}$ ) 원래 벡터  $\boldsymbol{x}$ 와의 사이각이 90도 이하인 변환  $\boldsymbol{A}$ 는 양의 준정부호 이며, 이에 대한 기하학적 의미(벡터 관점)는 이 [글](#)에 적어놓았다.  
+어떤 변환  $\boldsymbol{A}$ 를 취했을 때( $\boldsymbol{Ax}$ ) 원래 벡터  $\boldsymbol{x}$ 와의 사이각이 90도 이하인 변환  $\boldsymbol{A}$ 는 양의 준정부호 이며, 이에 대한 기하학적 의미(벡터 관점)는 이 [글]({{ site.baseurl }}/notes/linear-algebra/positive-definite/)에 적어놓았다.  
 이 글에서 공분산 행렬  $\boldsymbol{\Sigma}$ 가 양의 준정부호라는 사실을 다룰 때는, 벡터의 회전이나 각도가 아니라 '행렬 자체에 내재된 이차 형식(Quadratic Form)과 통계적 분산'의 관점으로 접근한다.  
 
  $n$ 차원 공간에 존재하는 확률 변수 열벡터  $\boldsymbol{x} = [x\_1, x\_2, \dots, x\_n]^\top$ 가 있다고 가정한다. 여기에 임의의 상수 열벡터  $\boldsymbol{v} = [v\_1, v\_2, \dots, v\_n]^\top$ 를 이용한 내적  $\boldsymbol{v}^\top \boldsymbol{x}$ 를 생각해보자.  

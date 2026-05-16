@@ -106,6 +106,8 @@ KOREAN_TO_ENG = {
     '젠슨 부등식': 'jensens-inequality',
     '엔트로피': 'entropy',
     '정보량': 'information-amount',
+    '할루시네이션': 'hallucination',
+    '생성모델 메모': 'generative-model-memo',
 }
 
 # ─── 상수 설정 ─────────────────────────────────────────────────────────────
@@ -119,9 +121,11 @@ NOTES_CONFIGS = [
     {'src': REPO / 'Note' / '확률과통계',        'dst': REPO / '_notes' / 'probability-statistics', 'col': 'notes', 'order': 3},
     {'src': REPO / 'Note' / '머신러닝',          'dst': REPO / '_notes' / 'machine-learning', 'col': 'notes', 'order': 4},
     {'src': REPO / 'Note' / '정보이론',          'dst': REPO / '_notes' / 'information-theory', 'col': 'notes', 'order': 5},
-    {'src': REPO / 'GenAI' / 'Diffusion',         'dst': REPO / '_genai' / 'diffusion', 'col': 'genai', 'order': 6},
-    {'src': REPO / 'GenAI' / 'Score Based Model', 'dst': REPO / '_genai' / 'score-based-model', 'col': 'genai', 'order': 7},
-    {'src': REPO / 'Research',                   'dst': REPO / '_research', 'col': 'research', 'order': 8},
+    {'src': REPO / 'GenAI' / 'Foundations',       'dst': REPO / '_genai' / 'foundations', 'col': 'genai', 'order': 6},
+    {'src': REPO / 'GenAI' / 'VAE',               'dst': REPO / '_genai' / 'vae', 'col': 'genai', 'order': 7},
+    {'src': REPO / 'GenAI' / 'Score Based Model', 'dst': REPO / '_genai' / 'score-based-model', 'col': 'genai', 'order': 8},
+    {'src': REPO / 'GenAI' / 'Diffusion',         'dst': REPO / '_genai' / 'diffusion', 'col': 'genai', 'order': 9},
+    {'src': REPO / 'Research',                   'dst': REPO / '_research', 'col': 'research', 'order': 10},
 ]
 
 # ─── 헬퍼 함수 ─────────────────────────────────────────────────────────────
@@ -185,6 +189,9 @@ def build_notes_map() -> dict:
 
 # ─── 마크다운 변환 핵심 로직 (V11: Final Fix) ──────────────────────────────────
 def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav_order: int) -> str:
+    # 탭 문자를 공백으로 변환 (Kramdown의 의도치 않은 코드 블록 생성 방지)
+    content = content.replace('\t', '    ')
+    
     raw_stem = file_path.stem
     title = raw_stem
     for kor, eng in KOREAN_TO_ENG.items():
@@ -232,7 +239,7 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav
         new_path = get_assets_map_value(raw_name) or sanitize_asset_name(raw_name)
         url = f'{BASE_URL}/assets/{new_path}'
         if Path(new_path).suffix.lower() in MEDIA_EXTS:
-            return f'<video controls class="img-normal" width="{w if w else "100%"}"><source src="{url}" type="video/mp4"></video>'
+            return f'<video controls preload="auto" class="img-normal" width="{w if w else "100%"}"><source src="{url}" type="video/mp4"></video>'
         attr = f'{{: .img-normal width="{w}" }}' if w else '{: .img-normal }'
         return f'![{raw_name}]({url}){attr}'
     body = re.sub(r'!\[\[(.*?)\]\]', rep_img, body)
@@ -271,7 +278,7 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav
         np = get_assets_map_value(fn) or sanitize_asset_name(fn)
         new_url = f'{BASE_URL}/assets/{np}'
         if any(new_url.lower().endswith(ext) for ext in ['.mp4', '.webm', '.ogg', '.mov']):
-            return f'<video controls class="img-normal" {attr}><source src="{new_url}" type="video/mp4"></video>'
+            return f'<video controls preload="auto" class="img-normal" {attr}><source src="{new_url}" type="video/mp4"></video>'
         at = attr.strip('{: }').strip() if attr else ""
         return f"{ps}{qp}![{alt}]({new_url}){{: .img-normal {at} }}".strip(' }') + ' }'
     body = re.sub(r'(^|\n)(>?\s*)!\[(.*?)\]\((.*?)\)(\{:.*?\}|)?', rep_final_img, body)
@@ -334,7 +341,7 @@ def transform(content: str, file_path: Path, notes_map: dict, col_name: str, nav
     if file_path.name == 'index.md':
         if col_name:
             fm['permalink'] = f'/{col_name}/'
-            fm['title'] = 'Mathematics for Machine Learning' if col_name == 'mml' else col_name.capitalize()
+            fm['title'] = 'Mathematics for Machine Learning' if col_name == 'mml' else ('GenAI' if col_name == 'genai' else col_name.capitalize())
         else:
             # 루트 index.md인 경우 permalink는 그대로(/) 두거나 title만 유지
             pass
@@ -366,7 +373,7 @@ def main():
             else: os.remove(it)
     ASSETS.mkdir(exist_ok=True)
     
-    for fn, sp in [('0_me.png', REPO/'me.png'), ('mml_cover.png', REPO/'MML'/'MML.png')]:
+    for fn, sp in [('0_me.png', REPO/'me.png'), ('mml_cover.png', REPO/'MML'/'MML.png'), ('passport_img.jpg', REPO/'passport_img.jpg'), ('present1.jpg', REPO/'present1.jpg')]:
         if sp.exists(): shutil.copy2(sp, ASSETS/fn); ASSETS_MAP[sp.name] = fn
 
     if MML_ROOT_SRC.exists():

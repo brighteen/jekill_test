@@ -2,7 +2,7 @@
 layout: sidebar
 title: 열역학 제2법칙
 collection_name: genai
-nav_order: 6999
+nav_order: 9999
 ---
 
 엔트로피 증가의 원리  

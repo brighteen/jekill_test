@@ -2,7 +2,7 @@
 layout: sidebar
 title: Diffusion 2
 collection_name: genai
-nav_order: 6999
+nav_order: 9999
 ---
 
 ## 3. Diffusion models and denoising autoencoders
